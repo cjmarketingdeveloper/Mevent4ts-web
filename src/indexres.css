@@ -1,0 +1,18 @@
+@media only screen and (min-width: 1200px) {
+    img.navi-logo {
+        width: 400px !important;
+    }    
+}
+
+@media only screen and (max-width: 992px) {
+
+}
+@media only screen and (max-width: 480px) {
+
+}
+@media only screen and (max-width: 360px) 
+{
+    .list-items.list-of-sponsors {
+        margin-bottom: 65px;
+      }
+}

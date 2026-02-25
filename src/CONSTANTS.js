@@ -1,0 +1,17 @@
+/*
+export const API_URL          = "https://mevent-2-admin-c7b0d608277d.herokuapp.com/api/";
+export const API_BASE         = "https://mevent-2-admin-c7b0d608277d.herokuapp.com/";
+export const SESSION_COOKIE   = "mobileUserLiveTheLORDMEVENTITheLORdDOnotChe";
+*/
+
+export const API_URL          = "http://localhost:1077/api/";
+export const API_BASE         = "http://localhost:1077/";
+export const SESSION_COOKIE   = "mobileUserLOCOETMEVENT2026";
+
+
+export const VERSION          = "2.0.1+1";
+export const DEFAULT_BANNER   = "https://mevent.co.za/images/home/mevent_01.jpg";
+
+export const SMALLER_PROCESS  = "https://cjmarketing.co/image_directory/loading.gif";
+export const SMALL_PROCESSING = "https://api.picnick.co.za/assets/smallprocess.gif";
+export const IMAGE_PROFILE    = "https://newclient.cjdsa.co.za/images/base/profile.jpg";

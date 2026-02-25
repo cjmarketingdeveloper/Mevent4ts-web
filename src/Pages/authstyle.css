@@ -1,0 +1,104 @@
+img.logo-one {
+    width: 250px;
+}
+.reg-header  {
+    text-align: center;
+}
+img.logo-one.rg-tlc {
+    width: 130px;
+}
+.log-start {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.link-log-text {
+    color:#ce2030;
+    text-decoration: none;
+    cursor: pointer;
+}
+.link-log-text {
+    color: #ce2030;
+}
+.space-flex {
+    display: flex;
+    justify-content: space-between;
+}
+.text-form {
+    font-size: 8px;
+}
+.smal-g {
+    color:gray;
+    font-size: 10px;
+}
+.logo-base {
+    background-image: linear-gradient(to right, #7d151f, #ce2030);
+    width: 100%;
+    height: 100vh;
+}
+.form-group.frg {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.main-login-data {
+    padding: 25px;
+    background: #fff;
+    width: 45%;
+    border-radius: 20px;
+}
+input.form-control.ct-content.matetrial-input {
+    display: inline-flex;
+    align-items: center;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #ce2030;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-radius: 0;
+    color: #6a4e4e;
+}
+input.form-control.ct-content.matetrial-input:focus {
+  outline: none; /* Removes the default outline */
+  border: none;  /* Removes the border */
+  box-shadow: none; /* Optional: Removes any box-shadow that might look like a border */
+  background: #b48a8f42;
+}
+
+h4.title-login.text-center {
+    text-transform: uppercase;
+    opacity: 0.2;
+}
+.rad-group small {
+    font-size: 10px;
+}
+.radio-options span {
+    margin-left: 5px;
+}
+
+.radio-options  {
+    margin-bottom: 10px !important;
+}
+ul.special-uis {
+    padding: 3px;
+}
+ul.special-uis li.card {
+    padding: 7px 10px;
+    font-style: italic;
+    background: #f7eeee;
+    margin-bottom: 2px;
+}
+@media only screen and (max-width: 992px) {
+    .main-login-data {
+        width: 80%;
+    }
+}
+@media only screen and (max-width: 480px) {
+    .main-login-data {
+        width: 97%;
+    }
+
+    .logo-base {
+        background:#fff;
+    }
+}
