@@ -33,8 +33,7 @@ export const register = createAsyncThunk('auth/register', async (user, thunkAPI)
 export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
     try{
 
-        const response = await axios.post(CONSTANTS.API_URL + "auth/login", user);
-    
+        const response = await axios.post(CONSTANTS.API_URL + "auth/login", user);    
         localStorage.setItem(CONSTANTS.SESSION_COOKIE, JSON.stringify(response.data));
 
         return response; 
