@@ -117,9 +117,14 @@ function AuthLoginScreen() {
                                 </p>
                             */
                           }
-                          <p className="text-center smal-g">
+                          <p className="mgtop20 txts12">
+                                <Link to="/forgot-password"  className="link-log-text">Forgot Password?</Link>
+                          </p>
+
+                          <p className="text-center smal-g mt-3">
                             { CONSTANTS.VERSION}
                           </p>
+                         
                           <div className="dot dot1" ></div>
                           <div className="dot dot2" ></div>
                   </div>

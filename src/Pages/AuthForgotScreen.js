@@ -31,16 +31,19 @@ function AuthForgotScreen() {
               setIsLoading(true);
               const passRespond = await axios.put(CONSTANTS.API_URL +"auth/password/reset/sms", userData);
 
-              //console.log(passRespond);
+              console.log(passRespond);
               setShowResetPass(true);
               setIsLoading(false);
               toast.success("Your going to receive an sms code to use to reset your password.")
         }else {
             toast.error("Phone Number not valid");
+            setIsLoading(false);
         }
 
        }catch(error){
         console.log(error);
+        setIsLoading(false);
+        toast.error("Something went wrong, please try again later.")
        }
     }
 
@@ -151,9 +154,16 @@ function AuthForgotScreen() {
                       }
                                                 
                           
-                          <p className="mgtop20 space-flex txts12">
+                          {
+                            /*
+                            <p className="mgtop20 space-flex txts12">
                               <Link to="/login"  className="link-log-text">Login?</Link>
                               <Link to="/register"  className="link-log-text">Register?</Link>
+                          </p>
+                            */
+                          }
+                          <p className="mgtop20 txts12">
+                              <Link to="/login"  className="link-log-text">Login?</Link>
                           </p>
                           <p className="text-center smal-g">
                           { CONSTANTS.VERSION}
