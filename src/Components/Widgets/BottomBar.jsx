@@ -87,7 +87,7 @@ function BottomBar({member}) {
                             <span>Home</span>
                         </Link>
                     </li>
-                                       
+                      {/*                 
                     <li>
                         <Link to="/qrcode" onClick={closeMenu}>
                             <span className="rx-panel">
@@ -129,6 +129,7 @@ function BottomBar({member}) {
                             <span>Agendas</span>
                         </Link>
                     </li> 
+                    */}
                     {/*
                     <li>
                         <Link to="/profile" onClick={closeMenu}>
