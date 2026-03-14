@@ -78,10 +78,10 @@ function AuthLoginScreen() {
                       <h4 className="title-login text-center">Login</h4>
                           <form encType="multipart/form-data">
                               <div className="form-group frg">
-                                  <input type="tel" className="form-control ct-content matetrial-input wide100" ref={phoneNumberRef} maxLength={10} placeholder="Enter Phone Number" required/>
+                                  <input type="tel" className="form-control ct-content wide100" ref={phoneNumberRef} maxLength={10} placeholder="Enter Phone Number" required/>
                               </div>
                               <div className="form-group frg">
-                                  <input type="password" className="form-control ct-content matetrial-input wide100"  ref={passwordRef} placeholder="Enter Password" required/>
+                                  <input type="password" className="form-control ct-content wide100"  ref={passwordRef} placeholder="Enter Password" required/>
                               </div>
 
                               <div className="form-group">

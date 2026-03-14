@@ -183,33 +183,33 @@ function AuthRegisterScreen() {
                           <form encType="multipart/form-data">
                               <div className="form-group frg">
                                   <input 
-                                    type="text" className="form-control ct-content matetrial-input wide100" 
+                                    type="text" className="form-control ct-content wide100" 
                                     ref={phoneNumberRef} 
                                     maxLength={10} 
                                     placeholder="Enter Phone Number*" required/>
                               </div>
                               <div className="form-group frg">
                                   <input type="password" 
-                                    className="form-control ct-content matetrial-input wide100"  
+                                    className="form-control ct-content wide100"  
                                     ref={passwordRef} 
                                     placeholder="Enter Password*" required/>
                               </div>
                               <div className="form-group frg">
                                   <input type="text" 
-                                    className="form-control ct-content matetrial-input" 
+                                    className="form-control ct-content" 
                                     ref={nameRef} 
                                     placeholder="Enter Name*" required/>
                               </div>
                               <div className="form-group frg">
                                   <input 
                                       type="text" 
-                                      className="form-control ct-content matetrial-input"  
+                                      className="form-control ct-content"  
                                       ref={surnameRef} 
                                       placeholder="Enter Surname*" required/>
                               </div>
                               <div className="form-group frg">
                                   <input type="email" 
-                                    className="form-control ct-content matetrial-input"  
+                                    className="form-control ct-content"  
                                     ref={emailRef} placeholder="Enter Email Address" />
                               </div>
                                                    
@@ -258,7 +258,7 @@ function AuthRegisterScreen() {
                                         <small>The Local Choice:</small>
                                         <input
                                           type="text"
-                                          className="form-control ct-content matetrial-input"
+                                          className="form-control ct-content"
                                           placeholder="Enter Pharmacy Name"
                                           value={searchWord}
                                           onChange={e => handleUpdateSearchWord(e)} 
@@ -293,7 +293,7 @@ function AuthRegisterScreen() {
                                       <div className="form-group">
                                         <input
                                           type="text"
-                                          className="form-control ct-content matetrial-input"
+                                          className="form-control ct-content"
                                           placeholder="Enter Pharmacy Name"
                                           onChange={(e) => setPharmacyName(e.target.value)}
                                           required
