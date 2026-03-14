@@ -22,7 +22,7 @@ code {
 .btn.btn-mevent{
   background: #ce2030;
   width: 100%;
-  border-radius: 30px;
+  border-radius: 15px;
   color: #fff;
   padding: 15px;
 }
@@ -47,6 +47,50 @@ code {
 .mgtop20 {
   margin-top: 20px;
 }
+.home-logo {
+  width: 100px;
+}
+.ml-3 {
+  margin-left: 15px;
+}
+.btn-gray {
+    background: #e4e4e4;
+    padding: 15px;
+    border-radius: 15px;
+}
+.btn-gradient {
+  color:#fff;
+  background: #ce2030;
+  background: linear-gradient(90deg,rgba(235, 40, 59, 1) 0%, rgba(145, 11, 25, 1) 100%);
+  padding: 11px;
+  border-radius: 15px;
+}
+.btn-gradient .perc-banner1{
+    width: 20%;
+    font-size: 20px;
+}
+.btn-gradient .content-title {
+    width: 60%;
+    text-align: left;
+}
+.card-bl-grad{
+  background: #e8feff;
+  background: linear-gradient(117deg,rgba(232, 254, 255, 0.8) 0%, rgba(255, 255, 255, 1) 49%, rgba(255, 245, 246, 0.89) 100%);
+}
+.content-log--2 {
+  background-color: #ce2030;
+  padding: 10px;
+  border-radius: 50%;
+  margin-top: 4px;
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+}
+.home-icon-item {
+    rotate: 88deg;
+    margin-top: 10px;
+}
+
 
 /** Footer Start **/
 .bottom-region-arena {

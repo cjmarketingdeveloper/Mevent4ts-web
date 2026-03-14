@@ -2,19 +2,20 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import * as CONSTANTS from "./../CONSTANTS";
-import { FaUser } from 'react-icons/fa';
+import { FaHive, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import Spinner from '../Components/Others/Spinner';
 //import { setUser } from "../reduxAuth/authSlice"; 
 //import EventSingle from '../Components/Widgets/EventSingle';
 //import EventMultiple from '../Components/Widgets/EventMultiple';
-import { Link } from 'react-router-dom';
+import { Link, Links } from 'react-router-dom';
 import Loading from '../Components/Others/Loading';
 import FranchiseeRsvp from '../Components/Widgets/rsvp/FranchiseeRsvp';
 import PotentialRsvp from '../Components/Widgets/rsvp/PotentialRsvp';
 import ClinicRsvp from '../Components/Widgets/rsvp/ClinicRsvp';
 import VipRsvp from '../Components/Widgets/rsvp/VipRsvp';
 import TradeshowRsvp from '../Components/Widgets/rsvp/TradeshowRsvp';
+import logoHome from '../assets/logo.png';
 
 function HomeScreen() {
 
@@ -65,37 +66,59 @@ function HomeScreen() {
 
   return (
     <div>
-        
-        <div className="header-row">
-          <div className="item-head">
-            <h2 className="line-one">Hi  <span className="colorred">{user.name}</span>, </h2>
-            <div className="line-two">Please check RSVP Details.</div>
-          </div>
-          <div className="item-head prof-lane">
-            {
-              user.profilePic.length > 3 ?
-              <div className="item-profile">
-                <div className="profile-image home-prof">
-                  <Link to={"/profile"} >
-                     <img src={user.profilePic} className="fit-image" />
+        <p className="text-center smal-g">
+            { CONSTANTS.VERSION}
+        </p>
+        <div className="p-3">
+          <div className="card card-bl-grad">
+            <div className="card-body">
+              <img src={logoHome} className="home-logo mt-4 ml-3" />
+              <div className="header-row">
+                
+                <div className="item-head">
+                  <h2 className="line-one">Welcome <span className="colorred">{user.name}</span>, </h2>
+                  <div className="line-two">Please check RSVP Details.</div>
+                </div>
+                
+              </div>
+              <div className="flexme mb-3">
+                <div className="w-50 p-2">
+                    <Link to={"/map"} className="btn btn-gray w-100 colorred">
+                      <span></span>
+                      <span>View Map</span>
+                  </Link>
+                </div>
+                <div className="w-50 p-2">
+                    <Link to={"/map"} className="btn btn-mevent w-100">
+                      <span></span>
+                      <span>Dietary</span>
                   </Link>
                 </div>
               </div>
-              :
-              <div className="item-profile">
-                 <div className="profile-icon">
-                    <Link to={"/profile"} className="colorred">
-                       <FaUser />
-                    </Link>
-                 </div>
-              </div>
-            }
+            </div>
           </div>
         </div>
         <div className="main-area-view"> 
-           <p className="text-center smal-g">
-            { CONSTANTS.VERSION}
-          </p>
+           
+           <div className="p-2">
+             <Link className="btn btn-gradient d-flex">
+               <div className="icon-item perc-banner1">
+                    <div className="home-icon-item">
+                      <FaHive />
+                    </div>
+               </div>
+               <div className="content-title">
+                  <h4>Current Agenda</h4>
+                  Agenda Item title
+               </div>
+                <div className="content-log perc-banner1">
+                  <div className="content-log--2">
+                    <FaSignOutAlt />
+                  </div>
+               </div>
+             </Link>
+           </div>
+
           {
             user.profile.profileName == "Franchisee" && (
               <FranchiseeRsvp user={user} CONSTANTS={CONSTANTS} />
