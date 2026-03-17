@@ -81,7 +81,7 @@ function HomeScreen() {
                 
                 <div className="item-head">
                   <h2 className="line-one">Welcome <span className="colorred">{user.name}</span>, </h2>
-                  <div className="line-two">Please check RSVP Details.</div>
+                
                 </div>
                 
               </div>
@@ -104,7 +104,7 @@ function HomeScreen() {
         </div>
         <div className="main-area-view"> 
            
-           
+              <div className="line-two">Please check RSVP Details.</div>
           {
             user.profile.profileName == "Franchisee" && (
               <FranchiseeRsvp user={user} CONSTANTS={CONSTANTS} />
