@@ -25,6 +25,7 @@ import SponsorsList from "./Pages/SponsorsList";
 import MultiAgendaWeb from "./Pages/MultiAgendaWeb";
 import Landing from "./Pages/Landing";
 import MultiAgenda from "./Pages/MultiAgenda";
+import PrivacyPolicy from "./Pages/PrivacyPolicy";
 
 function App() {
   
@@ -35,7 +36,8 @@ function App() {
         <Routes>
           <Route path="/login" element={<AuthLoginScreen />}/> 
           <Route path="/register" element={<AuthRegisterScreen />}/>
-          <Route path="/forgot-password" element={<AuthForgotScreen />}/>  
+          <Route path="/forgot-password" element={<AuthForgotScreen />}/> 
+          <Route path="/privacy-policy" element={<PrivacyPolicy />}/>  
           <Route path="/competitions/:id" element={<Competitions />} />
           <Route path="/home" element={<Landing />} />
           <Route path="/mulit-agenda/:id" element={<MultiAgenda/>} /> 

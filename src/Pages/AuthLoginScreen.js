@@ -92,7 +92,7 @@ function AuthLoginScreen() {
                                     onChange={() => setAgreePopi(!agreePopi)}
                                     />
                                     <label htmlFor="popiCheckbox" className="mgl10">
-                                      I agree with the terms of use <Link to={"https://mevent.co.za/privacy-policy.php"}>POPIA</Link>
+                                      I agree with the terms of use <Link to={"/privacy-policy"}>POPIA</Link>
                                     </label>
                               </div>
 

@@ -36,120 +36,130 @@ function BottomBar({member}) {
 
   return (
     <div className="bottom-region-arena">
-        {/*   */}
-        <ul className="nav-box">
-          <li className="bottom-line">
-            <Link to="/" className={`nav-list-item ${isActive("/start")}`}>
-                  <span>
-                      <FaHome />
-                  </span>
-              </Link>
-          </li>
-          <li className="bottom-line">
-                <Link to="/qrcode" className={`nav-list-item ${isActive("/qrcode")}`}>
+        <div className="bottom-region-arena-in">
+            {/*   */}
+            <ul className="nav-box">
+            <li className="bottom-line">
+                <Link to="/" className={`nav-list-item ${isActive("/start")}`}>
                     <span>
-                      <FaQrcode />
+                        <FaHome />
                     </span>
                 </Link>
             </li>
             <li className="bottom-line">
-              <Link to="/competition-view" className={`nav-list-item ${isActive("/competitions")}`}>
-                      <span>
-                          <FaTrophy />
-                      </span>                      
-                  </Link>
-              </li>             
-              <li className="bottom-line">
-                  <button className="nav-list-item " onClick={toggleMenu}>
-                      <span>
-                          <FaBars />
-                      </span>
-                  </button>
-              </li>
-          </ul>
-    
-        {/**/}
-          <div className={`side-menu ${isOpen ? "open" : ""}`}>
-              {/* Close Button */}
-               <div className="view-navigation">
-                    <button className="close-btn" onClick={toggleMenu}>
-                        <FaTimes />
+                    <Link to="/qrcode" className={`nav-list-item ${isActive("/qrcode")}`}>
+                        <span>
+                        <FaQrcode />
+                        </span>
+                    </Link>
+                </li>
+                <li className="bottom-line">
+                    <Link to="/qrcode" className={`nav-list-item ${isActive("/qrcode")}`}>
+                        <span>
+                        <FaQrcode />
+                        </span>
+                    </Link>
+                </li>
+                <li className="bottom-line">
+                <Link to="/competition-view" className={`nav-list-item ${isActive("/competitions")}`}>
+                        <span>
+                            <FaTrophy />
+                        </span>                      
+                    </Link>
+                </li>             
+                <li className="bottom-line">
+                    <button className="nav-list-item " onClick={toggleMenu}>
+                        <span>
+                            <FaBars />
+                        </span>
                     </button>
-               </div>
-                <img src={HeaderLogo} className="navi-logo" />
-                {/* Navigation Links */}
-                <ul className="slide-inner">
-                    <li>
-                        <Link to="/" onClick={closeMenu}>
-                            <span className="rx-panel">
-                                <FaHome />
-                            </span>
-                            <span>Home</span>
-                        </Link>
-                    </li>
-                      {/*                 
-                    <li>
-                        <Link to="/qrcode" onClick={closeMenu}>
-                            <span className="rx-panel">
-                                <FaQrcode />
-                            </span>
-                            <span>QR Code</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/add-event" onClick={closeMenu}>
-                            <span className="rx-panel">
-                                <FaCalendarDay />
-                            </span>
-                            <span>Find Events</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/sponsors" onClick={closeMenu}>
-                            <span className="rx-panel">
-                                <FaCompress />
-                            </span>
-                            <span>Scans</span>
-                        </Link>
-                    </li> 
-                    <li>
-                        <Link to="/competition-view" onClick={closeMenu}>
-                            <span className="rx-panel">
-                                <FaTrophy />
-                            </span>
-                            <span>Competitions</span>
-                        </Link>
-                    </li> 
-                    
-                    <li>
-                        <Link to="/mulit-agendas/" onClick={closeMenu}>
-                            <span className="rx-panel">
-                                <FaList />
-                            </span>
-                            <span>Agendas</span>
-                        </Link>
-                    </li> 
-                    */}
-                    {/*
-                    <li>
-                        <Link to="/profile" onClick={closeMenu}>
-                            <span className="rx-panel">
-                                <FaRegUser />
-                            </span>
-                            <span>Profile</span>
-                        </Link>
-                    </li>
-                    */}
-                    <li className="nav-log">
-                        <button className="btn btn-mevent" onClick={() => onLogOut()}>
-                            Logout
+                </li>
+            </ul>
+        
+            {/**/}
+            <div className={`side-menu ${isOpen ? "open" : ""}`}>
+                {/* Close Button */}
+                <div className="view-navigation">
+                        <button className="close-btn" onClick={toggleMenu}>
+                            <FaTimes />
                         </button>
-                    </li>
-                </ul>
-            </div>
+                </div>
+                    <img src={HeaderLogo} className="navi-logo" />
+                    {/* Navigation Links */}
+                    <ul className="slide-inner">
+                        <li>
+                            <Link to="/" onClick={closeMenu}>
+                                <span className="rx-panel">
+                                    <FaHome />
+                                </span>
+                                <span>Home</span>
+                            </Link>
+                        </li>
+                        {/*                 
+                        <li>
+                            <Link to="/qrcode" onClick={closeMenu}>
+                                <span className="rx-panel">
+                                    <FaQrcode />
+                                </span>
+                                <span>QR Code</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/add-event" onClick={closeMenu}>
+                                <span className="rx-panel">
+                                    <FaCalendarDay />
+                                </span>
+                                <span>Find Events</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/sponsors" onClick={closeMenu}>
+                                <span className="rx-panel">
+                                    <FaCompress />
+                                </span>
+                                <span>Scans</span>
+                            </Link>
+                        </li> 
+                        <li>
+                            <Link to="/competition-view" onClick={closeMenu}>
+                                <span className="rx-panel">
+                                    <FaTrophy />
+                                </span>
+                                <span>Competitions</span>
+                            </Link>
+                        </li> 
+                        
+                        <li>
+                            <Link to="/mulit-agendas/" onClick={closeMenu}>
+                                <span className="rx-panel">
+                                    <FaList />
+                                </span>
+                                <span>Agendas</span>
+                            </Link>
+                        </li> 
+                        */}
+                        {/*
+                        <li>
+                            <Link to="/profile" onClick={closeMenu}>
+                                <span className="rx-panel">
+                                    <FaRegUser />
+                                </span>
+                                <span>Profile</span>
+                            </Link>
+                        </li>
+                        */}
+                        <li className="nav-log">
+                            <button className="btn btn-mevent" onClick={() => onLogOut()}>
+                                Logout
+                            </button>
+                        </li>
+                    </ul>
+                </div>
 
-            {/* Overlay when menu is open */}
-            {isOpen && <div className="overlay" onClick={toggleMenu}></div>}
+                {/* Overlay when menu is open */}
+                {isOpen && <div className="overlay" onClick={toggleMenu}></div>}
+
+        </div>
     </div>
   )
 }

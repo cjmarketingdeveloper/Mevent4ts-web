@@ -94,15 +94,26 @@ code {
 
 /** Footer Start **/
 .bottom-region-arena {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #333; /* Change as needed */
+    position: fixed;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    z-index: 1;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+.bottom-region-arena-in {
+  position: relative;
+  width: 90%;
+  background-color: #ce2030; /* Change as needed */
   color: white; /* Change as needed */
   text-align: center;
   padding: 10px;
-  z-index: 1;
+  text-align: center;
+  border-radius: 20px;
 }
 ul.nav-box {
   padding: 0px;
@@ -111,7 +122,7 @@ ul.nav-box {
 }
 ul.nav-box a.nav-list-item {
   text-decoration: none;
-  color: #ababab;
+  color: #ffffff;
 }
 .bottom-region-arena ul li.bottom-line {
   width: 25%;
@@ -734,6 +745,9 @@ li.download-lane button {
   background-color: #ce2030;
   color: #fff;
 }
+.wide30{
+  width: 33%;
+}
 .wide50{
   width: 50%;
 }
@@ -979,4 +993,29 @@ span.light-gray {
 }
 .badge-logo {
   width: 120px;
+}
+.btn-place-primary {
+    font-weight: 800;
+    width: 50%;
+    padding-bottom: 5px;
+}
+.active-btn-boost {
+    font-weight: 800;
+    width: 50%;
+    color:#ce2030 !important;
+    border-bottom: 4px solid #ce2030 !important;
+    padding-bottom: 5px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0px;
+}
+.scan-box-container {
+  padding:10px;
+}
+.title-container-x1 {
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center;
+  text-align: center;
 }

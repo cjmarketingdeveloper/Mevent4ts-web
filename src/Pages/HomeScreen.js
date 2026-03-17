@@ -16,6 +16,7 @@ import ClinicRsvp from '../Components/Widgets/rsvp/ClinicRsvp';
 import VipRsvp from '../Components/Widgets/rsvp/VipRsvp';
 import TradeshowRsvp from '../Components/Widgets/rsvp/TradeshowRsvp';
 import logoHome from '../assets/logo.png';
+import HomeSponsors from '../Components/Widgets/HomeSponsors';
 
 function HomeScreen() {
 
@@ -38,10 +39,11 @@ function HomeScreen() {
         //////////////////////
           try {
             
+            
             const eventObject = {
               "eventCodes" : user.events
             }
-         
+            
             setIsLoadEvent(true);
 
           const eventData = await axios.put(CONSTANTS.API_URL +"events/list/specific", eventObject, {
@@ -50,6 +52,8 @@ function HomeScreen() {
                   }
               });
               setEventList(eventData.data);
+              //console.log("Events");
+              //console.log(eventData.data);
               setIsLoadEvent(false);
         }catch(error){
             console.log(error);
@@ -100,25 +104,7 @@ function HomeScreen() {
         </div>
         <div className="main-area-view"> 
            
-           <div className="p-2">
-             <Link className="btn btn-gradient d-flex">
-               <div className="icon-item perc-banner1">
-                    <div className="home-icon-item">
-                      <FaHive />
-                    </div>
-               </div>
-               <div className="content-title">
-                  <h4>Current Agenda</h4>
-                  Agenda Item title
-               </div>
-                <div className="content-log perc-banner1">
-                  <div className="content-log--2">
-                    <FaSignOutAlt />
-                  </div>
-               </div>
-             </Link>
-           </div>
-
+           
           {
             user.profile.profileName == "Franchisee" && (
               <FranchiseeRsvp user={user} CONSTANTS={CONSTANTS} />
