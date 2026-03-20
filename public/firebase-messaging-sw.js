@@ -25,7 +25,7 @@ messaging.onBackgroundMessage((payload) => {
   // Customize notification here
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
-    body: payload.notification.body,
+    body: payload.notification.body + " On Background",
     icon: '/logo192.png' // Ensure this icon exists in your public folder
   };
 
