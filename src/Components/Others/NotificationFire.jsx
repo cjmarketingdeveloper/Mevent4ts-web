@@ -39,12 +39,10 @@ function NotificationFire() {
                     const currentToken = await getToken(messaging, { 
                         vapidKey: process.env.REACT_APP_FIREBASE_KEY_PAIR
                     });
-                     console.log("granted");
-                     console.log(currentToken);
+                  
                     if (currentToken) {
                         console.log("Device Token:", currentToken);
-                        console.log(CONSTANTS)
-                        
+                            
                         // 3. POST the data to your backend
                         await axios.put(CONSTANTS.API_URL +'users/update/app/token/info/v1', {
                             userId: user._id,
