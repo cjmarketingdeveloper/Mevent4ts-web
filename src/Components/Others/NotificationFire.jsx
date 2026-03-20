@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { initializeApp } from "firebase/app";
-import { getMessaging, getToken } from "firebase/messaging";
+import { getMessaging, getToken, onMessage} from "firebase/messaging";
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+import * as CONSTANTS from "../../CONSTANTS";
+import { toast } from 'react-toastify';
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -17,11 +20,16 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
 
-function NotificationFire({user}) {
+function NotificationFire() {
+
+    const {user}                                                    = useSelector((state) => state.auth);
+    const [getNotifies, setGetNotifies]                             = useState(false);
 
     useEffect(() => {
+        
         const requestPermissionAndGetToken = async () => {
             try {
+                
                 // 1. Request browser permission
                 const permission = await Notification.requestPermission();
                 console.log(permission);
@@ -31,20 +39,20 @@ function NotificationFire({user}) {
                     const currentToken = await getToken(messaging, { 
                         vapidKey: process.env.REACT_APP_FIREBASE_KEY_PAIR
                     });
-
+                     console.log("granted");
+                     console.log(currentToken);
                     if (currentToken) {
                         console.log("Device Token:", currentToken);
-                        /*
+                        console.log(CONSTANTS)
+                        
                         // 3. POST the data to your backend
-                        await axios.post('https://your-api-endpoint.com/save-token', {
+                        await axios.put(CONSTANTS.API_URL +'users/update/app/token/info/v1', {
                             userId: user._id,
-                            name: user.name,
-                            surname: user.surname,
-                            phoneNumber: user.phonenumber,
                             token: currentToken
                         });
-                        */
+                        
                         console.log("Token successfully sent to server");
+                        setGetNotifies(true);
                     } else {
                         console.log('No registration token available. Request permission to generate one.');
                     }
@@ -56,18 +64,41 @@ function NotificationFire({user}) {
             }
         };
 
-        if (user?._id) {
+     
+        if (user?._id && user?.token === "") {
             requestPermissionAndGetToken();
         }
+
+        
+        ///////////////////////////////////////////////////////
+        const unsubscribe = onMessage(messaging, (payload) => {
+            console.log('Foreground message received: ', payload);
+            
+            // Trigger your toast library here
+            toast.info(
+                <div>
+                    <strong>{payload.notification.title}</strong>
+                    <p>{payload.notification.body}</p>
+                </div>, 
+                { position: "top-right", autoClose: 5000 }
+            );
+        });
+
+        return () => unsubscribe();
+        //////////////////////////////////////////////////////
     }, [user]);
-    //once app is initialized then get request permission then get Token
- 
-   ///GET TOKEN
-   /*
-   Post user._id, user.name, user.surname, user.phonenumber, token
-   */
+
   return (
-    <div>NotificationFire</div>
+    <div className='noty'>
+       
+        {
+            getNotifies && (<div className="p-4">
+                                <div className="alert alert-success">
+                                    Notification ready.
+                                </div>
+                            </div>)
+        }
+    </div>
   )
 }
 

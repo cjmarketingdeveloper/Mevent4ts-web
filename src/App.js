@@ -31,6 +31,7 @@ import ProfileScreen from "./Pages/ProfileScreen";
 import MapScreen from "./Pages/MapScreen";
 import RSVPScreen from "./Pages/RSVPScreen";
 import SurveyScreen from "./Pages/SurveyScreen";
+import NotificationFire from "./Components/Others/NotificationFire";
 
 function App() {
   
@@ -38,6 +39,8 @@ function App() {
     <>
     <Router>
       <div className="main-outer-container">
+        <NotificationFire />
+      
         <Routes>
           <Route path="/login" element={<AuthLoginScreen />}/> 
           <Route path="/register" element={<AuthRegisterScreen />}/>

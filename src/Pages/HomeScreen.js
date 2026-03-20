@@ -95,9 +95,7 @@ function HomeScreen() {
         <p className="text-center smal-g">
             { CONSTANTS.VERSION}
         </p>
-        {
-          user.token === "" && <NotificationFire user={user} />
-        }
+        
         <div className="p-3">
           <div className="card card-bl-grad">
             <div className="card-body">
