@@ -1,0 +1,399 @@
+
+.landscape-wrapper {
+  display: flex;
+  flex-direction: column; /* Stacks: Top Panel -> Map -> Bottom Panel */
+  height: 100vh;
+  width: 100vw;
+  padding: 10px; /* Space around the edges */
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* ===============================
+   FLOATING SIDE PANELS
+=================================*/
+
+.side-panel {
+  
+  background: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  flex: 0 0 80%;
+  max-width: 80%;
+  /* 1. Semi-transparent background */
+  background: rgba(255, 255, 255, 0.2); 
+  
+  /* 2. The "Frosted" effect (Blurs the map underneath) */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* For Safari support */
+
+  /* 3. Subtle border to define the edge of the glass */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  /* 4. Softer shadow for a floating feel */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  flex-direction: column;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* ROTATE CONTENT */
+.panel-inner {
+  /* transform: rotate(90deg); */
+  display: flex;
+}
+
+/* ===============================
+   LEFT PANEL BUTTONS
+=================================*/
+
+.left-panel {
+  /* display: flex; */
+  height: fit-content;
+  width: 382vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-panel .panel-inner {
+  /* transform: rotate(90deg); */
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.side-panel.left-panel {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 68px;
+  /* height: 19%; */
+}
+
+.left-panel button:hover {
+  background: #000000;
+}
+
+.control-item {
+  display: flex;           /* enable flex */
+  flex-direction: column;  /* stack icon above text */
+  align-items: center;     /* center horizontally */
+  justify-content: center; /* optional: center vertically */
+  gap: 4px;                /* space between icon and text */
+  cursor: pointer;
+}
+
+.control-item button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 20;
+  height: 20;
+  opacity: 1;
+}
+
+.control-item.active i {
+  color: #ff6600;
+}
+
+.control-item p{
+  width: 50;
+  height: 12;
+  opacity: 1;
+  font-family: Inter;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 10px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #18181B;
+}
+
+.control-item.active p {
+  color: #ff6600;
+}
+
+/* ===============================
+   RIGHT PANEL HEADER
+=================================*/
+
+.header-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+.header-block h1 {
+  font-size: 1.4rem;
+  margin: 0;
+  color: #333;
+}
+
+/* The 80px wide white vertical bar */
+.side-panel.right-panel {
+  background: linear-gradient(105.16deg, rgba(14, 165, 233, 0.09) 0%, rgba(0, 0, 0, 0) 50%, rgba(139, 92, 246, 0.09) 100%);
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 755px;
+  height: 68px;
+}
+
+/* The actual "tray" holding your text and search */
+.right-panel .panel-inner {
+  display: flex;
+  flex-direction: row;      /* horizontal layout */
+  align-items: center;      /* vertically centered */
+  justify-content: space-between; /* push left & right */
+  height: 100%;
+  width: 100%;
+}
+
+.header-title {
+  width: 146px;
+  height: 27px;
+  opacity: 1;
+  font-family: Inter;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 24px;
+  color: #E7000B;
+  line-height: 32px;
+  letter-spacing: 0.07px;
+  text-align: left;
+  vertical-align: middle;
+  left: 10px;
+  margin: 0;
+}
+
+.below-title{
+  width: 122px;
+  height: 16px;
+  opacity: 1;
+  font-family: Inter;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 14px;
+  line-height: 32px;
+  letter-spacing: 0.07px;
+  text-align: left;
+  vertical-align: top;
+  color: #E7000B;
+  margin: 0;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-left: auto;
+}
+
+
+.search-container input {
+  width: 291;
+  height: 43;
+  max-width: 720px;
+  opacity: 1;
+  gap: 4px;
+  border-radius: 28px;
+
+  padding: 8px 35px 8px 15px;
+  border: 1px solid #ddd;
+  outline: none;
+  font-size: 14px;
+  
+}
+
+.search-icon {
+  position: absolute;
+  right: 12px;
+  font-size: 14px;
+  pointer-events: none;
+  color: #888;
+}
+
+/* ===============================
+   MAP CENTER
+=================================*/
+
+.map-container {
+  flex: 1;            /* Grows to fill middle space */
+  position: relative; /* Change from absolute */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 80%;
+  /* border: 2px solid blue;  */
+  overflow: hidden;   /* Keeps the rotated SVG inside the lines */
+}
+
+.map-inner {
+  padding: 10px;
+  background: transparent;
+  border-radius: 12px;
+  transform: rotate(-90deg);
+  /* border: 2px solid red;  */
+  width: 30%;
+  height: auto;
+}
+
+.map-svg {
+  /* height: 729px;
+  width: 203px; */
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 100%;
+}
+
+/* ===============================
+   STALL STYLING
+=================================*/
+
+.stall path {
+  transition: all 0.2s ease;
+}
+
+.stall.muted {
+  fill: #2a0a0a; /* darkened background for muted stalls */
+}
+
+.stall.search-match {
+  fill: #ff9800; /* highlight color */
+}
+
+.stall.selected {
+  stroke: #fff;
+  stroke-width: 2px;
+}
+
+.exit path {
+  fill: #4da547;
+}
+
+.muted {
+  opacity: 0.2;
+}
+
+.my-location path {
+  stroke: #007aff;
+  stroke-width: 4;
+  stroke-dasharray: 4;
+  animation: pulse 1.5s infinite;
+}
+
+.highlight path {
+  filter: drop-shadow(0 0 6px gold);
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+/* =======================================
+TILT GATE, DON'T DELETE!
+======================================= */
+
+/* Container takes up full screen */
+.tilt-gate-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* The Overlay - Needs to be high z-index and sharp */
+.tilt-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.4); /* Semi-transparent */
+  backdrop-filter: blur(15px); /* This creates the glass blur */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  text-align: center;
+}
+
+.overlay-content {
+  color: #333;
+  font-family: sans-serif;
+}
+
+.overlay-content i {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 15px;
+  animation: rotatePhone 2s infinite ease-in-out;
+}
+
+/* Optional animation to show the user what to do */
+@keyframes rotatePhone {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(90deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Hide content when blurred */
+.is-blurred .main-content {
+  filter: blur(10px);
+  pointer-events: none; /* User can't click the map while blurred */
+}
+
+.stall {
+  transition: all 0.2s ease;
+}
+
+.my-location {
+  fill: #00bfff !important;
+}
+
+.search-match {
+  opacity: 1;
+  stroke: #000;
+  stroke-width: 1.5;
+}
+
+.selected {
+  stroke: #000;
+  stroke-width: 2;
+  stroke-dasharray: 4 3;
+}
+
+@media (max-width: 600px) {
+  .landscape-wrapper {
+    flex-direction: column;
+  }
+
+  .side-panel {
+    flex: 0 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row;      /* optional: panels horizontal for icons */
+    justify-content: space-around;
+  }
+
+  .map-container {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .map-svg {
+    max-height: 60%;        /* limit map height on small screens */
+  }
+}

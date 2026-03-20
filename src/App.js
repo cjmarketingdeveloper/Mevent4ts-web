@@ -26,6 +26,11 @@ import MultiAgendaWeb from "./Pages/MultiAgendaWeb";
 import Landing from "./Pages/Landing";
 import MultiAgenda from "./Pages/MultiAgenda";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
+import AgendaScreen from "./Pages/AgendaScreen";
+import ProfileScreen from "./Pages/ProfileScreen";
+import MapScreen from "./Pages/MapScreen";
+import RSVPScreen from "./Pages/RSVPScreen";
+import SurveyScreen from "./Pages/SurveyScreen";
 
 function App() {
   
@@ -43,12 +48,17 @@ function App() {
           <Route path="/mulit-agenda/:id" element={<MultiAgenda/>} /> 
           <Route element={<AuthScreens />}>                       
                 <Route path="/" element={<HomeScreen/>}/> 
+                <Route path="/agendas" element={<AgendaScreen />}/> 
+                <Route path="/map" element={<MapScreen />}/> 
+                <Route path="/profile" element={<ProfileScreen />}/> 
+                <Route path="/rsvp" element={<RSVPScreen />}/> 
+                <Route path="/survey" element={<SurveyScreen />}/> 
+                <Route path="/qrcode" element={<QRCode />}/> 
+                <Route path="/qrcode-scan" element={<QRCodeScan />}/> 
+                <Route path="/qrcode-input" element={<QRCodeInput />}/>
                 <Route path="/event-single/:id" element={<EventDetails />} />
                 <Route path="/competition-view" element={<CompetitionScreen />}/> 
                 <Route path="/sponsors" element={<SponsorsList />}/> 
-                <Route path="/qrcode" element={<QRCode />}/> 
-                <Route path="/qrcode-scan" element={<QRCodeScan />}/> 
-                <Route path="/qrcode-input" element={<QRCodeInput />}/> 
                 <Route path="/mulit-agendas" element={<MultiAgendaWeb/>} /> 
                 <Route path="/settings" element={<Settings />}/> 
             </Route>

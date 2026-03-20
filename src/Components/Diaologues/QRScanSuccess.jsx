@@ -24,8 +24,8 @@ function QRScanSuccess({title, urlString}) {
                         Thank you
                     </button>
 
-                    <Link to="/sponsors" className="btn btn-mevent mgtop10">
-                        View your scans
+                    <Link to="/home" className="btn btn-mevent mgtop10">
+                       Home
                     </Link>
                 </div>
             </div>

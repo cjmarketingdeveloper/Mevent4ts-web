@@ -65,27 +65,27 @@ function AuthForgotScreen() {
     const handleUpdateForgotPassword = async (e) => {
           e.preventDefault();
            
-            if(newPassword.length > 5){
-                if(newPassword === confirmNewPassword){
+        if(newPassword.length > 5){
+            if(newPassword === confirmNewPassword){
 
-                    const userData = {
-                        "code": smsCodeResetRef.current.value,
-                        "password": newPassword
-                      }        
-                      
-                      setIsLoading(true);
-                      const response = await axios.put(CONSTANTS.API_URL +"auth/paswordsreset", userData);
-                      
-                      //console.log(response);
-                      setIsLoading(false);
-                      
-                   toast.success("Your password has been updated, please login.")
-                }else {
-                    toast.error("Passwords don't match");
-                }
+                const userData = {
+                    "code": smsCodeResetRef.current.value,
+                    "password": newPassword
+                    }        
+                    
+                    setIsLoading(true);
+                    const response = await axios.put(CONSTANTS.API_URL +"auth/paswordsreset", userData);
+                    
+                    //console.log(response);
+                    setIsLoading(false);
+                    
+                toast.success("Your password has been updated, please login.")
             }else {
-                toast.error("Password should be at least six characters long.");
+                toast.error("Passwords don't match");
             }
+        }else {
+            toast.error("Password should be at least six characters long.");
+        }
     }
 
   return (

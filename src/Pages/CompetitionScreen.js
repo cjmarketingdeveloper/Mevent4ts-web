@@ -44,7 +44,7 @@ function CompetitionScreen() {
   return (
     <div>
         <div className="top-navbar">
-            <TopNavigation title={"Competitions"} />
+            <TopNavigation title={"Rewards"} />
         </div>
         <div className="layer-content">
            {

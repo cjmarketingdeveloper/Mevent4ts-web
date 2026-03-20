@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { FaQrcode } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
-function HomeSponsors({eventCodes, user, CONSTANTS}) {
+function HomeSponsors({eventCodes, user, CONSTANTS, setSponsorCount, setSponsorScanned}) {
     const [activeSponsor, setActiveSponsor]                         = useState("Unscanned");
 
     const [scannedList, setScannedList]                                 = useState([]);
@@ -38,10 +40,10 @@ function HomeSponsors({eventCodes, user, CONSTANTS}) {
           setScannedList(scanned);
           setUnscannedList(unscanned);
           setFilteredUnScannedList(unscanned);
-          //loop 
-          // setUnscannedList(listSponsors.data.voted is false)
-          // setFilteredUnScannedList(listSponsors.data.voted is false)
-          // setScannedList(listSponsors.data.voted is true)
+
+          /////////////////////
+          setSponsorCount(data.length);
+          setSponsorScanned(scanned.length);
       }catch(err){
         console.log(err);
       }
@@ -97,15 +99,17 @@ function HomeSponsors({eventCodes, user, CONSTANTS}) {
                       <div className="title-container-x1 wide30 p-2">
                         <h5>{sponsor.title}</h5>
                       </div>
-                      <div className="scanning-park wide30">
-
+                      <div className="scanning-park wide30 text-center">
+                          <Link className="btn-qr-box" to={'/qrcode-scan'}>
+                            <FaQrcode />
+                          </Link>
                       </div>
                     </div>
                   </div>
                 </div>
               ))
             ) : (
-              <p className="text-muted">No unscanned sponsors found.</p>
+              <h3 className="text-center text-muted">No unscanned sponsors found.</h3>
             )}
           </div>
         </div>
@@ -117,8 +121,17 @@ function HomeSponsors({eventCodes, user, CONSTANTS}) {
             <div className="sponsor-scan-list">
               {scannedList.length > 0 ? (
                 scannedList.map((sponsor) => (
-                  <div key={sponsor._id} className="sponsor-item p-2 border-bottom bg-light">
-                    {sponsor.title} ✅
+                  <div key={sponsor._id} className="card mb-2">
+                      <div className="card-body">
+                        <div className="sponsor-item p-2 flexme">
+                          <div className="wide30">
+                            <img src={sponsor.logo} className="image-ft"/>
+                          </div>
+                          <div className="title-container-x1 wide30 p-2">
+                            <h5>{sponsor.title}</h5>
+                          </div>
+                        </div>
+                      </div>
                   </div>
                 ))
               ) : (

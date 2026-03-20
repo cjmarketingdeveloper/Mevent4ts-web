@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import * as CONSTANTS from "./../CONSTANTS";
-import { FaHive, FaSignOutAlt, FaUser } from 'react-icons/fa';
+import { FaClipboard, FaHive, FaMap, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import Spinner from '../Components/Others/Spinner';
 //import { setUser } from "../reduxAuth/authSlice"; 
@@ -17,6 +17,8 @@ import VipRsvp from '../Components/Widgets/rsvp/VipRsvp';
 import TradeshowRsvp from '../Components/Widgets/rsvp/TradeshowRsvp';
 import logoHome from '../assets/logo.png';
 import HomeSponsors from '../Components/Widgets/HomeSponsors';
+import SpouseDetails from '../Components/Widgets/SpouseDetails';
+import NotificationFire from '../Components/Others/NotificationFire';
 
 function HomeScreen() {
 
@@ -30,6 +32,17 @@ function HomeScreen() {
 
   const [eventList, setEventList]                                     = useState([]);
 
+  const [dietary, setDietary]                                         = useState(null);
+
+  const [sponsorCount, setSponsorCount]                               = useState(0);
+  const [sponsorScanned, setSponsorScanned]                           = useState(0);
+ 
+  const progressPercentage = sponsorCount > 0 ? (sponsorScanned / sponsorCount) * 100 : 0;
+  
+  useEffect(() => {
+      collectDietaryData();
+  },[]);
+        
   useEffect(() => {
     getEventList();
   },[user])
@@ -38,8 +51,7 @@ function HomeScreen() {
       if(user.events.length > 0){
         //////////////////////
           try {
-            
-            
+                        
             const eventObject = {
               "eventCodes" : user.events
             }
@@ -52,8 +64,6 @@ function HomeScreen() {
                   }
               });
               setEventList(eventData.data);
-              //console.log("Events");
-              //console.log(eventData.data);
               setIsLoadEvent(false);
         }catch(error){
             console.log(error);
@@ -63,6 +73,18 @@ function HomeScreen() {
       }
   }
 
+  const collectDietaryData = async () => {
+      try{
+
+          const response = await axios.get(CONSTANTS.API_URL +"users/dietary/item/of-user/" + user.dietary);
+         
+          if(response.status === 200){
+              setDietary(response.data);
+          }
+      }catch(err){
+          console.log(err);
+      }
+  }
 
   if (isLoading) {
       return  <Spinner />
@@ -73,6 +95,9 @@ function HomeScreen() {
         <p className="text-center smal-g">
             { CONSTANTS.VERSION}
         </p>
+        {
+          user.token === "" && <NotificationFire user={user} />
+        }
         <div className="p-3">
           <div className="card card-bl-grad">
             <div className="card-body">
@@ -81,55 +106,111 @@ function HomeScreen() {
                 
                 <div className="item-head">
                   <h2 className="line-one">Welcome <span className="colorred">{user.name}</span>, </h2>
-                
-                </div>
-                
+                </div>                
               </div>
               <div className="flexme mb-3">
                 <div className="w-50 p-2">
                     <Link to={"/map"} className="btn btn-gray w-100 colorred">
-                      <span></span>
+                      <span className="ml-2"><FaMap /> </span>
                       <span>View Map</span>
                   </Link>
                 </div>
                 <div className="w-50 p-2">
-                    <Link to={"/map"} className="btn btn-mevent w-100">
-                      <span></span>
+                    <Link to={"/profile"} className="btn btn-mevent w-100">
+                      <span>
+                        {dietary?.badge && <img src={dietary.badge} className="button-image" />}                        
+                      </span>
                       <span>Dietary</span>
                   </Link>
                 </div>
+              </div>
+              <div className="d-flex">
+                  <div className="data-supplier-one">
+                    <FaClipboard />
+                  </div>
+                  <div className="data-supplier-two">
+                    Supplier Discovery
+                  </div>
+                  <div className="data-supplier-three">
+                    <span className="colorred">{sponsorScanned} </span>
+                    <span className="">/{sponsorCount} </span>
+                    <span className="gray">SCANNED</span>
+                  </div>
+              </div>
+              <div className="mt-3 progress-box mb-3">
+                <div 
+                    className="progress-bar" 
+                    style={{ width: `${progressPercentage}%` }}
+                  ></div>
               </div>
             </div>
           </div>
         </div>
         <div className="main-area-view"> 
            
-              <div className="line-two">Please check RSVP Details.</div>
-          {
+           <div className="p-2">
+             <Link className="btn btn-gradient d-flex" to={"/agendas"}>
+               <div className="icon-item perc-banner1">
+                    <div className="home-icon-item mt-3">
+                      <FaHive />
+                    </div>
+
+               </div>
+               <div className="content-title">
+                  <h4>Current Agenda</h4>
+                  Agenda Item title
+               </div>
+                <div className="content-log perc-banner1">
+                  <div className="content-log--2">
+                    <FaSignOutAlt />
+                  </div>
+               </div>
+             </Link>
+           </div>
+
+          <HomeSponsors 
+              eventCodes={user.events} 
+              user={user} 
+              CONSTANTS={CONSTANTS} 
+              setSponsorCount={setSponsorCount}
+              setSponsorScanned={setSponsorScanned}
+            />
+
+           {
+              user.spouseNumber.length === 10 && <SpouseDetails 
+                spouseNumber={user.spouseNumber}
+                CONSTANTS={CONSTANTS} />
+           }
+          <br/><br/>
+          {/*<div className="line-two">Please check RSVP Details.</div>
             user.profile.profileName == "Franchisee" && (
               <FranchiseeRsvp user={user} CONSTANTS={CONSTANTS} />
             )
+            */
           }
-          {
+          {/*
             user.profile.profileName == "Potential" && (
               <PotentialRsvp user={user} CONSTANTS={CONSTANTS} />
             )
+              */
           }
-          {
+          {/*
             user.profile.profileName == "Clinic" && (
               <ClinicRsvp user={user} CONSTANTS={CONSTANTS} />
             )
+            */
           }
-          {
+          {/*
             user.profile.profileName == "VIP" && (
               <VipRsvp user={user} CONSTANTS={CONSTANTS} />
             )
+              */
           }
-          {
+          {/*
             user.profile.profileName == "Tradeshow" && (
               <TradeshowRsvp user={user} CONSTANTS={CONSTANTS} />
             )
-          }
+         */ }
         <br/><br/>
             {
             /*
