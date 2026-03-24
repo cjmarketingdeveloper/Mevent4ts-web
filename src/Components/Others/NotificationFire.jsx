@@ -62,16 +62,20 @@ function NotificationFire() {
                 console.error('An error occurred while retrieving token:', err);
             }
         };
-
      
         if (user?._id && user?.token === "") {
             requestPermissionAndGetToken();
         }
-
         
         ///////////////////////////////////////////////////////
         const unsubscribe = onMessage(messaging, (payload) => {
             console.log('Foreground message received: ', payload);
+            // Check if the user is actually looking at THIS tab
+            if (document.visibilityState !== 'visible') {
+                console.log('Tab is hidden; letting the Service Worker handle this.');
+                return; 
+            }
+            
             if ("vibrate" in navigator) {
                 // 2. Trigger vibration
                 // [200, 100, 200] means: vibrate 200ms, pause 100ms, vibrate 200ms
