@@ -75,7 +75,7 @@ function NotificationFire() {
                 console.log('Tab is hidden; letting the Service Worker handle this.');
                 return; 
             }
-            
+
             if ("vibrate" in navigator) {
                 // 2. Trigger vibration
                 // [200, 100, 200] means: vibrate 200ms, pause 100ms, vibrate 200ms
@@ -84,7 +84,7 @@ function NotificationFire() {
             // Trigger your toast library here
             toast.info(
                 <div>
-                    <strong>{payload.notification.title}</strong>
+                    <strong>Cookie monster</strong>
                     <p>{payload.notification.body}</p>
                 </div>, 
                 { position: "top-right", autoClose: 5000 }
