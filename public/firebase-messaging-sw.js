@@ -26,7 +26,8 @@ messaging.onBackgroundMessage((payload) => {
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
     body: payload.notification.body,
-    icon: '/logo192.png' // Ensure this icon exists in your public folder
+    icon: '/logo192.png',
+    data: { url: 'https://main.d22k7gv86r3tav.amplifyapp.com/' }
   };
 
   self.registration.showNotification(notificationTitle, notificationOptions);
