@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import * as CONSTANTS from "../../CONSTANTS";
 import { toast } from 'react-toastify';
+import { FaBell, FaBellSlash } from 'react-icons/fa';
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -91,13 +92,15 @@ function NotificationFire() {
     }, [user]);
 
   return (
-    <div className='noty'>       
+    <div className='noty-alert'>       
         {
-            getNotifies && (<div className="p-4">
-                                <div className="alert alert-success">
-                                    Notification ready.
-                                </div>
-                            </div>)
+            getNotifies ? <div className="abso-alert">
+                               <FaBell />
+                            </div>
+                            :
+                            <div className="abso-alert">
+                               <FaBellSlash />
+                            </div>
         }
     </div>
   )
