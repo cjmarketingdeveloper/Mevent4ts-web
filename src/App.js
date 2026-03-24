@@ -39,8 +39,9 @@ function App() {
     <>
     <Router>
       <div className="main-outer-container">
+        
         <NotificationFire />
-      
+        
         <Routes>
           <Route path="/login" element={<AuthLoginScreen />}/> 
           <Route path="/register" element={<AuthRegisterScreen />}/>

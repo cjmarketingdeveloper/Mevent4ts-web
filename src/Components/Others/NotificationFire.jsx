@@ -71,7 +71,11 @@ function NotificationFire() {
         ///////////////////////////////////////////////////////
         const unsubscribe = onMessage(messaging, (payload) => {
             console.log('Foreground message received: ', payload);
-            
+            if ("vibrate" in navigator) {
+                // 2. Trigger vibration
+                // [200, 100, 200] means: vibrate 200ms, pause 100ms, vibrate 200ms
+                navigator.vibrate([200, 100, 200]);
+            }
             // Trigger your toast library here
             toast.info(
                 <div>
@@ -87,8 +91,7 @@ function NotificationFire() {
     }, [user]);
 
   return (
-    <div className='noty'>
-       
+    <div className='noty'>       
         {
             getNotifies && (<div className="p-4">
                                 <div className="alert alert-success">

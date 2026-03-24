@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import './authstyle.css'
-import HeaderBanner from './../assets/mevent-ill1.png';
+import './authstyle.css';
 import HeaderLogo from './../assets/logo.png';
 import * as CONSTANTS from "../CONSTANTS";
 import { Link, useNavigate } from 'react-router-dom';

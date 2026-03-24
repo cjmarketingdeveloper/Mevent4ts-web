@@ -130,7 +130,10 @@ const AgendaCard = ({ agenda }) => {
         <div className="px-4 pb-4 pt-2 bg-gray-50 border-t border-gray-100 grid grid-cols-2 gap-y-2 text-xs text-gray-600 bottom-footx">
            <div><span className="font-semibold text-gray-400">DAY:</span> {agenda.agendaDay}</div>
            <div><span className="font-semibold text-gray-400">DATE:</span> {new Date(agenda.agendaDate).toDateString()}</div>
-           {agenda.agendaGrade && <div><span className="font-semibold text-gray-400">GRADE:</span> {agenda.agendaGrade}</div>}
+           {
+           //agenda.agendaGrade && <div><span className="font-semibold text-gray-400">GRADE:</span> {agenda.agendaGrade}</div>
+           }
+           Add Email or Download options if documents exist.
         </div>
       )}
     </div>

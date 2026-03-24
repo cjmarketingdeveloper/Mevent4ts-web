@@ -18,7 +18,9 @@ import TradeshowRsvp from '../Components/Widgets/rsvp/TradeshowRsvp';
 import logoHome from '../assets/logo.png';
 import HomeSponsors from '../Components/Widgets/HomeSponsors';
 import SpouseDetails from '../Components/Widgets/SpouseDetails';
+import whiteFloor from './../assets/white-floor.jpg';
 import NotificationFire from '../Components/Others/NotificationFire';
+
 
 function HomeScreen() {
 
@@ -106,20 +108,24 @@ function HomeScreen() {
                   <h2 className="line-one">Welcome <span className="colorred">{user.name}</span>, </h2>
                 </div>                
               </div>
-              <div className="flexme mb-3">
+              <div className="row mb-3">
                 <div className="w-50 p-2">
-                    <Link to={"/map"} className="btn btn-gray w-100 colorred">
-                      <span className="ml-2"><FaMap /> </span>
-                      <span>View Map</span>
-                  </Link>
+                     <div className="card-boxer">
+                      <img src={whiteFloor} className="home-card map-road" />
+                      <Link to={"/map"} className="btn btn-gray w-100 colorred">
+                         
+                          <span>View Map</span>
+                      </Link>
+                     </div>
                 </div>
                 <div className="w-50 p-2">
-                    <Link to={"/profile"} className="btn btn-mevent w-100">
-                      <span>
-                        {dietary?.badge && <img src={dietary.badge} className="button-image" />}                        
-                      </span>
-                      <span>Dietary</span>
-                  </Link>
+                    <div className="card-boxer">
+                       {dietary?.badge && <img src={dietary.badge} className="home-card map-road" />} 
+                      <Link to={"/profile"} className="btn btn-mevent w-100">                        
+                          <span>Dietary</span>
+                      </Link>
+                    </div>
+                    
                 </div>
               </div>
               <div className="d-flex">

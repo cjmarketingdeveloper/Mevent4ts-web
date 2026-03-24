@@ -28,7 +28,7 @@ function SpouseDetails({spouseNumber, CONSTANTS}) {
   return (
     <div className="p-2">
       {
-        spouseDetails && <div className="card card-bl-grad">
+        spouseDetails && <div className="card black-intrevet">
                             <div className="card-body">
                                 <h4>Spouse Details</h4>
                                 <table className="table">
