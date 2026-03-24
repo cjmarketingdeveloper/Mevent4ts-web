@@ -98,7 +98,7 @@ function NotificationFire() {
                                <FaBell />
                             </div>
                             :
-                            <div className="abso-alert">
+                            <div className="closing-alert">
                                <FaBellSlash />
                             </div>
         }

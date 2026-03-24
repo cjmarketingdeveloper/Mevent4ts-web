@@ -1178,3 +1178,16 @@ img.home-card {
     width: 95%;
     margin: 15px auto;
 }
+.noty-alert {
+    font-size: 20px;
+    position: absolute;
+    right: 10px;
+    top: 1px;
+    z-index: 10;
+}
+.abso-alert {
+    opacity: 0.8;
+}
+.closing-alert {
+    opacity: 0.2;
+}
