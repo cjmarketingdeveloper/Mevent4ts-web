@@ -6,6 +6,7 @@ import { FaEnvelope, FaPhone, FaUser } from 'react-icons/fa';
 import axios from 'axios';
 import * as CONSTANTS from "./../CONSTANTS";
 import SpouseDetails from '../Components/Widgets/SpouseDetails';
+import { Link } from 'react-router-dom';
 
 function ProfileScreen() {
     const {user}                                                        = useSelector((state) => state.auth);
@@ -53,13 +54,10 @@ function ProfileScreen() {
                      <div>
                         <span><FaEnvelope /> </span><span >{user.email}</span>
                      </div>
+                     <Link to={"/rsvp"} className="btn btn-mevent mt-2">Edit Profile</Link>
                 </div>
                 <div className="p-3">
-                    <div className="card card-bl-grad mb-3">
-                        <div className="card-body">
-                              
-                        </div>
-                    </div>
+                    
                     <div className="card card-bl-grad">
                         <div className="card-body">
                             <h4 className="text-center">My Dietary Requirements</h4>
@@ -79,6 +77,9 @@ function ProfileScreen() {
                                     )
                                 }
                             </div>
+                            <div className="mt-2 mb-5 text-center">
+                                <Link to={"/rsvp"} className="btn btn-mevent ">Change Dietary Requirements</Link>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -92,6 +93,7 @@ function ProfileScreen() {
            </div>
         </div>
         <BottomBar />
+        <br/><br/>
     </div>
   )
 }

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { FaHome } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 function TiltGate({ children }) {
 
@@ -24,6 +26,9 @@ function TiltGate({ children }) {
           <div className="overlay-content">
             <i className="bi bi-phone-landscape"></i>
             <p>Please tilt your device to landscape</p>
+            <Link to={"/"} className="btn btn-mevent mt-5">
+              <FaHome />
+            </Link>
           </div>
         </div>
       )}
