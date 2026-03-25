@@ -30,5 +30,5 @@ messaging.onBackgroundMessage((payload) => {
     data: { url: 'https://main.d22k7gv86r3tav.amplifyapp.com/' }
   };
 
-  self.registration.showNotification(notificationTitle, notificationOptions);
+  return self.registration.showNotification(notificationTitle, notificationOptions);
 });
