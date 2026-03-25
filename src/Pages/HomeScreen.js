@@ -97,62 +97,61 @@ function HomeScreen() {
         <p className="text-center smal-g">
             { CONSTANTS.VERSION}
         </p>
-        
-        <div className="p-3">
-          <div className="card card-bl-grad">
-            <div className="card-body">
-              <img src={logoHome} className="home-logo mt-4 ml-3" />
-              <div className="header-row">
                 
-                <div className="item-head">
-                  <h2 className="line-one">Welcome <span className="colorred">{user.name}</span>, </h2>
-                </div>                
-              </div>
-              <div className="row mb-3">
-                <div className="w-50 p-2">
-                     <div className="card-boxer">
-                      <img src={whiteFloor} className="home-card map-road" />
-                      <Link to={"/map"} className="btn btn-gray w-100 colorred">
-                         
-                          <span>View Map</span>
-                      </Link>
-                     </div>
-                </div>
-                <div className="w-50 p-2">
-                    <div className="card-boxer">
-                       {dietary?.badge && <img src={dietary.badge} className="home-card map-road" />} 
-                      <Link to={"/profile"} className="btn btn-mevent w-100">                        
-                          <span>Dietary</span>
-                      </Link>
-                    </div>
+        <div className="main-area-view row mb-10"> 
+           <div className="p-3">
+              <div className="card card-bl-grad">
+                <div className="card-body">
+                  <img src={logoHome} className="home-logo mt-4 ml-3" />
+                  <div className="header-row">
                     
+                    <div className="item-head">
+                      <h2 className="line-one">Welcome <span className="colorred">{user.name}</span>, </h2>
+                    </div>                
+                  </div>
+                  <div className="row mb-3">
+                    <div className="w-50 p-2">
+                        <div className="card-boxer">
+                          <img src={whiteFloor} className="home-card map-road" />
+                          <Link to={"/map"} className="btn btn-gray w-100 colorred">
+                            
+                              <span>View Map</span>
+                          </Link>
+                        </div>
+                    </div>
+                    <div className="w-50 p-2">
+                        <div className="card-boxer">
+                          {dietary?.badge && <img src={dietary.badge} className="home-card map-road" />} 
+                          <Link to={"/profile"} className="btn btn-mevent w-100">                        
+                              <span>Dietary</span>
+                          </Link>
+                        </div>
+                        
+                    </div>
+                  </div>
+                  <div className="d-flex">
+                      <div className="data-supplier-one">
+                        <FaClipboard />
+                      </div>
+                      <div className="data-supplier-two">
+                        Supplier Discovery
+                      </div>
+                      <div className="data-supplier-three">
+                        <span className="colorred">{sponsorScanned} </span>
+                        <span className="">/{sponsorCount} </span>
+                        <span className="gray">SCANNED</span>
+                      </div>
+                  </div>
+                  <div className="mt-3 progress-box mb-3">
+                    <div 
+                        className="progress-bar" 
+                        style={{ width: `${progressPercentage}%` }}
+                      ></div>
+                  </div>
                 </div>
               </div>
-              <div className="d-flex">
-                  <div className="data-supplier-one">
-                    <FaClipboard />
-                  </div>
-                  <div className="data-supplier-two">
-                    Supplier Discovery
-                  </div>
-                  <div className="data-supplier-three">
-                    <span className="colorred">{sponsorScanned} </span>
-                    <span className="">/{sponsorCount} </span>
-                    <span className="gray">SCANNED</span>
-                  </div>
-              </div>
-              <div className="mt-3 progress-box mb-3">
-                <div 
-                    className="progress-bar" 
-                    style={{ width: `${progressPercentage}%` }}
-                  ></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="main-area-view"> 
-           
-           <div className="p-2">
+            </div>   
+           <div className="p-3">
              <Link className="btn btn-gradient d-flex" to={"/agendas"}>
                <div className="icon-item perc-banner1">
                     <div className="home-icon-item mt-3">
@@ -172,20 +171,24 @@ function HomeScreen() {
              </Link>
            </div>
 
-          <HomeSponsors 
-              eventCodes={user.events} 
-              user={user} 
-              CONSTANTS={CONSTANTS} 
-              setSponsorCount={setSponsorCount}
-              setSponsorScanned={setSponsorScanned}
-            />
+            <div className="p-2">
+              <HomeSponsors 
+                eventCodes={user.events} 
+                user={user} 
+                CONSTANTS={CONSTANTS} 
+                setSponsorCount={setSponsorCount}
+                setSponsorScanned={setSponsorScanned}
+              />
+            </div>
 
            {
-              user.spouseNumber.length === 10 && <SpouseDetails 
+              user.spouseNumber.length === 10 && <div className="p-3">
+                <SpouseDetails 
                 spouseNumber={user.spouseNumber}
                 CONSTANTS={CONSTANTS} />
+              </div>
            }
-          <br/><br/>
+         
           {/*<div className="line-two">Please check RSVP Details.</div>
             user.profile.profileName == "Franchisee" && (
               <FranchiseeRsvp user={user} CONSTANTS={CONSTANTS} />
@@ -270,6 +273,7 @@ function HomeScreen() {
               */
             }
         </div>
+         <br/><br/><br/>
     </div>
   )
 }

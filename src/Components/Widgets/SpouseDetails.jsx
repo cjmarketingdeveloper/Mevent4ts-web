@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-
+import { FaUserFriends, FaPhoneSquare, FaNewspaper } from "react-icons/fa";
+import imageLove from './../../assets/love-icon.png';
 function SpouseDetails({spouseNumber, CONSTANTS}) {
 
 
@@ -9,8 +10,7 @@ function SpouseDetails({spouseNumber, CONSTANTS}) {
     useEffect(() => {
         if(spouseNumber){
             collectSpouseDetails();
-        }
-        
+        }        
     },[])
 
     const collectSpouseDetails = async () => {
@@ -28,29 +28,32 @@ function SpouseDetails({spouseNumber, CONSTANTS}) {
   return (
     <div className="p-2">
       {
-        spouseDetails && <div className="card black-intrevet">
+        spouseDetails && <div className="card card-bl-grad">
                             <div className="card-body">
                                 <h4>Spouse Details</h4>
                                 <table className="table">
                                     <tbody>
                                         <tr>
-                                            <td>Name</td>
-                                            <td>{spouseDetails.name}</td>
+                                            <td className="title-icon-hom">
+                                                <FaUserFriends />
+                                            </td>
+                                            <td>
+                                                <strong>Name:</strong><br/>
+                                                {spouseDetails.name} {spouseDetails.surname}</td>
                                         </tr>
                                         <tr>
-                                            <td>Surname</td>
-                                            <td>{spouseDetails.surname}</td>
+                                            <td className="title-icon-hom"><FaPhoneSquare /></td>
+                                            <td><strong>Phone:</strong><br/>
+                                                {spouseDetails.phonenumber}</td>
                                         </tr>
                                         <tr>
-                                            <td>Phone</td>
-                                            <td>{spouseDetails.phonenumber}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Profession</td>
-                                            <td>{spouseDetails.profession}</td>
+                                            <td className="title-icon-hom"><FaNewspaper /> </td>
+                                            <td><strong>Profession:</strong><br/>
+                                                {spouseDetails.profession}</td>
                                         </tr>
                                     </tbody>
                                 </table>
+                                <img src={imageLove} className="magic-back" />
                             </div>                    
                          </div>
       }

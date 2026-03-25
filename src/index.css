@@ -1,8 +1,14 @@
+html {
+    overflow-x: hidden;
+}
 body {
   margin: 0;
   padding: 0;
   font-family: "Outfit", serif;
   color: #3f3f3f;
+  background: #f7f6f6;
+  overflow-x: hidden;
+    width: 100%;
 }
 h2, h3{
   font-weight: 800;
@@ -25,30 +31,36 @@ code {
 .colorred {
   color:#ce2030;
 }
-.btn-mev-active {
+.b-active-date {
+  background: #ce2030 !important;
+  color:#fff !important;
+}
+.b-days {
   background: #ce2030;
-  padding:10px;
-  font-size: 12px;
+  padding:14px;
+  font-size: 14px;
+  border-radius: 20px;
+  font-weight: 600;
+  border: 0px;
 }
 .btn-mev-active {
   background: #ce2030;
-  padding:14px;
-  font-size: 12px;
-  color:#fff;
-  border:1px solid #fff;
-  border-radius: 6px;
-  font-weight: 600;
+  color:#fff;  
 }
 .btn-unactive {
-  border:1px solid #ce2030;
   color:#ce2030;
   padding:14px;
-  font-size: 12px;
-  border-radius: 6px;
-  font-weight: 600;
+  background-color: rgb(231, 231, 231);
 }
 .scrollbar-hide {
     background: #fffbfb;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;    
+}
+.no-scrollbar::-webkit-scrollbar {
+    display: none;         
 }
 .btn.btn-mevent{
   background: #ce2030;
@@ -184,11 +196,23 @@ li.bottom-line.mid-scan-block {
 
 .sm-border-title-red {
   color: #ce2030 !important;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
 }
 /** Footer End **/
-
+td.title-icon-hom {
+    width: 50px;
+    font-size: 33px;
+    padding: 10px;
+    color: #ce2030;
+}
+img.magic-back {
+    width: 110px;
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    opacity: 0.1;
+}
 /**HEAD START **/
 .header-row {
   padding: 5px;
@@ -1190,4 +1214,8 @@ img.home-card {
 }
 .closing-alert {
     opacity: 0.2;
+}
+.ag-downld {
+    float: right;
+    margin-top: -35px;
 }

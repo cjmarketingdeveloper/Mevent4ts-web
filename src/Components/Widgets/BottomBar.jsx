@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate , useLocation} from 'react-router-dom';
-import { FaBars, FaQrcode , FaRegUser, FaHome, FaCalendarDay, FaTimes, FaList, FaTrophy, FaCompress, FaHive, FaUser, FaInbox, FaClipboardCheck } from 'react-icons/fa';
+import { FaBars, FaQrcode , FaFileImage, FaHome, FaCalendarDay, FaTimes, FaList, FaTrophy, FaCompress, FaHive, FaUser, FaInbox, FaClipboardCheck } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { logout, reset } from '../../reduxAuth/authSlice';
 import "./widgets.css";
@@ -36,7 +36,7 @@ function BottomBar({member}) {
 
   return (
     <div className="bottom-region-arena">
-        <div className="bottom-region-arena-in">
+        <div className="bottom-region-arena-in shadow">
             {/*   */}
             <ul className="nav-box">
             <li className="bottom-line">
@@ -138,6 +138,14 @@ function BottomBar({member}) {
                                     <FaTrophy />
                                 </span>
                                 <span>Rewards</span>
+                            </Link>
+                        </li> 
+                        <li>
+                            <Link to="/gallery" onClick={closeMenu}>
+                                <span className="rx-panel">
+                                    <FaFileImage />
+                                </span>
+                                <span>Gallery</span>
                             </Link>
                         </li> 
                         <li>
