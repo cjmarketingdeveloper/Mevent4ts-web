@@ -21,7 +21,8 @@ const messaging = firebase.messaging();
 // This is the background handler
 messaging.onBackgroundMessage((payload) => {
   console.log('[firebase-messaging-sw.js] Received background message ', payload);
-
+/*
+I want to see if it trigger
   // Customize notification here
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
@@ -31,4 +32,5 @@ messaging.onBackgroundMessage((payload) => {
   };
 
   self.registration.showNotification(notificationTitle, notificationOptions);
+  */
 });

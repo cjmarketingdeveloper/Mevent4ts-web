@@ -26,9 +26,10 @@ function SpouseDetails({spouseNumber, CONSTANTS}) {
         }
     }
   return (
-    <div className="p-2">
-      {
-        spouseDetails && <div className="card card-bl-grad">
+    <div className="p-2 row-component">
+        <div className="section-pad-item">
+        {
+            spouseDetails && <div className="card card-bl-grad">
                             <div className="card-body">
                                 <h4>Spouse Details</h4>
                                 <table className="table">
@@ -56,7 +57,9 @@ function SpouseDetails({spouseNumber, CONSTANTS}) {
                                 <img src={imageLove} className="magic-back" />
                             </div>                    
                          </div>
-      }
+             }
+        </div>
+      
     </div>
   )
 }

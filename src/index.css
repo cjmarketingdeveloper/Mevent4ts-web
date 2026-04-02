@@ -1219,3 +1219,282 @@ img.home-card {
     float: right;
     margin-top: -35px;
 }
+.section-pad-item {
+    padding: 2px 20px !important;
+}
+img.img-happiness {
+    width: 200px;
+    position: absolute;
+}
+
+.title-happiness {
+    position: relative; /* Stays relative */
+    width: 80%;
+    padding: 20px;
+    margin-left: auto; 
+    text-align: center;
+}
+img.img-happiness {
+    width: 190px;
+    position: absolute;
+    bottom: -4px;
+    left: -4px;
+}
+.hap-content {
+  overflow: hidden;
+}
+/* 1. The semi-transparent background covering the whole screen */
+.overlay-area {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Dimmed background */
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;     /* Centers vertically */
+    z-index: 9999;           /* High number to stay on top of everything */
+}
+
+/* 2. The white box in the middle */
+.rect-modal-card {
+    background: white;
+    width: 95%;
+    max-width: 500px;        /* Limits width on desktop */
+    min-height: 200px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    position: relative;
+    animation: fadeIn 0.3s ease-out; /* Optional smooth entrance */
+    display:flex;
+}
+
+/* Animation for a little extra polish */
+@keyframes fadeIn {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.mod-body {
+    padding: 10px 0;
+}
+/***** Happiness Factor *****/
+.multi-step-modal {
+    display: flex;
+    flex-direction: row;
+    width: 90% !important;
+    max-width: 850px !important;
+    min-height: 600px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+/* Sidebar Dots */
+.form-sidebar-dots {
+
+    width: 20px;
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dot-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background: gray;
+    border-radius: 50%;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: 0.3s;
+}
+
+.dot.active {
+    background: #ce2030; /* Pink active state */
+    transform: scale(1.4);
+    box-shadow: 0 0 10px #ce203165;
+}
+
+.dot.completed {
+    background: #2ecc71;
+}
+
+.dot-label {
+    font-size: 10px;
+    color: #bdc3c7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Icon & Content Area */
+.form-content {
+    flex: 1;
+    padding: 30px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.section-icon-large {
+    font-size: 3rem;
+    color: #ce2030;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.step-body h3 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-weight: 700;
+}
+
+/* Rating Pill Styles */
+.rating-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.rating-pill span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    border: 2px solid #eee;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.rating-pill input:checked + span {
+    background: #ce2030;
+    color: white;
+    border-color: #ce2030;
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(233, 30, 37, 0.3);
+}
+
+
+.rating-row label.rating-pill input[type="radio"] {
+    display: none;
+}
+.btn.btn-opt{
+  border:2px solid #ce2030;
+  color: rgb(47, 45, 45);
+}
+.btn.btn-opt.active{
+  border:2px solid #ce2030;
+  background: #ce2030;
+  color: white;
+}
+/* Navigation Buttons */
+.form-footer {
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 10px 10px 10px;
+    background-color: rgb(246, 245, 245);
+    width: 100%;
+}
+
+.btn-next {
+    background: #ce2030;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    border: none;
+    font-weight: bold;
+}
+
+.btn-back {
+    background: none;
+    border: none;
+    color: #999;
+    font-weight: bold;
+}
+.btn-next.btn-disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+    box-shadow: none;
+}
+
+/* Optional: Subtle animation when section appears */
+.fade-in {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.form-area-section-x1 {
+    max-height: 500px;
+    overflow: scroll;
+    padding: 7px;
+}
+.fr-large {
+    background: #eee3e3;
+}
+.title-happiness ul {
+    list-style: none;
+    text-align: left;
+    padding:0px;
+}
+.sub-area-title--rating {
+    padding-left: 100px;
+    text-align: left;
+}
+/***** End Happiness Factor *****/
+.main-area-view {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem; /* Adjust spacing as needed */
+}
+
+/***** gallery *******/
+.img-special {
+    cursor: pointer;
+    object-fit: cover;
+    object-position: center center;
+    width: 100%;
+}
+.scroll-image-list {
+  /* Defines how many columns you want */
+  column-count: 3; 
+  /* Space between the columns */
+  column-gap: 1.25rem; 
+  width: 100%;
+  padding: 1rem;
+}
+
+.scroll-image-list img {
+  display: block;
+  width: 100%;
+  margin-bottom: 1.25rem; /* Space between images vertically */
+  border-radius: 8px;
+  /* Crucial: prevents the image from being "cut" between columns */
+  break-inside: avoid; 
+}
+
+/* Responsive adjustment for mobile */
+@media (max-width: 768px) {
+  .scroll-image-list {
+    column-count: 2;
+  }
+}
+/***** gallery End *******/

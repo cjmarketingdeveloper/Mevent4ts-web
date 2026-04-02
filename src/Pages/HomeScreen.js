@@ -20,7 +20,8 @@ import HomeSponsors from '../Components/Widgets/HomeSponsors';
 import SpouseDetails from '../Components/Widgets/SpouseDetails';
 import whiteFloor from './../assets/white-floor.jpg';
 import NotificationFire from '../Components/Others/NotificationFire';
-
+import happinessImage from './../assets/happiness.png';
+import HappinessFactor from '../Components/Widgets/HappinessFactor';
 
 function HomeScreen() {
 
@@ -40,7 +41,8 @@ function HomeScreen() {
   const [sponsorScanned, setSponsorScanned]                           = useState(0);
  
   const progressPercentage = sponsorCount > 0 ? (sponsorScanned / sponsorCount) * 100 : 0;
-  
+  const [showModalHappiness, setShowModalHappiness]                   = useState(false);
+
   useEffect(() => {
       collectDietaryData();
   },[]);
@@ -99,7 +101,7 @@ function HomeScreen() {
         </p>
                 
         <div className="main-area-view row mb-10"> 
-           <div className="p-3">
+           <div className="p-3 row-component">
               <div className="card card-bl-grad">
                 <div className="card-body">
                   <img src={logoHome} className="home-logo mt-4 ml-3" />
@@ -151,7 +153,7 @@ function HomeScreen() {
                 </div>
               </div>
             </div>   
-           <div className="p-3">
+           <div className="p-3 row-component">
              <Link className="btn btn-gradient d-flex" to={"/agendas"}>
                <div className="icon-item perc-banner1">
                     <div className="home-icon-item mt-3">
@@ -170,8 +172,7 @@ function HomeScreen() {
                </div>
              </Link>
            </div>
-
-            <div className="p-2">
+           <div className="p-2 row-component">
               <HomeSponsors 
                 eventCodes={user.events} 
                 user={user} 
@@ -182,13 +183,44 @@ function HomeScreen() {
             </div>
 
            {
-              user.spouseNumber.length === 10 && <div className="p-3">
+              user.spouseNumber.length === 10 && 
                 <SpouseDetails 
                 spouseNumber={user.spouseNumber}
-                CONSTANTS={CONSTANTS} />
-              </div>
+                CONSTANTS={CONSTANTS} />             
            }
-         
+           <div className="row-component">
+            <div className="section-pad-item mt-3 mb-3">
+                  <div className="card card-bl-grad relative hap-content">
+                    <img src={happinessImage} className="img-happiness" />
+                    <div className="title-happiness">
+                        <h3 className="title happiness-title mt-2">Happiness Factor</h3>
+                        <p>Please answer honestly. All responses will be used to improve franchisee experience and support.</p>
+                        <div className="sub-area-title--rating">
+                            <div className="r-scale">Rating Scale:</div>
+                            <ul>
+                              <li>1 = <strong>Very Poor</strong></li>
+                              <li>2 = <strong>Poor</strong></li>
+                              <li>3 = <strong>Average</strong></li>
+                              <li>4 = <strong>Good</strong></li>
+                              <li>5 = <strong>Excellent</strong></li>
+                            </ul>
+                            <button className="btn btn-mevent mt-2" onClick={() => setShowModalHappiness(true)}>
+                              Take Form
+                            </button>
+                        </div>
+                    </div>
+                  </div>
+             </div>
+           </div>
+            
+            
+          {
+              showModalHappiness && (<HappinessFactor 
+                                        user={user}
+                                        showModalHappiness={showModalHappiness}
+                                        setShowModalHappiness={setShowModalHappiness}
+                                      />)
+          }
           {/*<div className="line-two">Please check RSVP Details.</div>
             user.profile.profileName == "Franchisee" && (
               <FranchiseeRsvp user={user} CONSTANTS={CONSTANTS} />

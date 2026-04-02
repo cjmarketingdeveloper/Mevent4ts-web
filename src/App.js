@@ -33,6 +33,7 @@ import RSVPScreen from "./Pages/RSVPScreen";
 import SurveyScreen from "./Pages/SurveyScreen";
 import NotificationFire from "./Components/Others/NotificationFire";
 import GalleryEvent from "./Pages/GalleryEvent";
+import GallerySingle from "./Pages/GallerySingle";
 
 function App() {
   
@@ -58,6 +59,7 @@ function App() {
                 <Route path="/profile" element={<ProfileScreen />}/> 
                 <Route path="/rsvp" element={<RSVPScreen />}/> 
                 <Route path="/gallery" element={<GalleryEvent />}/> 
+                <Route path="/gallery/:id" element={<GallerySingle />}/> 
                 <Route path="/survey" element={<SurveyScreen />}/> 
                 <Route path="/qrcode" element={<QRCode />}/> 
                 <Route path="/qrcode-scan" element={<QRCodeScan />}/> 
