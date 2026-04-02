@@ -27,7 +27,7 @@ I want to see if it trigger
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
     body: payload.notification.body,
-    icon: '/logo192.png',
+    icon: '/logo512.png',
     data: { url: 'https://main.d22k7gv86r3tav.amplifyapp.com/' }
   };
 
