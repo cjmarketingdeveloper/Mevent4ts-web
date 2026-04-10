@@ -1498,3 +1498,227 @@ img.img-happiness {
   }
 }
 /***** gallery End *******/
+button.w-5.table-card {
+    background: #ce2030;
+    color: #fff;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 0px;
+}
+.horizontal-stable {
+    display: flex;
+    flex-direction: row;      /* Force side-by-side */
+    flex-wrap: nowrap;        /* Prevent "stacking" onto new lines */
+    overflow-x: auto;         /* Enable the horizontal scrollbar */
+    width: 100%;              /* Stay within the parent width */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* The Individual Cards */
+.table-section-card {
+    flex-shrink: 0;           /* CRITICAL: Prevents the card from squishing */
+    width: 300px;             /* Or min-width */
+    margin-right: 16px;       /* Spacing between cards */
+}
+
+/* Optional: Hide the scrollbar for a cleaner mobile look */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.base-card-wide {
+  width: 300px;
+}
+button.w-5.table-card {
+    background: #ce2030;
+    color: #fff;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 0px;
+    margin-right: 14px;
+    margin-bottom: 13px;
+}
+.row-index-filter {
+  display: flex;
+    height: 50px;
+    padding: 2px 5px; /* Gives it some breathing room from the screen edge */
+    transition: all 0.3s ease-in-out;
+}
+
+.w-stage-indicate {
+    background: #2e2424;
+    padding: 10px;
+    color: #fff;
+    width: 180px;
+    text-align: center;
+    border-radius: 0 0 8px 8px; /* Optional: makes it look like it's hanging from the top */
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.row-index-filter.flex.w-full.h-12.flex-end {
+    justify-content: end;
+}
+.bx-space {
+    height: 15px;
+    width: 15px;
+    margin-right: 10px;
+}
+.red-space {
+    background: #ce2030;
+}
+.gray-space {
+    background: #ccc;
+}
+span.xs-copy
+ {
+    margin-top: -5px;
+    margin-right: 10px;
+}
+.grid-outer-wing.part-0 .mb-odd {
+    margin-top: 15px;
+}
+.grid-outer-wing.part-3 .mb-even {
+    margin-top: 15px;
+}
+
+
+
+
+
+
+/* 4 Columns for L and R sections */
+.grid-outer-wing {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem; /* Adjust spacing between tables */
+}
+
+/* Middle Sections: using your existing logic */
+.grid-inner-section {
+    display: flex;
+    flex-wrap: wrap;
+    /* add specific flex styles if needed */
+}
+
+/* Ensure buttons are consistent sizes */
+.table-dot {
+    aspect-ratio: 1 / 1; /* Makes them circular or square */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%; /* Remove this if you want squares */
+}
+button.table-dot {
+    color: #fff;
+    font-weight: 400;
+    width: 60px;
+    height: 60px;
+}
+
+
+
+
+
+.grid-inner-section.part-1.sect-type-LM {
+    grid-template-columns: repeat(3, 1fr) !important;
+    display: grid;
+}
+
+.sect-type-LM .cus-column-2 {
+    margin-top: 15px;
+}
+.sect-type-LM .cus-column-3 {
+    margin-top: 30px;
+}
+
+
+.grid-inner-section.part-2.sect-type-RM {
+    grid-template-columns: repeat(3, 1fr) !important;
+    display: grid;
+    direction: rtl;
+}
+
+.sect-type-RM .cus-column-3{
+     margin-top: 30px;
+}
+.sect-type-RM .cus-column-2{
+     margin-top: 20px;
+}
+
+.horiscroll {
+  display: flex;                /* Aligns items in a row */
+  overflow-x: auto;             /* Enables horizontal scrolling */
+  overflow-y: hidden;           /* Prevents vertical jiggle */
+  white-space: nowrap;          /* Forces content to stay on one line */
+  gap: 12px;                    /* Modern way to space items */
+  padding: 12px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  
+  /* Improves scrolling physics on mobile devices */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 2. The Items (Buttons) */
+.horiscroll button {
+  flex: 0 0 auto;               /* CRITICAL: Prevents buttons from shrinking to fit the screen */
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #f9f9f9;
+  cursor: pointer;
+}
+
+/* 3. Optional: Hide the scrollbar for a cleaner look */
+.horiscroll::-webkit-scrollbar {
+  display: none;                /* Safari and Chrome */
+}
+.horiscroll {
+  -ms-overflow-style: none;     /* IE and Edge */
+  scrollbar-width: none;        /* Firefox */
+}
+.gala-table-content {
+    width: 100%;
+}
+.btn-activate {
+  background-color: #ce2030 !important;
+  color: #fff !important;
+}
+.relative {
+    position: relative;
+}
+.gala-head {
+  font-weight: 700;
+  color:#fff;
+  width:60%;
+  float: left;
+}
+.ctx-seat {
+    width: 25%;
+    float: right;
+    font-weight: 900;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 30px;
+    border: dotted 1px #ffd70069;
+    text-align: center;
+    box-shadow: 2px 3px 7px #000000b6;
+}
+.fade-back {
+    background: #0000007d;
+    box-shadow: 3px 5px 10px #00000080;
+}
+.thin {
+    font-weight: 400;
+}
+.img-down-center {
+    width: 200px;
+}

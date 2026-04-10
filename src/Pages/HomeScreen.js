@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import Spinner from '../Components/Others/Spinner';
 //import { setUser } from "../reduxAuth/authSlice"; 
 //import EventSingle from '../Components/Widgets/EventSingle';
-//import EventMultiple from '../Components/Widgets/EventMultiple';
+import galaBack from './../assets/gala-back.jpg';
 import { Link, Links } from 'react-router-dom';
 import Loading from '../Components/Others/Loading';
 import FranchiseeRsvp from '../Components/Widgets/rsvp/FranchiseeRsvp';
@@ -22,6 +22,7 @@ import whiteFloor from './../assets/white-floor.jpg';
 import NotificationFire from '../Components/Others/NotificationFire';
 import happinessImage from './../assets/happiness.png';
 import HappinessFactor from '../Components/Widgets/HappinessFactor';
+import DlgDownloads from '../Components/Diaologues/DlgDownloads';
 
 function HomeScreen() {
 
@@ -34,6 +35,8 @@ function HomeScreen() {
   const [eventCode, setEventCode]                                     = useState("");
 
   const [eventList, setEventList]                                     = useState([]);
+  
+  const [galaSeatDetails, setGalaSeatDetails]                                     = useState(null);
 
   const [dietary, setDietary]                                         = useState(null);
 
@@ -42,6 +45,7 @@ function HomeScreen() {
  
   const progressPercentage = sponsorCount > 0 ? (sponsorScanned / sponsorCount) * 100 : 0;
   const [showModalHappiness, setShowModalHappiness]                   = useState(false);
+  const [showModalDownloads, setShowModalDownloads]               = useState(false);
 
   useEffect(() => {
       collectDietaryData();
@@ -51,6 +55,10 @@ function HomeScreen() {
     getEventList();
   },[user])
 
+  useEffect(() => {
+    getGalaSeat();
+  },[])
+
   const getEventList = async () => {
       if(user.events.length > 0){
         //////////////////////
@@ -59,7 +67,8 @@ function HomeScreen() {
             const eventObject = {
               "eventCodes" : user.events
             }
-            
+
+            console.log("Fetching events with codes:", eventObject);
             setIsLoadEvent(true);
 
           const eventData = await axios.put(CONSTANTS.API_URL +"events/list/specific", eventObject, {
@@ -67,6 +76,8 @@ function HomeScreen() {
                       token: "Bearer "+ user.accessToken
                   }
               });
+              console.log("Events")
+              console.log(eventData.data);
               setEventList(eventData.data);
               setIsLoadEvent(false);
         }catch(error){
@@ -87,6 +98,26 @@ function HomeScreen() {
           }
       }catch(err){
           console.log(err);
+      }
+  }
+
+    const getGalaSeat = async () => {
+      if(user.events.length > 0){
+        //////////////////////
+          try {
+                        
+
+          const eventData = await axios.get(CONSTANTS.API_URL +"events/gala/check/table/v1/" + user._id, {
+                  headers: {
+                      token: "Bearer "+ user.accessToken
+                  }
+              });
+
+              setGalaSeatDetails(eventData.data);             
+        }catch(error){
+            console.log(error);         
+        }
+        //////////////////////
       }
   }
 
@@ -115,10 +146,10 @@ function HomeScreen() {
                     <div className="w-50 p-2">
                         <div className="card-boxer">
                           <img src={whiteFloor} className="home-card map-road" />
-                          <Link to={"/map"} className="btn btn-gray w-100 colorred">
+                          <button onClick={() => setShowModalDownloads(true)} className="btn btn-gray w-100 colorred">
                             
                               <span>View Map</span>
-                          </Link>
+                          </button>
                         </div>
                     </div>
                     <div className="w-50 p-2">
@@ -180,15 +211,51 @@ function HomeScreen() {
                 setSponsorCount={setSponsorCount}
                 setSponsorScanned={setSponsorScanned}
               />
-            </div>
-
+           </div>
+           {
+              galaSeatDetails && (
+                <div className="p-3 row-component">
+                  <div className="card relative" style={{backgroundImage: `url(${galaBack})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+                    <div className="card-body fade-back">
+                      <div className="justify-content-between align-items-center mb-3 ">
+                        
+                            <div className="gala-head mt-2">
+                                <h4>Booked for the Gala</h4>
+                                <div className="thin">
+                                  You are on table {galaSeatDetails.tableNumber} at {galaSeatDetails.section} section.
+                                </div>
+                            </div>
+                        
+                            <div className="ctx-seat">
+                              <div className="ctx-size1">Seat 
+                              </div> 
+                              <div className="ctx-size2">{galaSeatDetails.seat.seatNumber} 
+                              </div> 
+                            </div> 
+                         
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )
+           }
            {
               user.spouseNumber.length === 10 && 
                 <SpouseDetails 
                 spouseNumber={user.spouseNumber}
                 CONSTANTS={CONSTANTS} />             
            }
-           <div className="row-component">
+           
+            {
+              showModalDownloads && (<DlgDownloads 
+                                        setShowModalDownloads={setShowModalDownloads}
+                                        user={user}
+
+                                      />)
+            }
+            {
+              /*
+              <div className="row-component">
             <div className="section-pad-item mt-3 mb-3">
                   <div className="card card-bl-grad relative hap-content">
                     <img src={happinessImage} className="img-happiness" />
@@ -212,8 +279,8 @@ function HomeScreen() {
                   </div>
              </div>
            </div>
-            
-            
+              */
+            }
           {
               showModalHappiness && (<HappinessFactor 
                                         user={user}

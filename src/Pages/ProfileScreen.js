@@ -21,7 +21,7 @@ function ProfileScreen() {
         try{
 
             const response = await axios.get(CONSTANTS.API_URL +"users/dietary/item/of-user/" + user.dietary);
-            console.log(response);
+           
             if(response.status === 200){
                 setDietary(response.data);
             }

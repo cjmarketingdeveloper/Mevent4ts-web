@@ -34,6 +34,7 @@ import SurveyScreen from "./Pages/SurveyScreen";
 import NotificationFire from "./Components/Others/NotificationFire";
 import GalleryEvent from "./Pages/GalleryEvent";
 import GallerySingle from "./Pages/GallerySingle";
+import GalaScreen from "./Pages/GalaScreen";
 
 function App() {
   
@@ -68,6 +69,7 @@ function App() {
                 <Route path="/competition-view" element={<CompetitionScreen />}/> 
                 <Route path="/sponsors" element={<SponsorsList />}/> 
                 <Route path="/mulit-agendas" element={<MultiAgendaWeb/>} /> 
+                <Route path="/gala" element={<GalaScreen/>} />
                 <Route path="/settings" element={<Settings />}/> 
             </Route>
         </Routes>

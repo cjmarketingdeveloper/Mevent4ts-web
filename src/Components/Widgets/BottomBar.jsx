@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate , useLocation} from 'react-router-dom';
-import { FaBars, FaQrcode , FaFileImage, FaHome, FaCalendarDay, FaTimes, FaList, FaTrophy, FaCompress, FaHive, FaUser, FaInbox, FaClipboardCheck } from 'react-icons/fa';
+import { FaBars, FaQrcode , FaFileImage, FaHome, FaBezierCurve, FaTimes, FaList, FaTrophy, FaCompress, FaHive, FaUser, FaInbox, FaClipboardCheck } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { logout, reset } from '../../reduxAuth/authSlice';
 import "./widgets.css";
@@ -156,6 +156,16 @@ function BottomBar({member}) {
                                 <span>Survey</span>
                             </Link>
                         </li> 
+                        
+                        
+                        <li>
+                            <Link to="/gala" onClick={closeMenu}>
+                                <span className="rx-panel">
+                                    <FaBezierCurve />
+                                </span>
+                                <span>Gala</span>
+                            </Link>                        
+                        </li>
                         {/*                 
                         
                         <li>
