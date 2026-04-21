@@ -56,13 +56,14 @@ function AgendaScreen() {
             const contentAgendas = {
                 "eventCodes": user.events
             }
+
           setLoading(true);
           const response = await axios.put(CONSTANTS.API_URL +"agendas/event/listing/v2", contentAgendas, {
                       headers: {
                           token: "Bearer "+ user.accessToken
                       }
                   });
-            console.log(response.data);
+            //console.log(response.data);
 
             setAgendaListing(response.data); 
             setLoading(false);                         
@@ -73,7 +74,7 @@ function AgendaScreen() {
     }
 
     if (loading) return <div className="p-10 text-center">Loading Agendas...</div>;
-    if (agendaListing.length === 0) return <div className="p-10 text-center">No events found.</div>;
+    //if (agendaListing.length === 0) return <div className="p-10 text-center">No events found.</div>;
 
     // Access the current active event based on the index
     const activeEvent = agendaListing[selectedEventIndex];

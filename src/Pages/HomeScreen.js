@@ -5,29 +5,21 @@ import * as CONSTANTS from "./../CONSTANTS";
 import { FaClipboard, FaHive, FaMap, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import Spinner from '../Components/Others/Spinner';
-//import { setUser } from "../reduxAuth/authSlice"; 
-//import EventSingle from '../Components/Widgets/EventSingle';
 import galaBack from './../assets/gala-back.jpg';
 import { Link, Links } from 'react-router-dom';
 import Loading from '../Components/Others/Loading';
-import FranchiseeRsvp from '../Components/Widgets/rsvp/FranchiseeRsvp';
-import PotentialRsvp from '../Components/Widgets/rsvp/PotentialRsvp';
-import ClinicRsvp from '../Components/Widgets/rsvp/ClinicRsvp';
-import VipRsvp from '../Components/Widgets/rsvp/VipRsvp';
-import TradeshowRsvp from '../Components/Widgets/rsvp/TradeshowRsvp';
 import logoHome from '../assets/logo.png';
 import HomeSponsors from '../Components/Widgets/HomeSponsors';
 import SpouseDetails from '../Components/Widgets/SpouseDetails';
 import whiteFloor from './../assets/white-floor.jpg';
 import NotificationFire from '../Components/Others/NotificationFire';
 import happinessImage from './../assets/happiness.png';
-import HappinessFactor from '../Components/Widgets/HappinessFactor';
+import DlgHappinessFactor from '../Components/Diaologues/DlgHappinessFactor';
 import DlgDownloads from '../Components/Diaologues/DlgDownloads';
 
 function HomeScreen() {
 
   const dispatch                                                      = useDispatch();
-
   const {user}                                                        = useSelector((state) => state.auth);
 
   const [isLoading, setIsLoading]                                     = useState(false);
@@ -35,7 +27,6 @@ function HomeScreen() {
   const [eventCode, setEventCode]                                     = useState("");
 
   const [eventList, setEventList]                                     = useState([]);
-  
   const [galaSeatDetails, setGalaSeatDetails]                                     = useState(null);
 
   const [dietary, setDietary]                                         = useState(null);
@@ -44,8 +35,10 @@ function HomeScreen() {
   const [sponsorScanned, setSponsorScanned]                           = useState(0);
  
   const progressPercentage = sponsorCount > 0 ? (sponsorScanned / sponsorCount) * 100 : 0;
-  const [showModalHappiness, setShowModalHappiness]                   = useState(false);
-  const [showModalDownloads, setShowModalDownloads]               = useState(false);
+  const [showModalHappiness, setShowModalHappiness]                     = useState(false);
+  const [showModalDownloads, setShowModalDownloads]                     = useState(false);
+
+  const [indicateHappinessFactor, setIndicateHappinessFactor]           = useState(false);
 
   useEffect(() => {
       collectDietaryData();
@@ -57,6 +50,7 @@ function HomeScreen() {
 
   useEffect(() => {
     getGalaSeat();
+    getHappinessCheck();
   },[])
 
   const getEventList = async () => {
@@ -68,7 +62,6 @@ function HomeScreen() {
               "eventCodes" : user.events
             }
 
-            console.log("Fetching events with codes:", eventObject);
             setIsLoadEvent(true);
 
           const eventData = await axios.put(CONSTANTS.API_URL +"events/list/specific", eventObject, {
@@ -76,8 +69,7 @@ function HomeScreen() {
                       token: "Bearer "+ user.accessToken
                   }
               });
-              console.log("Events")
-              console.log(eventData.data);
+
               setEventList(eventData.data);
               setIsLoadEvent(false);
         }catch(error){
@@ -101,13 +93,12 @@ function HomeScreen() {
       }
   }
 
-    const getGalaSeat = async () => {
+  const getGalaSeat = async () => {
       if(user.events.length > 0){
         //////////////////////
           try {
-                        
-
-          const eventData = await axios.get(CONSTANTS.API_URL +"events/gala/check/table/v1/" + user._id, {
+             
+            const eventData = await axios.get(CONSTANTS.API_URL +"events/gala/check/table/v1/" + user._id, {
                   headers: {
                       token: "Bearer "+ user.accessToken
                   }
@@ -119,6 +110,21 @@ function HomeScreen() {
         }
         //////////////////////
       }
+  }
+
+  const getHappinessCheck = async () =>{
+    try {
+          
+        const result = await axios.get(CONSTANTS.API_URL +"settings/happiness/factor/check/active/" + user._id, {
+              headers: {
+                  token: "Bearer "+ user.accessToken
+              }
+          });
+
+      setIndicateHappinessFactor(result.data.happiness);
+    }catch(error){
+        console.log(error);         
+    }
   }
 
   if (isLoading) {
@@ -250,73 +256,48 @@ function HomeScreen() {
               showModalDownloads && (<DlgDownloads 
                                         setShowModalDownloads={setShowModalDownloads}
                                         user={user}
-
+                                        CONSTANTS={CONSTANTS} 
                                       />)
             }
             {
-              /*
-              <div className="row-component">
-            <div className="section-pad-item mt-3 mb-3">
-                  <div className="card card-bl-grad relative hap-content">
-                    <img src={happinessImage} className="img-happiness" />
-                    <div className="title-happiness">
-                        <h3 className="title happiness-title mt-2">Happiness Factor</h3>
-                        <p>Please answer honestly. All responses will be used to improve franchisee experience and support.</p>
-                        <div className="sub-area-title--rating">
-                            <div className="r-scale">Rating Scale:</div>
-                            <ul>
-                              <li>1 = <strong>Very Poor</strong></li>
-                              <li>2 = <strong>Poor</strong></li>
-                              <li>3 = <strong>Average</strong></li>
-                              <li>4 = <strong>Good</strong></li>
-                              <li>5 = <strong>Excellent</strong></li>
-                            </ul>
-                            <button className="btn btn-mevent mt-2" onClick={() => setShowModalHappiness(true)}>
-                              Take Form
-                            </button>
-                        </div>
+                indicateHappinessFactor && (
+                  <div className="row-component">
+                    <div className="section-pad-item mt-3 mb-3">
+                          <div className="card card-bl-grad relative hap-content">
+                            <img src={happinessImage} className="img-happiness" />
+                            <div className="title-happiness">
+                                <h3 className="title happiness-title mt-2">Happiness Factor</h3>
+                                <p>Please answer honestly. All responses will be used to improve franchisee experience and support.</p>
+                                <div className="sub-area-title--rating">
+                                    <div className="r-scale">Rating Scale:</div>
+                                    <ul>
+                                      <li>1 = <strong>Very Poor</strong></li>
+                                      <li>2 = <strong>Poor</strong></li>
+                                      <li>3 = <strong>Average</strong></li>
+                                      <li>4 = <strong>Good</strong></li>
+                                      <li>5 = <strong>Excellent</strong></li>
+                                    </ul>
+                                    <button className="btn btn-mevent mt-2" onClick={() => setShowModalHappiness(true)}>
+                                      Take Form
+                                    </button>
+                                </div>
+                            </div>
+                          </div>
                     </div>
                   </div>
-             </div>
-           </div>
-              */
-            }
+                )
+             
+              
+             
+          }
           {
-              showModalHappiness && (<HappinessFactor 
+              showModalHappiness && (<DlgHappinessFactor 
                                         user={user}
                                         showModalHappiness={showModalHappiness}
                                         setShowModalHappiness={setShowModalHappiness}
                                       />)
           }
-          {/*<div className="line-two">Please check RSVP Details.</div>
-            user.profile.profileName == "Franchisee" && (
-              <FranchiseeRsvp user={user} CONSTANTS={CONSTANTS} />
-            )
-            */
-          }
-          {/*
-            user.profile.profileName == "Potential" && (
-              <PotentialRsvp user={user} CONSTANTS={CONSTANTS} />
-            )
-              */
-          }
-          {/*
-            user.profile.profileName == "Clinic" && (
-              <ClinicRsvp user={user} CONSTANTS={CONSTANTS} />
-            )
-            */
-          }
-          {/*
-            user.profile.profileName == "VIP" && (
-              <VipRsvp user={user} CONSTANTS={CONSTANTS} />
-            )
-              */
-          }
-          {/*
-            user.profile.profileName == "Tradeshow" && (
-              <TradeshowRsvp user={user} CONSTANTS={CONSTANTS} />
-            )
-         */ }
+          
         <br/><br/>
             {
             /*

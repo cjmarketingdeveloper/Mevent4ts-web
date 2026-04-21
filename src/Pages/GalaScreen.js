@@ -15,9 +15,6 @@ function GalaScreen() {
 
         const [activeIndex, setActiveIndex] = useState(0);
 
-        const getGridCols = (id) => {
-            return (id === "L" || id === "R") ? "grid-cols-4" : "grid-cols-3";
-        };
         /////////===========================================================================
         const getGridStyles = (sectionId) => {
                 if (sectionId === "L" || sectionId === "R") {
@@ -53,7 +50,6 @@ function GalaScreen() {
             
             if (newIndex !== activeIndex) {
                 setActiveIndex(newIndex);
-                console.log("Current Section Index:", newIndex);
             }
         };
 
@@ -68,10 +64,8 @@ function GalaScreen() {
                         token: "Bearer "+ user.accessToken
                     }
                 }); 
-    
-                console.log(response.data);
-                setTheGalaList(response.data);
                 
+                setTheGalaList(response.data);                
             }catch(err){
                 console.log(err);
             }      

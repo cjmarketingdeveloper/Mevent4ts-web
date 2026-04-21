@@ -1,0 +1,93 @@
+/* Ensure buttons are consistent sizes */
+.table-dot {
+    aspect-ratio: 1 / 1; /* Makes them circular or square */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%; /* Remove this if you want squares */
+}
+button.table-dot {
+    color: #fff;
+    font-weight: 400;
+    width: 70px;
+    height: 70px;
+}
+
+
+
+/* Container for each circle to handle spacing */
+.ax-table {
+  display: inline-block;
+}
+
+/* The actual button styling */
+.table-dot {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%; /* Makes it a circle */
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.table-dot:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+/* Bootstrap colors fallback if not using a library */
+.bg-danger { background-color: #dc3545 !important; }
+.bg-secondary { background-color: #6c757d !important; }
+
+/* Staggering rows (matches the visual offset in your image) */
+.table-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+/* Optional: Slightly shift alternate rows for that "honeycomb" look */
+.row-1, .row-3 {
+  padding-left: 30px; 
+}
+.stage-row {
+    text-align: center;
+    margin-bottom: 60px;
+    height: 35px;
+}
+.stage-area {
+  width: 50%;
+  margin: auto;
+  height: 40px;
+  display: flex;
+}
+.screen-option {
+  background-color: rgb(169, 168, 168);
+  height: 40px;
+  width: 20%;
+  display: flex;
+  justify-content: center; /* Horizontal centering */
+  align-items: center; 
+}
+.stage-option {
+  background-color: #6c757d;
+  width: 50%;
+  height: 40px;
+  margin: auto;
+  color:#fff;
+  display: flex;
+  justify-content: center; /* Horizontal centering */
+  align-items: center; 
+}
+.scroll-indicator {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    font-size: 12px;
+    opacity: 0.5;
+}

@@ -104,7 +104,9 @@ function AuthForgotScreen() {
                           <>
                             <form encType="multipart/form-data">
                                 <div className="form-group frg">
-                                    <input type="text" className="form-control ct-content matetrial-input wide100" ref={phoneNumberRef} maxLength={10} placeholder="Enter Phone Number" required/>
+                                    <input 
+                                        type="text" 
+                                        className="form-control ct-content wide100" ref={phoneNumberRef} maxLength={10} placeholder="Enter Phone Number" required/>
                                 </div>
                                 <div className="form-group mgtop20">
                                     <button className="btn btn-mevent btn-full" onClick={handleForgotPassword} disabled={isLoading}>Submit</button>
@@ -121,7 +123,7 @@ function AuthForgotScreen() {
                                     <div className="form-group frg">
                                     <p>Enter the code sent to your phone and set a new password</p>
                                         <input type="text" 
-                                            className="form-control ct-content matetrial-input wide100" 
+                                            className="form-control ct-content wide100" 
                                             ref={smsCodeResetRef} 
                                             placeholder="Enter SMS Code" 
                                             required/>
@@ -129,7 +131,7 @@ function AuthForgotScreen() {
                                     <div className="form-group frg">
                                         <p>New Password</p>
                                         <input type="text" 
-                                            className="form-control ct-content matetrial-input wide100" 
+                                            className="form-control ct-content wide100" 
                                             onChange={(e) => setNewPassword(e.target.value)}
                                             placeholder="Enter Password" 
                                             required/>
@@ -137,7 +139,7 @@ function AuthForgotScreen() {
                                     <div className="form-group frg">
                                         <p>Confirm New Password</p>
                                         <input type="text" 
-                                            className="form-control ct-content matetrial-input wide100" 
+                                            className="form-control ct-content wide100" 
                                             onChange={(e) => setConfirmNewPassword(e.target.value)}
                                             placeholder="Confirm Enter Password" 
                                             required/>

@@ -4,7 +4,7 @@ import Spinner from '../Others/Spinner';
 import { toast } from 'react-toastify';
 
 function DgGalaTable({user, showModalGala, setShowModalGala, selectedTable, setSelectedTable, CONSTANTS, setUpdateCount}) {
-    const [loading, setLoading]                             = useState(false);
+    const [loading, setLoading]                                 = useState(false);
     const [bookingDetails, setBookingDetails]                   = useState([]);
     const [activeSeatNumber, setActiveSeatNumber]               = useState(null);
 

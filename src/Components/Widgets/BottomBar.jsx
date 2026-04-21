@@ -36,7 +36,7 @@ function BottomBar({member}) {
 
   return (
     <div className="bottom-region-arena">
-        <div className="bottom-region-arena-in shadow">
+        <div className="bottom-region-arena-in">
             {/*   */}
             <ul className="nav-box">
             <li className="bottom-line">

@@ -35,48 +35,49 @@ import NotificationFire from "./Components/Others/NotificationFire";
 import GalleryEvent from "./Pages/GalleryEvent";
 import GallerySingle from "./Pages/GallerySingle";
 import GalaScreen from "./Pages/GalaScreen";
+import GalaBallScreen from "./Pages/GalaBallScreen";
 
 function App() {
   
   return (
     <>
-    <Router>
-      <div className="main-outer-container">
-        
-        <NotificationFire />
-        
-        <Routes>
-          <Route path="/login" element={<AuthLoginScreen />}/> 
-          <Route path="/register" element={<AuthRegisterScreen />}/>
-          <Route path="/forgot-password" element={<AuthForgotScreen />}/> 
-          <Route path="/privacy-policy" element={<PrivacyPolicy />}/>  
-          <Route path="/competitions/:id" element={<Competitions />} />
-          <Route path="/home" element={<Landing />} />
-          <Route path="/mulit-agenda/:id" element={<MultiAgenda/>} /> 
-          <Route element={<AuthScreens />}>                       
-                <Route path="/" element={<HomeScreen/>}/> 
-                <Route path="/agendas" element={<AgendaScreen />}/> 
-                <Route path="/map" element={<MapScreen />}/> 
-                <Route path="/profile" element={<ProfileScreen />}/> 
-                <Route path="/rsvp" element={<RSVPScreen />}/> 
-                <Route path="/gallery" element={<GalleryEvent />}/> 
-                <Route path="/gallery/:id" element={<GallerySingle />}/> 
-                <Route path="/survey" element={<SurveyScreen />}/> 
-                <Route path="/qrcode" element={<QRCode />}/> 
-                <Route path="/qrcode-scan" element={<QRCodeScan />}/> 
-                <Route path="/qrcode-input" element={<QRCodeInput />}/>
-                <Route path="/event-single/:id" element={<EventDetails />} />
-                <Route path="/competition-view" element={<CompetitionScreen />}/> 
-                <Route path="/sponsors" element={<SponsorsList />}/> 
-                <Route path="/mulit-agendas" element={<MultiAgendaWeb/>} /> 
-                <Route path="/gala" element={<GalaScreen/>} />
-                <Route path="/settings" element={<Settings />}/> 
-            </Route>
-        </Routes>
-      </div>
-    </Router>
-    <ToastContainer />
-  </>
+      <Router>
+        <div className="main-outer-container">
+          
+          <NotificationFire />
+          
+          <Routes>
+            <Route path="/login" element={<AuthLoginScreen />}/> 
+            <Route path="/register" element={<AuthRegisterScreen />}/>
+            <Route path="/forgot-password" element={<AuthForgotScreen />}/> 
+            <Route path="/privacy-policy" element={<PrivacyPolicy />}/>  
+            <Route path="/competitions/:id" element={<Competitions />} />
+            <Route path="/home" element={<Landing />} />
+            <Route path="/mulit-agenda/:id" element={<MultiAgenda/>} /> 
+            <Route element={<AuthScreens />}>                       
+                  <Route path="/" element={<HomeScreen/>}/> 
+                  <Route path="/agendas" element={<AgendaScreen />}/> 
+                  <Route path="/map" element={<MapScreen />}/> 
+                  <Route path="/profile" element={<ProfileScreen />}/> 
+                  <Route path="/rsvp" element={<RSVPScreen />}/> 
+                  <Route path="/gallery" element={<GalleryEvent />}/> 
+                  <Route path="/gallery/:id" element={<GallerySingle />}/> 
+                  <Route path="/survey" element={<SurveyScreen />}/> 
+                  <Route path="/qrcode" element={<QRCode />}/> 
+                  <Route path="/qrcode-scan" element={<QRCodeScan />}/> 
+                  <Route path="/qrcode-input" element={<QRCodeInput />}/>
+                  <Route path="/event-single/:id" element={<EventDetails />} />
+                  <Route path="/competition-view" element={<CompetitionScreen />}/> 
+                  <Route path="/sponsors" element={<SponsorsList />}/> 
+                  <Route path="/mulit-agendas" element={<MultiAgendaWeb/>} /> 
+                  <Route path="/gala" element={<GalaBallScreen/>} />
+                  <Route path="/settings" element={<Settings />}/> 
+              </Route>
+          </Routes>
+        </div>
+      </Router>
+      <ToastContainer />
+    </>
   );
 }
 

@@ -9,7 +9,6 @@ export const API_BASE         = "http://localhost:1077/";
 export const SESSION_COOKIE   = "mobileUserLOCOETMEVENT2026";
 */
 
-
 export const VERSION          = "2.0.2";
 export const DEFAULT_BANNER   = "https://mevent.co.za/images/home/mevent_01.jpg";
 

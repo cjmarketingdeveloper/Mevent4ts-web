@@ -159,6 +159,7 @@ code {
   text-align: center;
   border-radius: 20px;
   height: 70px;
+  box-shadow: 3px 5px 10px #ce203096;
 }
 ul.nav-box {
   padding: 0px;
@@ -1107,6 +1108,7 @@ a.btn-qr-box {
     border-radius: 7px;
     margin-top: 24px;
     display: inline-block;
+    box-shadow: 3px 5px 10px #ce203096;
 }
 .data-supplier-one {
   color: #ce2030;
@@ -1607,21 +1609,6 @@ span.xs-copy
     /* add specific flex styles if needed */
 }
 
-/* Ensure buttons are consistent sizes */
-.table-dot {
-    aspect-ratio: 1 / 1; /* Makes them circular or square */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%; /* Remove this if you want squares */
-}
-button.table-dot {
-    color: #fff;
-    font-weight: 400;
-    width: 60px;
-    height: 60px;
-}
-
 
 
 
@@ -1701,7 +1688,7 @@ button.table-dot {
   float: left;
 }
 .ctx-seat {
-    width: 25%;
+    width: 28%;
     float: right;
     font-weight: 900;
     color: #fff;
@@ -1721,4 +1708,15 @@ button.table-dot {
 }
 .img-down-center {
     width: 200px;
+}
+.pointer {
+  cursor: pointer;
+}
+.success-message {
+    text-align: center;
+    font-size: 20px;
+    background: #d1f5d1de;
+    padding: 10px;
+    border-radius: 10px;
+    color: #346434;
 }

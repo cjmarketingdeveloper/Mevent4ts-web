@@ -12,7 +12,6 @@ function SponsorsList() {
 
     const [sponsors, setSponsors]                                   = useState([]);
 
-
     useEffect(() => {
         collectSponsorsList();
     },[])
@@ -29,12 +28,12 @@ function SponsorsList() {
                 }
             });
 
-            //console.log(res.data);
             setSponsors(res.data);
         }catch(errorData){
             console.log(errorData);
         }
     }
+    
   return (
     <div>
         <div className="top-navbar">
