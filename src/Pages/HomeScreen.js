@@ -15,6 +15,7 @@ import whiteFloor from './../assets/white-floor.jpg';
 import NotificationFire from '../Components/Others/NotificationFire';
 import happinessImage from './../assets/happiness.png';
 import DlgHappinessFactor from '../Components/Diaologues/DlgHappinessFactor';
+import DlgHappinessFactorClinic from '../Components/Diaologues/DlgHappinessFactorClinic';
 import DlgDownloads from '../Components/Diaologues/DlgDownloads';
 
 function HomeScreen() {
@@ -36,6 +37,7 @@ function HomeScreen() {
  
   const progressPercentage = sponsorCount > 0 ? (sponsorScanned / sponsorCount) * 100 : 0;
   const [showModalHappiness, setShowModalHappiness]                     = useState(false);
+  const [showModalHappinessClinic, setShowModalHappinessClinic]         = useState(false);
   const [showModalDownloads, setShowModalDownloads]                     = useState(false);
 
   const [indicateHappinessFactor, setIndicateHappinessFactor]           = useState(false);
@@ -280,6 +282,9 @@ function HomeScreen() {
                                     <button className="btn btn-mevent mt-2" onClick={() => setShowModalHappiness(true)}>
                                       Take Form
                                     </button>
+                                    <button className="btn btn-mevent mt-2" onClick={() => setShowModalHappinessClinic(true)}>
+                                      Take Clinic Form
+                                    </button>
                                 </div>
                             </div>
                           </div>
@@ -291,13 +296,22 @@ function HomeScreen() {
              
           }
           {
-              showModalHappiness && (<DlgHappinessFactor 
+              showModalHappiness && (<DlgHappinessFactor
                                         user={user}
                                         showModalHappiness={showModalHappiness}
                                         setShowModalHappiness={setShowModalHappiness}
                                       />)
           }
-          
+          {
+              showModalHappinessClinic && (
+                  <DlgHappinessFactorClinic
+                      user={user}
+                      // Logic: parentStateVariable={childPropName}
+                      showModalHappinessClinic={showModalHappinessClinic} 
+                      setShowModalHappinessClinic={setShowModalHappinessClinic}
+                  />
+              )
+          }
         <br/><br/>
             {
             /*
