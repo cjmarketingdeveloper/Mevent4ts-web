@@ -35,21 +35,37 @@ function QRCodeScan() {
     const codeReader = new BrowserMultiFormatReader();
     
     try {
+
       const videoElement = videoRef.current;
     
       const result = await codeReader.decodeOnceFromVideoDevice(undefined, videoElement);
-      
-      if(result.text.length === 6){
-        stopScan();
-        
-        // Stop the camera
-        if (videoElement.srcObject) {
-            videoElement.srcObject.getTracks().forEach(track => track.stop());
-            videoElement.srcObject = null;
-        }   
+      const scannedText = result.text;
+      let sponsorCode = "";
 
-        handleScannedData(result.text);
+      // Check if the scanned text is a URL or just a raw 6-character code
+      if (scannedText.includes('?code=')) {
+          // Use URLSearchParams to cleanly extract the code
+          const urlParams = new URLSearchParams(scannedText.split('?')[1]);
+          sponsorCode = urlParams.get('code');
+      } else if (scannedText.length === 6) {
+          // Fallback for old QR codes that only contain the 6-digit code
+          sponsorCode = scannedText;
       }
+
+        if (sponsorCode) {
+            stopScan();
+            
+            // Stop the camera
+            if (videoElement.srcObject) {
+                videoElement.srcObject.getTracks().forEach(track => track.stop());
+                videoElement.srcObject = null;
+            }   
+
+            // Pass the extracted code to your handler
+            handleScannedData(sponsorCode);
+        } else {
+            toast.error("Invalid QR Code format.");
+        }
       
     } catch (err) {
       console.log("QR scanning error:");

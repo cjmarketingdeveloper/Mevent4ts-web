@@ -132,12 +132,24 @@ function BottomBar({member}) {
                                 <span>QR Code</span>
                             </Link>
                         </li>
+                                           
+                        
+                        {
+                        /****
+                        <li>
+                            <Link to="/survey" onClick={closeMenu}>
+                                <span className="rx-panel">
+                                    <FaClipboardCheck />
+                                </span>
+                                <span>Survey</span>
+                            </Link>
+                        </li> 
                         <li>
                             <Link to="/competition-view" onClick={closeMenu}>
                                 <span className="rx-panel">
                                     <FaTrophy />
                                 </span>
-                                <span>Rewards</span>
+                                <span>Rewards & Competitions</span>
                             </Link>
                         </li> 
                         <li>
@@ -147,17 +159,7 @@ function BottomBar({member}) {
                                 </span>
                                 <span>Gallery</span>
                             </Link>
-                        </li> 
-                        <li>
-                            <Link to="/survey" onClick={closeMenu}>
-                                <span className="rx-panel">
-                                    <FaClipboardCheck />
-                                </span>
-                                <span>Survey</span>
-                            </Link>
-                        </li> 
-                        
-                        
+                        </li>                  
                         <li>
                             <Link to="/gala" onClick={closeMenu}>
                                 <span className="rx-panel">
@@ -166,8 +168,8 @@ function BottomBar({member}) {
                                 <span>Gala</span>
                             </Link>                        
                         </li>
-                        {/*                 
-                        
+
+                        ///////////////////////////////////////////////////
                         <li>
                             <Link to="/add-event" onClick={closeMenu}>
                                 <span className="rx-panel">
