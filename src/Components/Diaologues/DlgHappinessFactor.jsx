@@ -11,7 +11,7 @@ import Loading from '../Others/Loading';
 import axios from 'axios';
 import * as CONSTANTS from "../../CONSTANTS";
 
-function DlgHappinessFactor({user, showModalHappiness, setShowModalHappiness}) {
+function DlgHappinessFactor({user, showModalHappiness, setShowModalHappiness, setIndicateHappinessFactor}) {
     const [loading, setLoading]                         = useState(false);
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({ isNewOrRevamp: '' });
@@ -91,16 +91,17 @@ function DlgHappinessFactor({user, showModalHappiness, setShowModalHappiness}) {
             };
             
             setLoading(true);
-             const response = await axios.put(CONSTANTS.API_URL +"settings/happiness/factor/franchise/creation/v1", payload, {
+             const response = await axios.post(CONSTANTS.API_URL +"settings/happiness/factor/franchise/creation/v1", payload, {
                       headers: {
                           token: "Bearer "+ user.accessToken
                       }
                   });
 
-            console.log(response);
             setSubmitMessage(response.data.message)
             setLoading(false);
-            //setShowModalHappiness(false)
+            if(response.status === 201){
+                setIndicateHappinessFactor(false);
+            }
         }catch(err){    
             console.log(err);
             setLoading(false);
@@ -133,12 +134,12 @@ function DlgHappinessFactor({user, showModalHappiness, setShowModalHappiness}) {
                         <h3>Section 1: Franchise Background</h3>
                         <p>1) How long have you been part of The Local Choice?</p>
                         <select className="form-select" onChange={(e) => setFormData({...formData, tenure: e.target.value})}>
-                        <option value="">Select...</option>
-                        <option>Less than 1 year</option>
-                        <option>1 – 3 years</option>
-                        <option>4 – 7 years</option>
-                        <option>8 – 10 years</option>
-                        <option>More than 10 years</option>
+                            <option value="">Select...</option>
+                            <option>Less than 1 year</option>
+                            <option>1 – 3 years</option>
+                            <option>4 – 7 years</option>
+                            <option>8 – 10 years</option>
+                            <option>More than 10 years</option>
                         </select>
 
                         <p className="mt-4">2) How many of The Local Choice pharmacies do you currently operate within the network?</p>
@@ -152,9 +153,9 @@ function DlgHappinessFactor({user, showModalHappiness, setShowModalHappiness}) {
 
                         <p className="mt-4">3) Joined or revamped in the last 12 months?</p>
                         <div className="custom-radio-group">
-                        <button className={`btn btn-opt mt-1 me-1 ${formData.isNewOrRevamp === 'Yes-New' ? 'active' : ''}`} onClick={() => setFormData({...formData, isNewOrRevamp: 'Yes-New'})}>Yes - New</button>
-                        <button className={`btn btn-opt mt-1 me-1 ${formData.isNewOrRevamp === 'Yes-Revamp' ? 'active' : ''}`} onClick={() => setFormData({...formData, isNewOrRevamp: 'Yes-Revamp'})}>Yes - Revamp</button>
-                        <button className={`btn btn-opt mt-1 me-1 ${formData.isNewOrRevamp === 'No' ? 'active' : ''}`} onClick={() => setFormData({...formData, isNewOrRevamp: 'No'})}>No</button>
+                            <button className={`btn btn-opt mt-1 me-1 ${formData.isNewOrRevamp === 'Yes-New' ? 'active' : ''}`} onClick={() => setFormData({...formData, isNewOrRevamp: 'Yes-New'})}>Yes - New</button>
+                            <button className={`btn btn-opt mt-1 me-1 ${formData.isNewOrRevamp === 'Yes-Revamp' ? 'active' : ''}`} onClick={() => setFormData({...formData, isNewOrRevamp: 'Yes-Revamp'})}>Yes - Revamp</button>
+                            <button className={`btn btn-opt mt-1 me-1 ${formData.isNewOrRevamp === 'No' ? 'active' : ''}`} onClick={() => setFormData({...formData, isNewOrRevamp: 'No'})}>No</button>
                         </div>
                         
                     </section>
@@ -221,7 +222,7 @@ function DlgHappinessFactor({user, showModalHappiness, setShowModalHappiness}) {
                     {
                     step === 3 && (
                             <section>
-                                <h3>Operations Support</h3>
+                                <h3>Section 3: Operations Support</h3>
                                 <p>11) How would you rate the support received from your Opportunity Manager?</p>
                                     <RatingScale name="q11" />
 
@@ -250,7 +251,7 @@ function DlgHappinessFactor({user, showModalHappiness, setShowModalHappiness}) {
                     {
                     step === 4 && (
                             <section>
-                                <h3>Marketing</h3>
+                                <h3> Section 4: Marketing</h3>
                                 <div className="form-area-section-x1">
                                     <p>14) How satisfied are you with the marketing support provided by The Local Choice?</p>
                                     <RatingScale name="q14" />
@@ -293,7 +294,7 @@ function DlgHappinessFactor({user, showModalHappiness, setShowModalHappiness}) {
                     {
                     step === 5 && (
                             <section>
-                                <h3>Design Team & Projects</h3>
+                                <h3>Section 5: Design Team & Projects</h3>
                                 <p>18) How satisfied are you with the service and turnaround time from the design team?</p>
                                     <RatingScale name="q18" />
 
@@ -317,7 +318,7 @@ function DlgHappinessFactor({user, showModalHappiness, setShowModalHappiness}) {
                     {
                     step === 6 && (
                             <section>
-                                <h3>Clinic</h3>
+                                <h3>Section 6: Clinic</h3>
                                 <div className="form-area-section-x1">
                                     <p>20) How satisfied are you with the clinic offering provided by The Local Choice?</p>
                                         <RatingScale name="q20" />
@@ -357,7 +358,7 @@ function DlgHappinessFactor({user, showModalHappiness, setShowModalHappiness}) {
                     {
                     step === 7 && (
                             <section>
-                                <h3>Stockfile</h3>
+                                <h3>Section 7: Stockfile</h3>
                                 <p>23) How satisfied are you with the stockfile provided by The Local Choice?</p>
                                     <RatingScale name="q23" />
 
@@ -386,7 +387,7 @@ function DlgHappinessFactor({user, showModalHappiness, setShowModalHappiness}) {
                     {
                     step === 8 && (
                             <section>
-                                <h3>LocalEd</h3>
+                                <h3>Section 8: LocalEd</h3>
                                 <p>25) Have you enrolled staff in LocalEd training programmes?</p>
                                 <div className="custom-radio-group">
                                     <button className={`btn btn-opt me-1 ${formData.q25 === 'Yes' ? 'active' : ''}`} onClick={() => setFormData({...formData, q25: 'Yes'})}>Yes</button>
@@ -417,7 +418,7 @@ function DlgHappinessFactor({user, showModalHappiness, setShowModalHappiness}) {
                     {
                     step === 9 && (
                             <section>
-                                <h3>Additional Franchise Solutions</h3>
+                                <h3>Section 9: Additional Franchise Solutions</h3>
                                 <div className="form-area-section-x1">
                                     <p>27) <strong>Loyalty Programme</strong> <br/>How satisfied are you with the loyalty programme?</p>
                                         <RatingScale name="q27" />
@@ -448,7 +449,7 @@ function DlgHappinessFactor({user, showModalHappiness, setShowModalHappiness}) {
                     {
                     step === 10 && (
                             <section>
-                                <h3>Opportunities for Improvement</h3>
+                                <h3>Section 10: Opportunities for Improvement</h3>
                                 <div className="form-area-section-x1">
                                     <p>30) Is there anything you would like The Local Choice to improve on?</p>
                                         <textarea 
@@ -501,8 +502,7 @@ function DlgHappinessFactor({user, showModalHappiness, setShowModalHappiness}) {
                                             value={formData.contactOptNumEmail}
                                             onChange={(e) => setFormData({...formData, contactOptNumEmail: e.target.value})}
                                         />
-                                </div>
-                                
+                                </div>                                
                             </section>
                             )
                     }

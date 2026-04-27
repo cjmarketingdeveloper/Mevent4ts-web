@@ -36,6 +36,8 @@ import GalleryEvent from "./Pages/GalleryEvent";
 import GallerySingle from "./Pages/GallerySingle";
 import GalaScreen from "./Pages/GalaScreen";
 import GalaBallScreen from "./Pages/GalaBallScreen";
+import ScanRedirect from "./Pages/ScanRedirect";
+import VideoHowToScreen from "./Pages/VideoHowToScreen";
 
 function App() {
   
@@ -54,6 +56,7 @@ function App() {
             <Route path="/competitions/:id" element={<Competitions />} />
             <Route path="/home" element={<Landing />} />
             <Route path="/mulit-agenda/:id" element={<MultiAgenda/>} /> 
+            <Route path="/scan-redirect/:id" element={<ScanRedirect />} />
             <Route element={<AuthScreens />}>                       
                   <Route path="/" element={<HomeScreen/>}/> 
                   <Route path="/agendas" element={<AgendaScreen />}/> 
@@ -71,6 +74,7 @@ function App() {
                   <Route path="/sponsors" element={<SponsorsList />}/> 
                   <Route path="/mulit-agendas" element={<MultiAgendaWeb/>} /> 
                   <Route path="/gala" element={<GalaBallScreen/>} />
+                  <Route path="/how-to" element={<VideoHowToScreen />} />
                   <Route path="/settings" element={<Settings />}/> 
               </Route>
           </Routes>

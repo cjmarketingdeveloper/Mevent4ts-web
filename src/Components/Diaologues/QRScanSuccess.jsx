@@ -10,9 +10,9 @@ function QRScanSuccess({title, urlString}) {
     }
 
   return (
-    <div className="modal-dialogue-top">
+    <div className="modal-dialogue-top full-height-scan">
         <div className="modal-content">
-            <div className="modal-body-update">
+            <div className="modal-body-update ">
 
                 <div className="layer-content">
                         <h2 className="text-center">{title}</h2>
@@ -20,11 +20,7 @@ function QRScanSuccess({title, urlString}) {
                         <img src={urlString} className="img-responsive" />
                     </div>
 
-                    <button className="btn btn-mevent mgtop10" onClick={() => HandleRescan()}>
-                        Thank you
-                    </button>
-
-                    <Link to="/home" className="btn btn-mevent mgtop10">
+                    <Link to="/" className="btn btn-mevent mgtop10">
                        Home
                     </Link>
                 </div>

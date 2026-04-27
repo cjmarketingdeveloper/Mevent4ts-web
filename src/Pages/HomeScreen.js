@@ -14,8 +14,11 @@ import SpouseDetails from '../Components/Widgets/SpouseDetails';
 import whiteFloor from './../assets/white-floor.jpg';
 import NotificationFire from '../Components/Others/NotificationFire';
 import happinessImage from './../assets/happiness.png';
+import happyClinicImage from './../assets/clinic_happy.png';
 import DlgHappinessFactor from '../Components/Diaologues/DlgHappinessFactor';
+import DlgHappinesFactorClinic from '../Components/Diaologues/DlgHappinesFactorClinic';
 import DlgDownloads from '../Components/Diaologues/DlgDownloads';
+import HowToVideos from '../Components/Widgets/HowToVideos';
 
 function HomeScreen() {
 
@@ -36,11 +39,14 @@ function HomeScreen() {
  
   const progressPercentage = sponsorCount > 0 ? (sponsorScanned / sponsorCount) * 100 : 0;
   const [showModalHappiness, setShowModalHappiness]                     = useState(false);
+  const [showModalHappinessClinic, setShowModalHappinessClinic]         = useState(false);
   const [showModalDownloads, setShowModalDownloads]                     = useState(false);
 
   const [indicateHappinessFactor, setIndicateHappinessFactor]           = useState(false);
+  const [indicateHappinessClinic, setIndicateHappinessClinic]           = useState(true);
 
   useEffect(() => {
+      console.log(user.profile.profileName);
       collectDietaryData();
   },[]);
         
@@ -51,6 +57,7 @@ function HomeScreen() {
   useEffect(() => {
     getGalaSeat();
     getHappinessCheck();
+    getHappinessClinicCheck();
   },[])
 
   const getEventList = async () => {
@@ -115,7 +122,7 @@ function HomeScreen() {
   const getHappinessCheck = async () =>{
     try {
           
-        const result = await axios.get(CONSTANTS.API_URL +"settings/happiness/factor/check/active/" + user._id, {
+        const result = await axios.get(CONSTANTS.API_URL +"settings/happiness/factor/check/franchise/active/" + user._id, {
               headers: {
                   token: "Bearer "+ user.accessToken
               }
@@ -127,6 +134,20 @@ function HomeScreen() {
     }
   }
 
+  const getHappinessClinicCheck = async () => {
+    try{
+
+      const result = await axios.get(CONSTANTS.API_URL +"settings/happiness/factor/check/clinic/active/" + user._id, {
+              headers: {
+                  token: "Bearer "+ user.accessToken
+              }
+          });
+
+        setIndicateHappinessClinic(result.data.happiness);
+    }catch(err){
+      console.log(err);
+    }
+  }
   if (isLoading) {
       return  <Spinner />
   }
@@ -149,6 +170,7 @@ function HomeScreen() {
                     </div>                
                   </div>
                   <div className="row mb-3">
+                    {/*
                     <div className="w-50 p-2">
                         <div className="card-boxer">
                           <img src={whiteFloor} className="home-card map-road" />
@@ -158,16 +180,17 @@ function HomeScreen() {
                           </button>
                         </div>
                     </div>
-                    <div className="w-50 p-2">
+                    */}
+                    <div className="w-100 p-2">
                         <div className="card-boxer">
                           {dietary?.badge && <img src={dietary.badge} className="home-card map-road" />} 
                           <Link to={"/profile"} className="btn btn-mevent w-100">                        
                               <span>Dietary</span>
                           </Link>
-                        </div>
-                        
+                        </div>                        
                     </div>
                   </div>
+                  {/*
                   <div className="d-flex">
                       <div className="data-supplier-one">
                         <FaClipboard />
@@ -181,22 +204,24 @@ function HomeScreen() {
                         <span className="gray">SCANNED</span>
                       </div>
                   </div>
+                  
                   <div className="mt-3 progress-box mb-3">
                     <div 
                         className="progress-bar" 
                         style={{ width: `${progressPercentage}%` }}
                       ></div>
                   </div>
+                  */}
                 </div>
               </div>
-            </div>   
+          </div>
+          {/*  Agenda button
            <div className="p-3 row-component">
              <Link className="btn btn-gradient d-flex" to={"/agendas"}>
                <div className="icon-item perc-banner1">
                     <div className="home-icon-item mt-3">
                       <FaHive />
                     </div>
-
                </div>
                <div className="content-title">
                   <h4>Current Agenda</h4>
@@ -209,6 +234,8 @@ function HomeScreen() {
                </div>
              </Link>
            </div>
+           */}
+           {/* sponsors
            <div className="p-2 row-component">
               <HomeSponsors 
                 eventCodes={user.events} 
@@ -218,7 +245,8 @@ function HomeScreen() {
                 setSponsorScanned={setSponsorScanned}
               />
            </div>
-           {
+           */}
+           {/*
               galaSeatDetails && (
                 <div className="p-3 row-component">
                   <div className="card relative" style={{backgroundImage: `url(${galaBack})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
@@ -244,13 +272,13 @@ function HomeScreen() {
                   </div>
                 </div>
               )
-           }
-           {
-              user.spouseNumber.length === 10 && 
-                <SpouseDetails 
-                spouseNumber={user.spouseNumber}
-                CONSTANTS={CONSTANTS} />             
-           }
+            */}
+            {
+                user.spouseNumber.length === 10 && 
+                  <SpouseDetails 
+                    spouseNumber={user.spouseNumber}
+                    CONSTANTS={CONSTANTS} />             
+            }
            
             {
               showModalDownloads && (<DlgDownloads 
@@ -260,100 +288,125 @@ function HomeScreen() {
                                       />)
             }
             {
-                indicateHappinessFactor && (
-                  <div className="row-component">
-                    <div className="section-pad-item mt-3 mb-3">
-                          <div className="card card-bl-grad relative hap-content">
-                            <img src={happinessImage} className="img-happiness" />
-                            <div className="title-happiness">
-                                <h3 className="title happiness-title mt-2">Happiness Factor</h3>
-                                <p>Please answer honestly. All responses will be used to improve franchisee experience and support.</p>
-                                <div className="sub-area-title--rating">
-                                    <div className="r-scale">Rating Scale:</div>
-                                    <ul>
-                                      <li>1 = <strong>Very Poor</strong></li>
-                                      <li>2 = <strong>Poor</strong></li>
-                                      <li>3 = <strong>Average</strong></li>
-                                      <li>4 = <strong>Good</strong></li>
-                                      <li>5 = <strong>Excellent</strong></li>
-                                    </ul>
-                                    <button className="btn btn-mevent mt-2" onClick={() => setShowModalHappiness(true)}>
-                                      Take Form
-                                    </button>
+              user.profile.profileName === "Clinic" && 
+                <>{
+                  //indicateHappinessClinic && (
+                    false && (
+                      <div className="row-component">
+                        <div className="section-pad-item mt-3 mb-3 clinic-home-box">
+                              <div className="card card-bl-grad relative hap-content">
+                                <img src={happyClinicImage} className="img-happiness" />
+                                <div className="title-happiness">
+                                    <h3 className="title happiness-title clinic-title mt-2">Clinic Happiness Factor Questionnaire</h3>
+                                    <p>Thank you for taking the time to complete this questionnaire. Your feedback is essential in helping us improve clinic support, training, and integration within The Local Choice pharmacy network.</p>
+                                    <p>Please answer honestly. All responses will be used to enhance the clinic experience and support provided to you.</p>
+                                    <div className="sub-area-title--rating">
+                                        <div className="r-scale">Rating Scale:</div>
+                                        <ul>
+                                          <li>1 = <strong>Very Poor</strong></li>
+                                          <li>2 = <strong>Poor</strong></li>
+                                          <li>3 = <strong>Average</strong></li>
+                                          <li>4 = <strong>Good</strong></li>
+                                          <li>5 = <strong>Excellent</strong></li>
+                                        </ul>
+                                        <button className="btn btn-mevent mt-2" onClick={() => setShowModalHappinessClinic(true)}>
+                                          Take Form
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                          </div>
-                    </div>
-                  </div>
-                )
-             
-              
-             
-          }
+                              </div>
+                        </div>
+                      </div>
+                    )
+                  }
+                </>
+            }
+            {
+              user.profile.profileName === "Franchisee" && 
+              <>
+                  {
+                    //indicateHappinessFactor && (
+                    false && (
+                      <div className="row-component">
+                        <div className="section-pad-item mt-3 mb-3">
+                              <div className="card card-bl-grad relative hap-content">
+                                <img src={happinessImage} className="img-happiness" />
+                                <div className="title-happiness">
+                                    <h3 className="title happiness-title mt-2">Happiness Factor</h3>
+                                    <p>Please answer honestly. All responses will be used to improve franchisee experience and support.</p>
+                                    <div className="sub-area-title--rating">
+                                        <div className="r-scale">Rating Scale:</div>
+                                        <ul>
+                                          <li>1 = <strong>Very Poor</strong></li>
+                                          <li>2 = <strong>Poor</strong></li>
+                                          <li>3 = <strong>Average</strong></li>
+                                          <li>4 = <strong>Good</strong></li>
+                                          <li>5 = <strong>Excellent</strong></li>
+                                        </ul>
+                                        <button className="btn btn-mevent mt-2" onClick={() => setShowModalHappiness(true)}>
+                                          Take Form
+                                        </button>
+                                    </div>
+                                </div>
+                              </div>
+                        </div>
+                      </div>
+                    )
+                }
+              </>
+            }
+            
           {
               showModalHappiness && (<DlgHappinessFactor 
                                         user={user}
                                         showModalHappiness={showModalHappiness}
                                         setShowModalHappiness={setShowModalHappiness}
+                                        setIndicateHappinessFactor={setIndicateHappinessFactor}
                                       />)
           }
           
-        <br/><br/>
-            {
-            /*
-              user.events.length > 0 ?
-              <div className="event-show">
-                {
-                  isLoadEvent && (<div className="lane-loading"><Loading /></div>)
-                }
-                {
-                  eventList &&
-                  eventList.length > 0 && (
-                    <>
-                    {
-                      user.events.length === 1 ? 
-                           <EventSingle  
-                              eventContent={eventList[0]}                        
-                              user={user}
-                             />
-                        :
-                           <div  className="event-main">
-                              <EventMultiple 
-                                eventContent={eventList} 
-                                user={user}                         
-                              />
-                           </div>
-                    }
-                    </>
-                  )
-                }
-              </div> 
-              :
-              <div className="add-event">
-               
-                <div className="add-event-base-form">
-                <h2 className="add-event-title">Find Event</h2>
-                  <form onSubmit={activateEventAccount}>
-                    <div className="form-group">
-                      <input 
-                        type="text" 
-                        className="form-control fr-phase-code" 
-                        maxLength={5} 
-                        onChange={(e)=> setEventCode(e.target.value)}
-                        placeholder="Enter Code" />
-                    </div>
-                    <div className="form-group">
-                      <button className="btn btn-mevent" >
-                        Activate
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-              */
-            }
+          {
+            showModalHappinessClinic && (<DlgHappinesFactorClinic 
+                                            user={user}
+                                            showModalHappinessClinic={showModalHappinessClinic}
+                                            setShowModalHappinessClinic={setShowModalHappinessClinic}
+                                            setIndicateHappinessClinic={setIndicateHappinessClinic}
+                                            />)
+            
+            
+          }
+     
+            
         </div>
-         <br/><br/><br/>
+         {
+          /*
+            *
+            * How to Video Componet
+            * 
+            * <div className="p-3 row-component">
+             <Link className="btn btn-gradient d-flex" to={"/survey"}>
+               <div className="icon-item perc-banner1">
+                    <div className="home-icon-item mt-3">
+                      <FaHive />
+                    </div>
+
+               </div>
+               <div className="content-title">
+                  <h4>Survey</h4>
+                  <p>Please complete the short survey it will take less than <strong>5 minutes</strong>.</p>
+               </div>
+                <div className="content-log perc-banner1">
+                  <div className="content-log--2">
+                    <FaSignOutAlt />
+                  </div>
+               </div>
+             </Link>
+           </div>
+          */
+         }
+         
+         <HowToVideos />
+            <br/><br/>
     </div>
   )
 }
