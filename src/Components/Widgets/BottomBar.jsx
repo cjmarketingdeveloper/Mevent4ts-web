@@ -133,9 +133,6 @@ function BottomBar({member}) {
                             </Link>
                         </li>
                                            
-                        
-                        {
-                        /****
                         <li>
                             <Link to="/survey" onClick={closeMenu}>
                                 <span className="rx-panel">
@@ -143,7 +140,10 @@ function BottomBar({member}) {
                                 </span>
                                 <span>Survey</span>
                             </Link>
-                        </li> 
+                        </li>
+                        {
+                        /****
+                         
                         <li>
                             <Link to="/competition-view" onClick={closeMenu}>
                                 <span className="rx-panel">

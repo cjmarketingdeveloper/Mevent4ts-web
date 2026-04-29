@@ -38,16 +38,15 @@ import GalaScreen from "./Pages/GalaScreen";
 import GalaBallScreen from "./Pages/GalaBallScreen";
 import ScanRedirect from "./Pages/ScanRedirect";
 import VideoHowToScreen from "./Pages/VideoHowToScreen";
+import NetworkStatus from "./Components/Widgets/NetworkStatus";
 
 function App() {
   
   return (
     <>
       <Router>
-        <div className="main-outer-container">
-          
-          <NotificationFire />
-          
+        <div className="main-outer-container">          
+          <NotificationFire />          
           <Routes>
             <Route path="/login" element={<AuthLoginScreen />}/> 
             <Route path="/register" element={<AuthRegisterScreen />}/>
@@ -78,6 +77,7 @@ function App() {
                   <Route path="/settings" element={<Settings />}/> 
               </Route>
           </Routes>
+          <NetworkStatus />
         </div>
       </Router>
       <ToastContainer />

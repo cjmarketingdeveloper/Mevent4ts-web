@@ -307,4 +307,11 @@ button.button-uncover {
   padding: 10px 12px;
   border-radius: 50%;
 }
-
+.ct-range-part {
+    display: flex;
+    justify-content: space-between;
+    background: #dcdcdc;
+    padding: 5px;
+    font-size: 12px;
+    font-weight: 600;
+}
