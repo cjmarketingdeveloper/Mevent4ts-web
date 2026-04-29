@@ -14,7 +14,11 @@ import { useDispatch } from 'react-redux';
 function SurveyOneWidget({user, CONSTANTS}) {
      const [loading, setLoading]                                    = useState(false);
      const [formData, setFormData]                                  = useState({
-        q1: ""
+        q1: "",
+        optionalContactName: user.name,     
+        optionalContactSurName : user.surname,
+        optionalContactPhone : user.phonenumber,
+        optionalContactEmail: user.email,
      });
      const [step, setStep]                                          = useState(1);
      const [submitMessage, setSubmitMessage]                        = useState("");
@@ -39,14 +43,13 @@ function SurveyOneWidget({user, CONSTANTS}) {
     const isStepValid = () => {
         const validationMap = {
             1: ['q1', 'q2'],
-            2: ['q3', 'q4'],
-            3: ['q5', 'q6'],
-            4: ['q7', 'q8'],
-            5: ['q9', 'q10'],
-            6: ['q11'],
-            7: ['q12', 'q13'],
+            2: ['q3', 'q3B'], 
+            3: ['q4'],
+            4: ['q5', 'q6'],
+            5: ['q7'],
+            6: ['q8'],
+            7: ['q9'],
         };
-
 
         const requiredFields = validationMap[step] || [];
         
@@ -75,31 +78,77 @@ function SurveyOneWidget({user, CONSTANTS}) {
         </div>
     );
         
+    const handleMultiSelect = (value) => {
+        // Convert current string to an array, filtering out empty values
+        const currentSelections = formData.q6 ? formData.q6.split(',') : [];
+
+        if (currentSelections.includes(value)) {
+            // 1. Remove if already selected (toggle off)
+            const updated = currentSelections.filter((item) => item !== value);
+            setFormData({ ...formData, q6: updated.join(',') });
+        } else {
+            // 2. Add if under the limit of 3
+            if (currentSelections.length < 3) {
+            const updated = [...currentSelections, value];
+            setFormData({ ...formData, q6: updated.join(',') });
+            } else {
+            // Optional: Alert the user they've reached the limit
+                toast.warning("You can only select up to 3 options.");
+            }
+        }
+    };
+
     const handleSubmitForm = async () => {
             try {
                 setLoading(true);
                 const payload = {
-                    ...formData,
-                    userId: user._id,
-                    events: user.events
+                    "kind" : user.profile.profileName === "Franchisee" ? "franchisee" : "main",
+                    "q1": formData.q1,
+                    "q2": formData.q2,
+                    "q3": formData.q3,
+                    "q3B": formData.q3B,
+                    "q4": formData.q4,
+                    "q5": formData.q5,
+                    "q6": formData.q6,
+                    "q7": formData.q7,
+                    "q8": formData.q8,                    
+                    "q9": formData.q9,
+                    "optionalContactName": formData.optionalContactName ,     
+                    "optionalContactSurName" : formData.optionalContactSurName ,
+                    "optionalContactPhone" : formData.optionalContactPhone,
+                    "optionalContactEmail": formData.optionalContactEmail,
                 };
     
                 console.log(payload);
-                /*
-                const response = await axios.post(CONSTANTS.API_URL + "settings/happiness/factor/clinic/v1", payload, {
-                    headers: { token: "Bearer " + user.accessToken }
-                });
-    
-                setSubmitMessage(response.data.message);
+                console.log("++++++++++++++++++");
+
+                const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyHufEoDIW-w3oMK7puSP5ZBq-WVilbFA_tLg8XbX-MRus9JN_FeMpMqisfaKfEUSKs/exec';
+                //const SCRIPT_URL = 'https://script.google.com/macros/library/d/1fmITqgW2V3-k3de5xe0l4Yd3GWg7Da6UGKlVnOQNCkkvahRQbIkFXAa3/1';
                 
-                setLoading(false);
-                if(response.status === 201){
-                    setIndicateHappinessClinic(false);
+                const response = await fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors', // standard for Apps Script to avoid pre-flight issues
+                        headers: {
+                        'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(payload),
+                    });
+    
+                console.log("sssssssssssssssssssss");
+                console.log(response);
+                console.log(response.status);
+                if(response.status === 0){
+                    setSubmitMessage("Thank you for taking the time to share your perspective, we really appreciate your input. We're looking forward to seeing you at the conference and working together to shape the future of The Local Choice franchise.");
+                }else {
+                    setSubmitMessage("Submission was not successfully, please try again later.");
                 }
-                */
-            } catch (err) {    
-                console.error(err);
+                                
                 setLoading(false);
+                                
+            } catch (err) {    
+                console.log(err);
+                setLoading(false);
+                toast.error("Something went wrong, please try again later.");
             }
     };
     
@@ -150,10 +199,8 @@ function SurveyOneWidget({user, CONSTANTS}) {
                                                             <button className={`btn btn-opt mt-1 me-1 ${formData.q2 === 'Neither concerned or confident' ? 'active' : ''}`} onClick={() => setFormData({...formData, q2: 'Neither concerned or confident'})}>Neither concerned or confident</button>
                                                             <button className={`btn btn-opt mt-1 me-1 ${formData.q2 === 'Somewhat confident' ? 'active' : ''}`} onClick={() => setFormData({...formData, q2: 'Somewhat confident'})}>Somewhat confident</button>
                                                             <button className={`btn btn-opt mt-1 me-1 ${formData.q2 === 'Very confident' ? 'active' : ''}`} onClick={() => setFormData({...formData, q2: 'Very confident'})}>Very confident</button>
-                                                        </div>
-                                                        
+                                                        </div>                                                        
                                                     </>
-
                                         }
                                     </section>
                                 )}
@@ -162,7 +209,7 @@ function SurveyOneWidget({user, CONSTANTS}) {
                                         <h3>Section 2</h3>
                                         {
                                             user.profile.profileName === "Franchisee" ? <>
-                                                        <p>3) In a word or short phrase, how would you describe how you're feeling about The Local Choice right now?</p>
+                                                        <p>3.1) In a word or short phrase, how would you describe how you're feeling about The Local Choice right now?</p>
                                                         <textarea 
                                                             className="form-control mt-2 fr-large" 
                                                             rows="3"
@@ -173,7 +220,7 @@ function SurveyOneWidget({user, CONSTANTS}) {
                                                     </>
                                                     :
                                                     <>
-                                                    <p>3) In a word or short phrase, how would you describe how you're feeling about The Local Choice based on what you’ve seen or heard so far?</p>
+                                                    <p>3.1) In a word or short phrase, how would you describe how you're feeling about The Local Choice based on what you’ve seen or heard so far?</p>
                                                         <textarea 
                                                             className="form-control mt-2 fr-large" 
                                                             rows="3"
@@ -186,7 +233,7 @@ function SurveyOneWidget({user, CONSTANTS}) {
                                         }
                                                 
                                         <div className="form-group mt-2">
-                                            <label>3B: What is driving that feeling?</label>
+                                            <label>3.2) What is driving that feeling?</label>
                                             <textarea 
                                                 className="form-control mt-2 fr-large" 
                                                 rows="3"
@@ -194,142 +241,172 @@ function SurveyOneWidget({user, CONSTANTS}) {
                                                 value={formData.q3B}
                                                 onChange={(e) => setFormData({...formData, q3B: e.target.value})}
                                             />
-                                        </div>
+                                        </div>                                        
                                     </section>
                                 )}
-        
                                 {step === 3 && (
                                     <section>
                                         <h3>Section 3</h3>
-                                        <p className="mt-4">4) ?</p>
-                                        <div className="custom-radio-group">
-                                            <button className={`btn btn-opt mt-1 me-1 ${formData.q5 === 'Yes' ? 'active' : ''}`} onClick={() => setFormData({...formData, q5: 'Yes'})}>Yes</button>
-                                            <button className={`btn btn-opt mt-1 me-1 ${formData.q5 === 'No' ? 'active' : ''}`} onClick={() => setFormData({...formData, q5: 'No'})}>No</button>
-                                        </div>
-        
-                                        <div className="form-group mt-2">
-                                            <label>6) Which topics or training would you like to see added?</label>
-                                            <textarea 
-                                                className="form-control mt-2 fr-large" 
-                                                rows="3"
-                                                placeholder="Share your thoughts here..."
-                                                value={formData.localedTopicsTrainingAdd}
-                                                onChange={(e) => setFormData({...formData, localedTopicsTrainingAdd: e.target.value})}
-                                            />
-                                        </div>
+                                         {
+                                            user.profile.profileName === "Franchisee" ? <>
+                                                        <p className="mt-3">4) Do you feel the value and support promised when joining The Local Choice franchise is being delivered?</p>
+                                                        <div className="custom-radio-group">
+                                                            <button className={`btn btn-opt mt-1 me-1 ${formData.q4 === 'Very dissatisfied' ? 'active' : ''}`} onClick={() => setFormData({...formData, q4: 'Very dissatisfied'})}>Very dissatisfied</button>
+                                                            <button className={`btn btn-opt mt-1 me-1 ${formData.q4 === 'Dissatisfied' ? 'active' : ''}`} onClick={() => setFormData({...formData, q4: 'Dissatisfied'})}>Dissatisfied</button>
+                                                            <button className={`btn btn-opt mt-1 me-1 ${formData.q4 === 'Neither dissatisfied or satisfied' ? 'active' : ''}`} onClick={() => setFormData({...formData, q4: 'Neither dissatisfied or satisfied'})}>Neither dissatisfied or satisfied</button>
+                                                            <button className={`btn btn-opt mt-1 me-1 ${formData.q4 === 'Satisfied' ? 'active' : ''}`} onClick={() => setFormData({...formData, q4: 'Satisfied'})}>Satisfied</button>
+                                                            <button className={`btn btn-opt mt-1 me-1 ${formData.q4 === 'Very satisfied' ? 'active' : ''}`} onClick={() => setFormData({...formData, q4: 'Very satisfied'})}>Very satisfied</button>
+                                                        </div>
+                                                    </>
+                                                    :
+                                                    <>
+                                                    <p className="mt-3">4) Based on your interactions so far, how appealing compelling do you find the value offered by The Local Choice?</p>
+                                                        <div className="custom-radio-group">
+                                                            <button className={`btn btn-opt mt-1 me-1 ${formData.q4 === 'Not compelling appealing at all' ? 'active' : ''}`} onClick={() => setFormData({...formData, q4: 'Not compelling appealing at all'})}>Not compelling appealing at all</button>
+                                                            <button className={`btn btn-opt mt-1 me-1 ${formData.q4 === 'Not appealing' ? 'active' : ''}`} onClick={() => setFormData({...formData, q4: 'Not appealing'})}>Not appealing</button>
+                                                            <button className={`btn btn-opt mt-1 me-1 ${formData.q4 === 'Neither appealing or unappealing' ? 'active' : ''}`} onClick={() => setFormData({...formData, q4: 'Neither appealing or unappealing'})}>Neither appealing or unappealing</button>
+                                                            <button className={`btn btn-opt mt-1 me-1 ${formData.q4 === 'Appealing' ? 'active' : ''}`} onClick={() => setFormData({...formData, q4: 'Appealing'})}>Appealing</button>
+                                                            <button className={`btn btn-opt mt-1 me-1 ${formData.q4 === 'Very appealing compelling' ? 'active' : ''}`} onClick={() => setFormData({...formData, q4: 'Very appealing compelling'})}>Very appealing</button>
+                                                        </div>                                             
+                                                    </>
+                                        }                                   
                                     </section>
                                 )}
-        
+                
                                 {step === 4 && (
                                     <section>
-                                        <h3>Section 4: Communication from Head Office</h3>
-                                        <p>7) Do you feel communication from Head Office is sufficient?</p>
-                                            <RatingScale name="q7" />
-        
-                                        <p className="mt-4">8) Which communication platform do you prefer?</p>
+                                        <h3>Section 5</h3>
+                                        {
+                                            user.profile.profileName === "Franchisee" ? <>
+                                                <p className="mt-3">5) In your day-to-day operations, what is the single biggest challenge you experience as a pharmacy owner?</p>
+                                                    <textarea 
+                                                        className="form-control mt-2 fr-large" 
+                                                        rows="3"
+                                                        placeholder="Share your thoughts here..."
+                                                        value={formData.q5}
+                                                        onChange={(e) => setFormData({...formData, q5: e.target.value})}
+                                                    />
+                                                </>
+                                                :
+                                                <>
+                                                <p className="mt-3">5) Based on what you've seen so far, what is one thing you would like to see improved or clarified about The Local Choice?</p>
+                                                    <textarea 
+                                                        className="form-control mt-2 fr-large" 
+                                                        rows="3"
+                                                        placeholder="Share your thoughts here..."
+                                                        value={formData.q5}
+                                                        onChange={(e) => setFormData({...formData, q5: e.target.value})}
+                                                    />                                         
+                                                </>
+                                        }
+
+                                        <p className="mt-3">6) Which of the following do you most wish took less time or effort in your pharmacy?</p>
+                                        (Select up to 3)
                                         <div className="custom-radio-group">
-                                            <button className={`btn btn-opt mt-1 me-1 ${formData.q8 === 'WhatsApp' ? 'active' : ''}`} onClick={() => setFormData({...formData, q8: 'WhatsApp'})}>WhatsApp</button>
-                                            <button className={`btn btn-opt mt-1 me-1 ${formData.q8 === 'Email' ? 'active' : ''}`} onClick={() => setFormData({...formData, q8: 'Email'})}>Email</button>
-                                            <button className={`btn btn-opt mt-1 me-1 ${formData.q8 === 'Both' ? 'active' : ''}`} onClick={() => setFormData({...formData, q8: 'Both'})}>Both</button>
-        
-                                        </div>
-                                        <div className="form-group mt-2">
-                                            <label>Comments (Optional):</label>
-                                            <textarea 
-                                                className="form-control mt-2 fr-large" 
-                                                rows="3"
-                                                placeholder="Share your thoughts here..."
-                                                value={formData.commentCommunicationHeadOffice}
-                                                onChange={(e) => setFormData({...formData, commentCommunicationHeadOffice: e.target.value})}
-                                            />
-                                        </div>
+                                        {
+                                            [
+                                                'Admin', 
+                                                'Compliance & regulations', 
+                                                'Customer-related issues', 
+                                                'Franchise communication', 
+                                                'Pricing & promotions', 
+                                                'Reporting', 
+                                                'Staff management', 
+                                                'Stock & supply management / supply', 
+                                                'Systems & technology'
+                                            ].map((option) => (
+                                                <button
+                                                key={option}
+                                                className={`btn btn-opt mt-1 me-1 ${formData.q6?.split(',').includes(option) ? 'active' : ''}`}
+                                                onClick={() => handleMultiSelect(option)}
+                                                >
+                                                {option}
+                                                </button>
+                                            ))
+                                            }
+                                        </div> 
                                     </section>
                                 )}
         
                                 {step === 5 && (
                                     <section>
-                                        <h3>Section 5: Team Integration & Culture</h3>
-                                        <p>9) Do you feel part of your store team?</p>
-                                            <RatingScale name="q9" />
-                                        
-                                        <p className="mt-4">10) Do you feel part of The Local Choice "family"?</p>
-                                            <RatingScale name="q10" />
-        
-                                        <div className="form-group mt-2">
-                                            <label>Comments (Optional):</label>
+                                        <h3>Section 6</h3>
+                                        <p>7) What is the one topic or challenge you would most like to see addressed at this year's conference?</p>
                                             <textarea 
                                                 className="form-control mt-2 fr-large" 
                                                 rows="3"
                                                 placeholder="Share your thoughts here..."
-                                                value={formData.commentTeamIntegration}
-                                                onChange={(e) => setFormData({...formData, commentTeamIntegration: e.target.value})}
-                                            />
-                                        </div>
+                                                value={formData.q7}
+                                                onChange={(e) => setFormData({...formData, q7: e.target.value})}
+                                            />                                                                                  
                                     </section>
                                 )}
         
                                 {step === 6 && (
                                     <section>
-                                        <h3>Section 6: Overall Clinic Experience</h3>
-                                        <p>11) Overall, how happy are you in your clinic role within The Local Choice?</p>
-                                            <RatingScale name="q11" />
-                                    
+                                        <h3>Section 6</h3>
+                                        <p>8) How likely are you to recommend The Local Choice franchise to another independent pharmacy owner</p>
+                                            <RatingScale name="q8" /> 
+
+                                              
+                                            <div className="ct-range-part">
+                                                <div className="lk-info">[1 Not likely</div>
+                                                <div className="lk-info"> 5 likely]</div>
+                                            </div>                                    
                                     </section>
                                 )}
         
                                 {step === 7 && (
                                     <section>
-                                        <h3>Section 7: Opportunities for Improvement</h3>  
-                                        <div className="form-area-section-x1">
-                                            <div className="form-group mt-2">
-                                                <label>12) What can The Local Choice do to better support you in your clinic role?</label>
-                                                    <textarea 
-                                                        className="form-control mt-2 fr-large" 
-                                                        rows="3"
-                                                        placeholder="Share your thoughts here..."
-                                                        value={formData.opportunityImprovement}
-                                                        onChange={(e) => setFormData({...formData, opportunityImprovement: e.target.value})}
-                                                    />
-                                                </div>
-                                                <div className="form-group mt-2">
-                                                    <label>13) Any additional suggestions or feedback?</label>
-                                                    <textarea 
-                                                        className="form-control mt-2 fr-large" 
-                                                        rows="3"
-                                                        placeholder="Share your thoughts here..."
-                                                        value={formData.suggestionFeedback}
-                                                        onChange={(e) => setFormData({...formData, suggestionFeedback: e.target.value})}
-                                                    />
-                                                </div>
-        
-                                                <p className="mt-2">Optional Contact Details</p>
-                                                <label>Name</label>
-                                                    <input
-                                                        type="text" 
-                                                        className="form-control mt-2 " 
-                                                        placeholder="Share your thoughts here..."
-                                                        value={formData.optionalContactName}
-                                                        onChange={(e) => setFormData({...formData, optionalContactName: e.target.value})}
-                                                    />
-                                                
-                                                    <label className="mt-2">Pharmacy</label>
-                                                    <input
-                                                        type="text" 
-                                                        className="form-control mt-2 " 
-                                                        placeholder="Share your thoughts here..."
-                                                        value={formData.optionalContactPharmacy}
-                                                        onChange={(e) => setFormData({...formData, optionalContactPharmacy: e.target.value})}
-                                                    />
-                                                
-                                                    <label className="mt-2">Name of Number/Email</label>
-                                                    <input
-                                                        type="text" 
-                                                        className="form-control mt-2 " 
-                                                        placeholder="Share your thoughts here..."
-                                                        value={formData.optionalContactEmail}
-                                                        onChange={(e) => setFormData({...formData, optionalContactEmail: e.target.value})}
-                                                    />    
-                                        </div>
+                                        <h3>Section 7</h3>
+                                        <p>We are forming a network of pharmacy owners to be part of future research and to be thought partners in collaborative discussions on future ideas, when needed. Participation is voluntary, and your information will be used solely for this specified purpose.</p> 
+                                        <p>Would you be open to being contacted for future research or collaboration opportunities?</p>
+                                        <div className="custom-radio-group">
+                                            <button className={`btn btn-opt mt-1 me-1 ${formData.q9 === 'Yes' ? 'active' : ''}`} onClick={() => setFormData({...formData, q9: 'Yes'})}>Yes</button>
+                                            <button className={`btn btn-opt mt-1 me-1 ${formData.q9 === 'No' ? 'active' : ''}`} onClick={() => setFormData({...formData, q9: 'No'})}>No</button>
+                                        </div>   
+
+                                        {
+                                            formData.q9 === 'Yes' && <>
+                                                                <p className="mt-3">Please share your details below</p>
+                                                                        <label>Name</label>
+                                                                        <input
+                                                                            type="text" 
+                                                                            className="form-control mt-2 " 
+                                                                            placeholder="Share your thoughts here..."
+                                                                            value={formData.optionalContactName}
+                                                                            onChange={(e) => setFormData({...formData, optionalContactName: e.target.value})}
+                                                                        />
+                                                                     
+                                                                        <label className="mt-3">Surname</label>
+                                                                        <input
+                                                                            type="text" 
+                                                                            className="form-control mt-2 " 
+                                                                            placeholder="Share your thoughts here..."
+                                                                            value={formData.optionalContactSurName}
+                                                                            onChange={(e) => setFormData({...formData, optionalContactSurName: e.target.value})}
+                                                                        />
+                                                                    
+                                                                        <label className="mt-3">Phone Number</label>
+                                                                        <input
+                                                                            type="text" 
+                                                                            className="form-control mt-2 " 
+                                                                            placeholder="Share your thoughts here..."
+                                                                            value={formData.optionalContactPhone}
+                                                                            onChange={(e) => setFormData({...formData, optionalContactPhone: e.target.value})}
+                                                                        />
+                                                                        
+                                                                        <label className="mt-3">Email</label>
+                                                                        <input
+                                                                            type="text" 
+                                                                            className="form-control mt-2 " 
+                                                                            placeholder="Share your thoughts here..."
+                                                                            value={formData.optionalContactEmail}
+                                                                            onChange={(e) => setFormData({...formData, optionalContactEmail: e.target.value})}
+                                                                        />
+                                                                     </>
+                                        }
+                                       
                                     </section>
                                 )}
         

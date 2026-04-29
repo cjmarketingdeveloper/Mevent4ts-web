@@ -250,7 +250,7 @@ function HomeScreen() {
               />
            </div>
            */}
-           {/*
+           {/**** Gala Details ***/
               galaSeatDetails && (
                 <div className="p-3 row-component">
                   <div className="card relative" style={{backgroundImage: `url(${galaBack})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
@@ -276,7 +276,7 @@ function HomeScreen() {
                   </div>
                 </div>
               )
-            */}
+            }
             {
                 user.spouseNumber.length === 10 && 
                   <SpouseDetails 
@@ -294,8 +294,7 @@ function HomeScreen() {
             {
               user.profile.profileName === "Clinic" && 
                 <>{
-                  //indicateHappinessClinic && (
-                    false && (
+                    indicateHappinessClinic && (
                       <div className="row-component">
                         <div className="section-pad-item mt-3 mb-3 clinic-home-box">
                               <div className="card card-bl-grad relative hap-content">
@@ -330,7 +329,7 @@ function HomeScreen() {
               <>
                   {
                     //indicateHappinessFactor && (
-                    false && (
+                    false && (  
                       <div className="row-component">
                         <div className="section-pad-item mt-3 mb-3">
                               <div className="card card-bl-grad relative hap-content">
@@ -358,7 +357,7 @@ function HomeScreen() {
                     )
                 }
               </>
-            }
+          }
             
           {
               showModalHappiness && (<DlgHappinessFactor
@@ -378,8 +377,7 @@ function HomeScreen() {
                                             />)
             
             
-          }
-     
+          }     
             
         </div>
          {
@@ -387,7 +385,10 @@ function HomeScreen() {
             *
             * How to Video Componet
             * 
-            * <div className="p-3 row-component">
+            * 
+          */
+         }
+         <div className="p-3 row-component">
              <Link className="btn btn-gradient d-flex" to={"/survey"}>
                <div className="icon-item perc-banner1">
                     <div className="home-icon-item mt-3">
@@ -406,9 +407,7 @@ function HomeScreen() {
                </div>
              </Link>
            </div>
-          */
-         }
-         
+           
          <HowToVideos />
             <br/><br/>
     </div>
