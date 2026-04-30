@@ -111,9 +111,12 @@ function HomeScreen() {
                   }
               });
 
+              console.log("*****************")
+              console.log(eventData.data);
               setGalaSeatDetails(eventData.data);             
         }catch(error){
-            console.log(error);         
+            console.log(error);  
+
         }
         //////////////////////
       }
@@ -247,7 +250,7 @@ function HomeScreen() {
            </div>
            */}
            {/**** Gala Details ***/
-              galaSeatDetails && (
+              galaSeatDetails !== null && (
                 <div className="p-3 row-component">
                   <div className="card relative" style={{backgroundImage: `url(${galaBack})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
                     <div className="card-body fade-back">
@@ -274,7 +277,7 @@ function HomeScreen() {
               )
             }
             {
-                user.spouseNumber.length === 10 && 
+                user?.spouseNumber.length === 10 && 
                   <SpouseDetails 
                     spouseNumber={user.spouseNumber}
                     CONSTANTS={CONSTANTS} />             
@@ -405,7 +408,7 @@ function HomeScreen() {
            </div>
            
          <HowToVideos />
-            <br/><br/>
+          <br/><br/>
     </div>
   )
 }

@@ -7,7 +7,7 @@ import AccessIsDenied from './AccessIsDenied';
 function AuthScreens() {
     const navigate                              = useNavigate();
     const {user}                                = useSelector((state) => state.auth);
-       
+
     useEffect(() => {
         if(!user){
             navigate("/login");
