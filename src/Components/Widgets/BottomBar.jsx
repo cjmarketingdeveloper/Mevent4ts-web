@@ -142,8 +142,7 @@ function BottomBar({member}) {
                             </Link>
                         </li>
                         {
-                        /****
-                         
+                        /****                         
                         <li>
                             <Link to="/competition-view" onClick={closeMenu}>
                                 <span className="rx-panel">
