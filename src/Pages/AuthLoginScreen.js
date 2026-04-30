@@ -27,9 +27,9 @@ function AuthLoginScreen() {
     
       if(isSuccess || user){
           navigate('/');
-        }
+       }
 
-        dispatch(reset())
+       dispatch(reset())
   },[user, isError, isSuccess, message, navigate, dispatch])
 
   const handleLogin = async (e) => {
@@ -37,6 +37,7 @@ function AuthLoginScreen() {
 
       let checkTest = isValidPhoneNumber(phoneNumberRef.current.value);
       if(checkTest){
+        
           const userData = {
               "phonenumber": phoneNumberRef.current.value,
               "password": passwordRef.current.value
