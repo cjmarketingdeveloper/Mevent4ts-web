@@ -1,6 +1,14 @@
 import React, { useState } from 'react'
 
 function HowToVideos() {
+    /*
+    
+        {
+            "title" : "Gala",
+            "description" : "This would be the process to review and book yourself for the gala.",
+            "videoUrl" : "https://admin.mevent.co.za/assess/videos/mevent06Gala.mp4"
+        },
+    */
     const videoListing = [
         {
             "title" : "Home Screen",
@@ -16,11 +24,6 @@ function HowToVideos() {
             "title" : "Agenda",
             "description" : "To review your agenda, please go through the video.",
             "videoUrl" : "https://admin.mevent.co.za/assess/videos/mevent02Agenda.mp4"
-        },
-        {
-            "title" : "Gala",
-            "description" : "This would be the process to review and book yourself for the gala.",
-            "videoUrl" : "https://admin.mevent.co.za/assess/videos/mevent06Gala.mp4"
         },
         {
             "title" : "Floor Plan",

@@ -214,7 +214,8 @@ function HomeScreen() {
                         style={{ width: `${progressPercentage}%` }}
                       ></div>
                   </div>
-                  */}
+                  */
+                  }
                 </div>
               </div>
           </div>
@@ -393,7 +394,6 @@ function HomeScreen() {
                     <div className="home-icon-item mt-3">
                       <FaHive />
                     </div>
-
                </div>
                <div className="content-title">
                   <h4>Survey</h4>
