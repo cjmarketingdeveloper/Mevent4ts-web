@@ -24,7 +24,7 @@ function GallerySingle() {
         }
     },[currentGallery])
 
-        const getCurrentGalleryDetails = async () => {
+    const getCurrentGalleryDetails = async () => {
 
         try{
 

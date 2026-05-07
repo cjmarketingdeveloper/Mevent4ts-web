@@ -656,6 +656,7 @@ function TradeshowRsvp({user, CONSTANTS}) {
             onClick={() =>
               setEditSection(editSection === "dietary" ? null : "dietary")
             }
+            disabled={true}
           >
             {editSection === "dietary" ? "Cancel" : "Edit"}
           </button>
@@ -757,6 +758,7 @@ function TradeshowRsvp({user, CONSTANTS}) {
             onClick={() =>
               setEditSection(editSection === "accommodation" ? null : "accommodation")
             }
+            disabled={true}
           >
             {editSection === "accommodation" ? "Cancel" : "Edit"}
           </button>
