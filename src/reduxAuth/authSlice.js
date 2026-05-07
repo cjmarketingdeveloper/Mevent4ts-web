@@ -38,7 +38,7 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
 
         return response; 
     }catch(error){
-        console.log(error);
+       // console.log(error);
        // const message = (error.response && error.response.data && error.data.message) || error.message || error.toString()
        const message = error.response.data 
         return thunkAPI.rejectWithValue(message)
@@ -47,12 +47,10 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
 
 //Logout user 
 export const logout = createAsyncThunk('auth/logout', async () => {
-
-        console.log("LOGOUT ------------->");
+        //console.log("LOGOUT ------------->");
         localStorage.removeItem(CONSTANTS.SESSION_COOKIE);
 })
-export const updateUser = createAsyncThunk(
-  'auth/updateUser',
+export const updateUser = createAsyncThunk('auth/updateUser',
   async (userUpdate, thunkAPI) => {
     try {
       const response = await axios.put(

@@ -634,6 +634,7 @@ function ClinicRsvp({user, CONSTANTS}) {
             onClick={() =>
               setEditSection(editSection === "dietary" ? null : "dietary")
             }
+            disabled={true}
           >
             {editSection === "dietary" ? "Cancel" : "Edit"}
           </button>

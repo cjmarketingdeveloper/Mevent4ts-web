@@ -11,7 +11,6 @@ import * as CONSTANTS from "./../CONSTANTS";
 function RSVPScreen() {
       const {user}                                                        = useSelector((state) => state.auth);
 
-
   return (
     <div>
         <div className="top-navbar">
