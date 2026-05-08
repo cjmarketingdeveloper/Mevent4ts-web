@@ -122,7 +122,7 @@ function SurveyOneWidget({user, CONSTANTS}) {
                 console.log(payload);
                 console.log("++++++++++++++++++");
 
-                const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyHufEoDIW-w3oMK7puSP5ZBq-WVilbFA_tLg8XbX-MRus9JN_FeMpMqisfaKfEUSKs/exec';
+                const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzzAKodjDJx6S6mZIeJ7CxiL7V9jEyoYCw_zzg9lhw30x3RO_mmBWcWd7mVga2Lzuvd/exec';
                 //const SCRIPT_URL = 'https://script.google.com/macros/library/d/1fmITqgW2V3-k3de5xe0l4Yd3GWg7Da6UGKlVnOQNCkkvahRQbIkFXAa3/1';
                 
                 const response = await fetch(SCRIPT_URL, {
@@ -134,9 +134,7 @@ function SurveyOneWidget({user, CONSTANTS}) {
                         body: JSON.stringify(payload),
                     });
     
-                console.log("sssssssssssssssssssss");
-                console.log(response);
-                console.log(response.status);
+              
                 if(response.status === 0){
                     setSubmitMessage("Thank you for taking the time to share your perspective, we really appreciate your input. We're looking forward to seeing you at the conference and working together to shape the future of The Local Choice franchise.");
                 }else {
