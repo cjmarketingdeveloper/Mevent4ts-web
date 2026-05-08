@@ -34,17 +34,18 @@ function AuthLoginScreen() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+    console.log("1")
       let checkTest = isValidPhoneNumber(phoneNumberRef.current.value);
       if(checkTest){
-        
+        console.log("2")
           const userData = {
               "phonenumber": phoneNumberRef.current.value,
               "password": passwordRef.current.value
             }        
-            
+            console.log("3")
             dispatch(login(userData));
       }else {
+        console.log("4")
           toast.error("Phone number not valid");
       }
   }
