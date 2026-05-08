@@ -33,7 +33,6 @@ function SurveyScreen() {
           }
       }
 
-      
   return (
     <div>
             <div className="top-navbar">

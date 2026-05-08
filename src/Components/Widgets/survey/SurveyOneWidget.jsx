@@ -23,9 +23,11 @@ function SurveyOneWidget({user, CONSTANTS}) {
      const [step, setStep]                                          = useState(1);
      const [submitMessage, setSubmitMessage]                        = useState("");
 
+    /*
     useEffect(() => {
         console.log(formData)
     },[formData])
+    */
     
     const steps = [
         { id: 1, label: 'Info', icon: <FaClinicMedical /> },
