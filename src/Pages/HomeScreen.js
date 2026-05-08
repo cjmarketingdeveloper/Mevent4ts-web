@@ -159,8 +159,7 @@ function HomeScreen() {
     <div>
         <p className="text-center smal-g">
             { CONSTANTS.VERSION}
-        </p>
-                
+        </p>                
         <div className="main-area-view row mb-10"> 
            <div className="p-3 row-component">
               <div className="card card-bl-grad">
@@ -173,18 +172,20 @@ function HomeScreen() {
                     </div>                
                   </div>
                   <div className="row mb-3">
-                    {/*
+                    
                     <div className="w-50 p-2">
                         <div className="card-boxer">
                           <img src={whiteFloor} className="home-card map-road" />
+                          {/*
                           <button onClick={() => setShowModalDownloads(true)} className="btn btn-gray w-100 colorred">
                             
                               <span>View Map</span>
                           </button>
+                          */}
                         </div>
                     </div>
-                    */}
-                    <div className="w-100 p-2">
+                  
+                    <div className="w-50 p-2">
                         <div className="card-boxer">
                           {dietary?.badge && <img src={dietary.badge} className="home-card map-road" />} 
                           <Link to={"/profile"} className="btn btn-mevent w-100">                        
@@ -374,8 +375,7 @@ function HomeScreen() {
                                             showModalHappinessClinic={showModalHappinessClinic}
                                             setShowModalHappinessClinic={setShowModalHappinessClinic}
                                             setIndicateHappinessClinic={setIndicateHappinessClinic}
-                                            />)
-            
+                                            />)         
             
           }     
             
@@ -408,7 +408,7 @@ function HomeScreen() {
            </div>
            
          <HowToVideos />
-          <br/><br/>
+         <br/><br/>
     </div>
   )
 }
