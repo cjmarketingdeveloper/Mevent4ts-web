@@ -179,13 +179,10 @@ function HomeScreen() {
                     
                     <div className="w-50 p-2">
                         <div className="card-boxer">
-                          <img src={whiteFloor} className="home-card map-road" />
-                          {/*
-                          <button onClick={() => setShowModalDownloads(true)} className="btn btn-gray w-100 colorred">
-                            
+                          <img src={whiteFloor} className="home-card map-road" />                          
+                          <button onClick={() => setShowModalDownloads(true)} className="btn btn-gray w-100 colorred">                            
                               <span>View Map</span>
-                          </button>
-                          */}
+                          </button>                          
                         </div>
                     </div>
                   
@@ -198,7 +195,7 @@ function HomeScreen() {
                         </div>                        
                     </div>
                   </div>
-                  {/*
+                  
                   <div className="d-flex">
                       <div className="data-supplier-one">
                         <FaClipboard />
@@ -219,8 +216,8 @@ function HomeScreen() {
                         style={{ width: `${progressPercentage}%` }}
                       ></div>
                   </div>
-                  */
-                  }
+                  
+                  
                 </div>
               </div>
           </div>
