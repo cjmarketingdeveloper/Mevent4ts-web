@@ -326,8 +326,7 @@ function HomeScreen() {
               user.profile.profileName === "Franchisee" && 
               <>
                   {
-                    //indicateHappinessFactor && (
-                    false && (  
+                   indicateHappinessFactor && (                   
                       <div className="row-component">
                         <div className="section-pad-item mt-3 mb-3">
                               <div className="card card-bl-grad relative hap-content">
@@ -385,7 +384,10 @@ function HomeScreen() {
             * 
           */
          }
-         <div className="p-3 row-component">
+
+         {
+          /*
+          <div className="p-3 row-component">
              <Link className="btn btn-gradient d-flex" to={"/survey"}>
                <div className="icon-item perc-banner1">
                     <div className="home-icon-item mt-3">
@@ -403,6 +405,8 @@ function HomeScreen() {
                </div>
              </Link>
            </div>
+          */
+         }
            
          <HowToVideos />
          <br/><br/>
