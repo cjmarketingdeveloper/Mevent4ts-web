@@ -171,15 +171,19 @@ function HomeScreen() {
             { CONSTANTS.VERSION}
         </p>                
         <div className="main-area-view row mb-10"> 
+           <div className="p-8">
+            <button 
+              onClick={handleRefresh}
+              className="btn btn-mevent float-end">
+               Refresh
+            </button>
+           </div>
            <div className="p-3 row-component">
               <div className="card card-bl-grad">
                 <div className="card-body">
                   <img src={logoHome} className="home-logo mt-4 ml-3" />
                   <div className="header-row">
-                    <button onClick={handleRefresh}
-                      className="btn float-end">
-                      Float Right
-                    </button>
+                   
                     <div className="item-head">
                       <h2 className="line-one">Welcome <span className="colorred">{user.name}</span>, </h2>
                     </div>                
