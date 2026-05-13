@@ -16,11 +16,7 @@ import NotificationFire from '../Components/Others/NotificationFire';
 import happinessImage from './../assets/happiness.png';
 import happyClinicImage from './../assets/clinic_happy.png';
 import DlgHappinessFactor from '../Components/Diaologues/DlgHappinessFactor';
-<<<<<<< HEAD
-import DlgHappinessFactorClinic from '../Components/Diaologues/DlgHappinessFactorClinic';
-=======
 import DlgHappinesFactorClinic from '../Components/Diaologues/DlgHappinesFactorClinic';
->>>>>>> 1068e32 (Video tutorials view)
 import DlgDownloads from '../Components/Diaologues/DlgDownloads';
 import HowToVideos from '../Components/Widgets/HowToVideos';
 import IPhoneNotificationBanner from '../Components/Widgets/IPhoneNotificationBanner';
