@@ -23,7 +23,7 @@ import DlgHappinesFactorClinic from '../Components/Diaologues/DlgHappinesFactorC
 >>>>>>> 1068e32 (Video tutorials view)
 import DlgDownloads from '../Components/Diaologues/DlgDownloads';
 import HowToVideos from '../Components/Widgets/HowToVideos';
-import IPhoneNotificationBanner from './IPhoneNotificationBanner';
+import IPhoneNotificationBanner from '../Components/Widgets/IPhoneNotificationBanner';
 
 function HomeScreen() {
 
