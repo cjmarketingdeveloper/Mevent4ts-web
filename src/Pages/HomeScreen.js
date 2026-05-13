@@ -19,7 +19,7 @@ import DlgHappinessFactor from '../Components/Diaologues/DlgHappinessFactor';
 import DlgHappinesFactorClinic from '../Components/Diaologues/DlgHappinesFactorClinic';
 import DlgDownloads from '../Components/Diaologues/DlgDownloads';
 import HowToVideos from '../Components/Widgets/HowToVideos';
-import IPhoneNotificationBanner from './IPhoneNotificationBanner';
+import IPhoneNotificationBanner from '../Components/Widgets/IPhoneNotificationBanner';
 
 function HomeScreen() {
 
