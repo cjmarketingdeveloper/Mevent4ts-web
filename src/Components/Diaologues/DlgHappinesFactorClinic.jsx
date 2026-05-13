@@ -163,7 +163,7 @@ function DlgHappinesFactorClinic({user, showModalHappinessClinic, setShowModalHa
                                             placeholder="Please specify your role"
                                             value={formData.q1}
                                             onChange={(e) => setFormData({ ...formData, q1: e.target.value })}
-                                        autoFocus
+                                            autoFocus
                                         />
                                     </div>
                                     )}

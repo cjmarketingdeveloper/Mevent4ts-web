@@ -19,6 +19,7 @@ import DlgHappinessFactor from '../Components/Diaologues/DlgHappinessFactor';
 import DlgHappinesFactorClinic from '../Components/Diaologues/DlgHappinesFactorClinic';
 import DlgDownloads from '../Components/Diaologues/DlgDownloads';
 import HowToVideos from '../Components/Widgets/HowToVideos';
+import IPhoneNotificationBanner from './IPhoneNotificationBanner';
 
 function HomeScreen() {
 
@@ -44,7 +45,7 @@ function HomeScreen() {
 
   const [indicateHappinessFactor, setIndicateHappinessFactor]           = useState(false);
   const [indicateHappinessClinic, setIndicateHappinessClinic]           = useState(true);
-
+  
   useEffect(() => {
       console.log(user.profile.profileName);
       collectDietaryData();
@@ -151,6 +152,11 @@ function HomeScreen() {
       console.log(err);
     }
   }
+  
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
   if (isLoading) {
       return  <Spinner />
   }
@@ -166,11 +172,15 @@ function HomeScreen() {
                 <div className="card-body">
                   <img src={logoHome} className="home-logo mt-4 ml-3" />
                   <div className="header-row">
-                    
+                    <button onClick={handleRefresh}
+                      className="btn float-end">
+                      Float Right
+                    </button>
                     <div className="item-head">
                       <h2 className="line-one">Welcome <span className="colorred">{user.name}</span>, </h2>
                     </div>                
                   </div>
+                  <IPhoneNotificationBanner />
                   <div className="row mb-3">
                     
                     <div className="w-50 p-2">
