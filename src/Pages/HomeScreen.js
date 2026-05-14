@@ -344,6 +344,7 @@ function HomeScreen() {
                 </>
             }
             {
+              // (user.profile.profileName === "Franchisee") || (user.profile.profileName === "Potential") && 
               user.profile.profileName === "Franchisee" && 
               <>
                   {

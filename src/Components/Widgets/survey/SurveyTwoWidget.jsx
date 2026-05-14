@@ -16,6 +16,7 @@ function SurveyTwoWidget({user, CONSTANTS}) {
              q1: "",
              
           });
+          
           const [step, setStep]                                          = useState(1);
           const [submitMessage, setSubmitMessage]                        = useState("");
      

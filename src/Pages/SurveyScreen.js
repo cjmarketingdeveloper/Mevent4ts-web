@@ -45,7 +45,18 @@ function SurveyScreen() {
                         Your feedback will help us better understand your experience and will help shape this year's TLC conference topics so that we focus on what matters most for you.
                     </p>  
                     {
-                      surveyData !== null && <div className="survey-display">
+                      surveyData !== null && <>
+                                {
+                                    user.profile.profileName == "Clinic" ?
+                                    <div className="">
+                                        <Link 
+                                            to="https://mobiletlc.mevent.co.za/" 
+                                            className="btn btn-mevent">
+                                            Clinic Survey
+                                        </Link>
+                                    </div>
+                                    :
+                                    <div className="survey-display">
                                       {
                                         surveyData.surveyOne && <SurveyOneWidget user={user} CONSTANTS={CONSTANTS} />
                                       }    
@@ -55,7 +66,10 @@ function SurveyScreen() {
                                       {
                                         surveyData.surveyThree && <SurveyThreeWidget user={user} CONSTANTS={CONSTANTS}/>
                                       }    
-                                  </div>
+                                  </div>   
+                                }
+                                 
+                                  </>
                     }
                 </div>
            </div>
