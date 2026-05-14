@@ -1105,6 +1105,9 @@ span.light-gray {
   align-items: center;
   text-align: center;
 }
+.unsc-title {
+  font-size: 11px !important;
+}
 img.button-image {
     width: 20px;
     margin-right: 15px;

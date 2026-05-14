@@ -97,7 +97,7 @@ function HomeSponsors({eventCodes, user, CONSTANTS, setSponsorCount, setSponsorS
                         <img src={sponsor.logo} className="image-ft"/>
                       </div>
                       <div className="title-container-x1 wide30 p-2">
-                        <h5>{sponsor.title}</h5>
+                        <h5 className="unsc-title">{sponsor.title}</h5>
                       </div>
                       <div className="scanning-park wide30 text-center">
                           <Link className="btn-qr-box" to={'/qrcode-scan'}>
