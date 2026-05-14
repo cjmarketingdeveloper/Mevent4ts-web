@@ -48,26 +48,27 @@ function SurveyScreen() {
                       surveyData !== null && <>
                                 {
                                     user.profile.profileName == "Clinic" ?
-                                    <div className="">
-                                        <Link 
-                                            to="https://mobiletlc.mevent.co.za/" 
-                                            className="btn btn-mevent">
-                                            Clinic Survey
-                                        </Link>
-                                    </div>
-                                    :
-                                    <div className="survey-display">
-                                      {
-                                        surveyData.surveyOne && <SurveyOneWidget user={user} CONSTANTS={CONSTANTS} />
-                                      }    
-                                      {
-                                        surveyData.surveyTwo && <SurveyTwoWidget user={user} CONSTANTS={CONSTANTS}/>
-                                      }    
-                                      {
-                                        surveyData.surveyThree && <SurveyThreeWidget user={user} CONSTANTS={CONSTANTS}/>
-                                      }    
-                                  </div>   
-                                }
+                                                <div className="survey-display">
+                                                {
+                                                    surveyData.surveyOne && <SurveyOneWidget user={user} CONSTANTS={CONSTANTS} />
+                                                }    
+                                                {
+                                                    surveyData.surveyTwo && <SurveyTwoWidget user={user} CONSTANTS={CONSTANTS}/>
+                                                }    
+                                                {
+                                                    surveyData.surveyThree && <SurveyThreeWidget user={user} CONSTANTS={CONSTANTS}/>
+                                                }    
+                                                </div>  
+                                        :
+                                        <div className="clinic-part">
+                                            <Link 
+                                                to="https://mobiletlc.mevent.co.za/" 
+                                                className="btn btn-mevent">
+                                                Clinic Survey
+                                            </Link>
+                                        </div>
+                                        
+                                    }
                                  
                                   </>
                     }
