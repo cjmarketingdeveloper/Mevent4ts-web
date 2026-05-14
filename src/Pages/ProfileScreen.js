@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TopNavigation from '../Components/Widgets/TopNavigation';
 import BottomBar from '../Components/Widgets/BottomBar';
 import { FaEnvelope, FaPhone, FaUser } from 'react-icons/fa';
@@ -7,8 +7,11 @@ import axios from 'axios';
 import * as CONSTANTS from "./../CONSTANTS";
 import SpouseDetails from '../Components/Widgets/SpouseDetails';
 import { Link } from 'react-router-dom';
+import { updateUserLocal } from '../reduxAuth/authSlice';
+import { toast } from 'react-toastify';
 
 function ProfileScreen() {
+    const dispatch                                                      = useDispatch();
     const {user}                                                        = useSelector((state) => state.auth);
 
     const [dietary, setDietary]                                         = useState(null);
@@ -24,6 +27,23 @@ function ProfileScreen() {
            
             if(response.status === 200){
                 setDietary(response.data);
+            }
+        }catch(err){
+            console.log(err);
+        }
+    }
+
+    const handleCheckUpdatedUser = async () => {
+        try{
+             const response = await axios.get(CONSTANTS.API_URL +"users/person/" + user._id);
+             
+             //I want to update
+            if (response.data) {
+                //console.log("Updating local user state with:", response.data);
+                
+                // ACTION: Dispatch the payload to your reducer
+                dispatch(updateUserLocal(response.data));
+                toast.success("Thank you for the update.");
             }
         }catch(err){
             console.log(err);
@@ -54,7 +74,7 @@ function ProfileScreen() {
                      <div>
                         <span><FaEnvelope /> </span><span >{user.email}</span>
                      </div>
-                     <Link to={"/rsvp"} className="btn btn-mevent mt-2">Edit Profile</Link>
+                     <Link to={"/rsvp"} className="btn btn-mevent mt-3">Edit Profile</Link>
                 </div>
                 <div className="p-3">
                     
@@ -81,15 +101,21 @@ function ProfileScreen() {
                                 <Link to={"/rsvp"} className="btn btn-mevent ">Change Dietary Requirements</Link>
                             </div>
                         </div>
+                        
                     </div>
+                </div>
+                <div className="mt-2 mb-5 p-3 text-center">
+                        <button className="btn btn-mevent "
+                            onClick={handleCheckUpdatedUser}>
+                            Status
+                        </button>
                 </div>
                 {
                     user.spouseNumber.length === 10 && <SpouseDetails 
                         spouseNumber={user.spouseNumber}
                         CONSTANTS={CONSTANTS} />
                 }
-                 {//JSON.stringify(user.events)
-                 }
+               
            </div>
         </div>
         <BottomBar />

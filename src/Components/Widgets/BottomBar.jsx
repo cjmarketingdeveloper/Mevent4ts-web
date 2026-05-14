@@ -160,7 +160,7 @@ function BottomBar({member}) {
                             </Link>
                         </li> 
                         {
-                            member.galaOn && <li>
+                            member?.galaOn && <li>
                                             <Link to="/gala" onClick={closeMenu}>
                                                 <span className="rx-panel">
                                                     <FaBezierCurve />
