@@ -36,7 +36,25 @@ function QRCodeInput() {
 
               toast.success("Your scan was successful.");             
               setLoading(false);
-        }else {
+        }else if (codeString.length === 8){
+          ///scavenger hunt
+          setLoading(true);
+
+              const votingObject = {
+                  "userid" : user._id,
+                  "votingCode" : codeString
+                }
+        
+                console.log(votingObject);
+              const response = await axios.post(CONSTANTS.API_URL +"votes/creation/scavenger/v1/", votingObject, {
+                      headers: {
+                          token: "Bearer "+ user.accessToken
+                      }
+                  });
+
+              toast.success("Your scan was successful.");             
+              setLoading(false);
+        } else {
           toast.warning("Code length needs to six characters.");
         }
        
@@ -77,7 +95,7 @@ function QRCodeInput() {
                         type="text"
                         className="form-control ses-code"
                         onChange={(e) => setCodeString(e.target.value)}
-                        maxLength={6}
+                        maxLength={8}
                         required
                         />
                     </div>

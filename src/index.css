@@ -1795,3 +1795,6 @@ span.xs-copy
     align-items: center;
     margin-bottom: 10px;
 }
+.floor-plan-wrapper {
+    width: 500px;
+}

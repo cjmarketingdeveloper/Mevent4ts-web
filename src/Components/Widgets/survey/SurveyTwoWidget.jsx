@@ -130,6 +130,7 @@ function SurveyTwoWidget({user, CONSTANTS}) {
           </div>
   
           <div className="form-content">
+                  <h3 className="text-center">Mid Conference</h3>
                   <div className="step-header-area">
                       <div className="section-icon-large">{currentIcon}</div>
                   </div>

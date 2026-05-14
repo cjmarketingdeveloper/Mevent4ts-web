@@ -112,8 +112,7 @@ function HomeScreen() {
                   }
               });
 
-              console.log("*****************")
-              console.log(eventData.data);
+  
               setGalaSeatDetails(eventData.data);             
         }catch(error){
             console.log(error);  
@@ -231,7 +230,7 @@ function HomeScreen() {
                 </div>
               </div>
           </div>
-          {/*  Agenda button
+          {/*  Agenda button */}
            <div className="p-3 row-component">
              <Link className="btn btn-gradient d-flex" to={"/agendas"}>
                <div className="icon-item perc-banner1">
@@ -250,8 +249,8 @@ function HomeScreen() {
                </div>
              </Link>
            </div>
-           */}
-           {/* sponsors
+           {/******/}
+           {/* sponsors */}
            <div className="p-2 row-component">
               <HomeSponsors 
                 eventCodes={user.events} 
@@ -261,34 +260,41 @@ function HomeScreen() {
                 setSponsorScanned={setSponsorScanned}
               />
            </div>
-           */}
-           {/**** Gala Details ***/
+           
+           {/***/}
+           {
+              user.galaOn && <>              
+              {/**** Gala Details ***/
               galaSeatDetails !== null && (
                 <div className="p-3 row-component">
-                  <div className="card relative" style={{backgroundImage: `url(${galaBack})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
-                    <div className="card-body fade-back">
-                      <div className="justify-content-between align-items-center mb-3 ">
-                        
-                            <div className="gala-head mt-2">
-                                <h4>Booked for the Gala</h4>
-                                <div className="thin">
-                                  You are on table {galaSeatDetails.tableNumber} at {galaSeatDetails.section} section.
-                                </div>
-                            </div>
-                        
-                            <div className="ctx-seat">
-                              <div className="ctx-size1">Seat 
+                  
+                    <div className="card relative" style={{backgroundImage: `url(${galaBack})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+                      <div className="card-body fade-back">
+                        <div className="justify-content-between align-items-center mb-3 ">
+                          
+                              <div className="gala-head mt-2">
+                                  <h4>Booked for the Gala</h4>
+                                  <div className="thin">
+                                    You are on table {galaSeatDetails.tableNumber} at {galaSeatDetails.section} section.
+                                  </div>
+                              </div>
+                          
+                              <div className="ctx-seat">
+                                <div className="ctx-size1">Seat 
+                                </div> 
+                                <div className="ctx-size2">{galaSeatDetails.seat.seatNumber} 
+                                </div> 
                               </div> 
-                              <div className="ctx-size2">{galaSeatDetails.seat.seatNumber} 
-                              </div> 
-                            </div> 
-                         
+                          
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              )
-            }
+                )
+              }
+              </>
+           }
+           
             {
                 user?.spouseNumber.length === 10 && 
                   <SpouseDetails 
@@ -303,6 +309,7 @@ function HomeScreen() {
                                         CONSTANTS={CONSTANTS} 
                                       />)
             }
+
             {
               user.profile.profileName === "Clinic" && 
                 <>{
@@ -394,7 +401,7 @@ function HomeScreen() {
           /*
             *
             * How to Video Componet
-            * 
+            *  <HowToVideos />         
             * 
           */
          }
@@ -422,8 +429,7 @@ function HomeScreen() {
           */
          }
            
-         <HowToVideos />
-         <br/><br/>
+        <br/><br/><br/><br/>
     </div>
   )
 }

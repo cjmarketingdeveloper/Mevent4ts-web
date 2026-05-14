@@ -7,6 +7,8 @@ import { toast } from 'react-toastify';
 import Loading from '../Components/Others/Loading';
 import { Parser } from "html-to-react";
 
+import scavengImg from '../assets/scavengerhunt.png';
+
 function CompetitionScreen() {
     const {user}                                                              = useSelector((state) => state.auth);
 
@@ -47,6 +49,14 @@ function CompetitionScreen() {
             <TopNavigation title={"Rewards"} />
         </div>
         <div className="layer-content">
+            <div className="p-5">
+                <div className="card">
+                    <div className="card-body">
+                        Enjoy the 
+                        <img src={scavengImg} className="img-responsive"/>
+                    </div>
+                </div>
+            </div>
            {
                 competitionList &&
                 competitionList.length > 0 && (

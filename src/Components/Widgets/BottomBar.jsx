@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate , useLocation} from 'react-router-dom';
-import { FaBars, FaQrcode , FaFileImage, FaHome, FaBezierCurve, FaTimes, FaList, FaTrophy, FaCompress, FaHive, FaUser, FaInbox, FaClipboardCheck } from 'react-icons/fa';
+import { FaBars, FaQrcode , FaFileImage, FaHome, FaBezierCurve, FaTimes, 
+    FaList, FaTrophy, FaCompress, FaHive, FaUser, FaInbox, FaFileVideo, 
+    FaClipboardCheck , FaRegUser} from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { logout, reset } from '../../reduxAuth/authSlice';
 import "./widgets.css";
@@ -108,6 +110,14 @@ function BottomBar({member}) {
                             </Link>
                         </li>
                         <li>
+                            <Link to="/how-to" onClick={closeMenu}>
+                                <span className="rx-panel">
+                                    <FaFileVideo  />
+                                </span>
+                                <span>How to Videos</span>
+                            </Link>
+                        </li> 
+                        <li>
                             <Link to="/rsvp" onClick={closeMenu}>
                                 <span className="rx-panel">
                                     <FaInbox />
@@ -141,8 +151,6 @@ function BottomBar({member}) {
                                 <span>Survey</span>
                             </Link>
                         </li>
-                        {
-                        /****                         
                         <li>
                             <Link to="/competition-view" onClick={closeMenu}>
                                 <span className="rx-panel">
@@ -151,6 +159,19 @@ function BottomBar({member}) {
                                 <span>Rewards & Competitions</span>
                             </Link>
                         </li> 
+                        {
+                            member.galaOn && <li>
+                                            <Link to="/gala" onClick={closeMenu}>
+                                                <span className="rx-panel">
+                                                    <FaBezierCurve />
+                                                </span>
+                                                <span>Gala</span>
+                                            </Link>                        
+                                        </li>
+                        }
+                        {
+                        /****                         
+                        
                         <li>
                             <Link to="/gallery" onClick={closeMenu}>
                                 <span className="rx-panel">
@@ -159,14 +180,7 @@ function BottomBar({member}) {
                                 <span>Gallery</span>
                             </Link>
                         </li>                  
-                        <li>
-                            <Link to="/gala" onClick={closeMenu}>
-                                <span className="rx-panel">
-                                    <FaBezierCurve />
-                                </span>
-                                <span>Gala</span>
-                            </Link>                        
-                        </li>
+                        
 
                         ///////////////////////////////////////////////////
                         <li>
@@ -195,7 +209,7 @@ function BottomBar({member}) {
                             </Link>
                         </li> 
                         */}
-                        {/*
+                        
                         <li>
                             <Link to="/profile" onClick={closeMenu}>
                                 <span className="rx-panel">
@@ -204,7 +218,7 @@ function BottomBar({member}) {
                                 <span>Profile</span>
                             </Link>
                         </li>
-                        */}
+                        
                         <li className="nav-log">
                             <button className="btn btn-mevent" onClick={() => onLogOut()}>
                                 Logout

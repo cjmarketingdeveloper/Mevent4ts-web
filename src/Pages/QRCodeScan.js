@@ -50,6 +50,9 @@ function QRCodeScan() {
       } else if (scannedText.length === 6) {
           // Fallback for old QR codes that only contain the 6-digit code
           sponsorCode = scannedText;
+      } else if (scannedText.length === 8) {
+          // Fallback for old QR codes that only contain the 6-digit code
+          sponsorCode = scannedText;
       }
 
         if (sponsorCode) {
@@ -76,37 +79,70 @@ function QRCodeScan() {
 
   const handleScannedData = async (data) => {
 
-    if (!/^\w{6}$/.test(data)) {
-      toast.error("Invalid QR code!");
-      setResponseData({ status: "error" });
-      return;
+    if (!/^(\w{6}|\w{8})$/.test(data.trim())) {
+        toast.error("Invalid QR code! Must be 6 or 8 characters.");
+        setResponseData({ status: "error" });
+        return;
     }
 
-    setLoading(true);
-
     try {
-      
-      const voting = {
-        "userid" : user._id,
-        "votingCode" : data
-      }
 
-      const response = await axios.post(CONSTANTS.API_URL +"votes/creation", voting, {
-              headers: {
-                  token: "Bearer "+ user.accessToken
+      console.log(data.length)
+        
+      setLoading(true);
+
+      if(data.length === 6){
+          console.log("Let us marvel at the sponsor");
+          ////////////////////////////////////////////
+            const voting = {
+                "userid" : user._id,
+                "votingCode" : data
               }
-          });
-       
-        if(response.status === 201){
-          setTitleDialogue("Your scan was succesfull.");
-          setUrlImage(mevSuccess);
-        }else {
-          setTitleDialogue("We had a slight issue, please try again later.");
-          //toast.warning("We had a slight issue, please try again later.");
-          setUrlImage(mevError);
-        }
 
-      setResponseData({ status: "success", data: response.data });
+              const response = await axios.post(CONSTANTS.API_URL +"votes/creation", voting, {
+                      headers: {
+                          token: "Bearer "+ user.accessToken
+                      }
+                  });
+              
+                if(response.status === 201){
+                  setTitleDialogue("Your scan was succesfull.");
+                  setUrlImage(mevSuccess);
+                }else {
+                  setTitleDialogue("We had a slight issue, please try again later.");
+                  //toast.warning("We had a slight issue, please try again later.");
+                  setUrlImage(mevError);
+                }
+
+              setResponseData({ status: "success", data: response.data });
+
+          ////////////////////////////////////////////
+      }else if(data.length === 8){
+       
+            const votingObject = {
+                "userid" : user._id,
+                "votingCode" : data
+              }
+      
+            const response = await axios.post(CONSTANTS.API_URL +"votes/creation/scavenger/v1/", votingObject, {
+                    headers: {
+                        token: "Bearer "+ user.accessToken
+                    }
+                });
+
+                
+          if(response.status === 201){
+                  setTitleDialogue("Your scan was succesfull.");
+                  setUrlImage(mevSuccess);
+                }else {
+                  setTitleDialogue("We had a slight issue, please try again later.");
+                  //toast.warning("We had a slight issue, please try again later.");
+                  setUrlImage(mevError);
+                }
+
+              setResponseData({ status: "success", data: response.data });
+
+      }
       setLoading(false);
     } catch (err) {
       if(err.status === 401){

@@ -165,6 +165,8 @@ function SurveyOneWidget({user, CONSTANTS}) {
         </div>
 
           <div className="form-content">
+             
+             <h3 className="text-center">Pre Conference</h3>
                             <div className="step-header-area">
                                 <div className="section-icon-large">{currentIcon}</div>
                             </div>
@@ -316,11 +318,11 @@ function SurveyOneWidget({user, CONSTANTS}) {
                                                 'Systems & technology'
                                             ].map((option) => (
                                                 <button
-                                                key={option}
-                                                className={`btn btn-opt mt-1 me-1 ${formData.q6?.split(',').includes(option) ? 'active' : ''}`}
-                                                onClick={() => handleMultiSelect(option)}
+                                                    key={option}
+                                                    className={`btn btn-opt mt-1 me-1 ${formData.q6?.split(',').includes(option) ? 'active' : ''}`}
+                                                    onClick={() => handleMultiSelect(option)}
                                                 >
-                                                {option}
+                                                  {option}
                                                 </button>
                                             ))
                                             }
@@ -348,7 +350,6 @@ function SurveyOneWidget({user, CONSTANTS}) {
                                         <p>8) How likely are you to recommend The Local Choice franchise to another independent pharmacy owner</p>
                                             <RatingScale name="q8" /> 
 
-                                              
                                             <div className="ct-range-part">
                                                 <div className="lk-info">[1 Not likely</div>
                                                 <div className="lk-info"> 5 likely]</div>
@@ -444,8 +445,7 @@ function SurveyOneWidget({user, CONSTANTS}) {
                                     }
                                 </div>
                             }
-        
-                        </div>
+        </div>
         
     </div>
   )
