@@ -44,6 +44,7 @@ function SurveyScreen() {
                         We'd love to hear your honest thoughts as we prepare for this year's conference. Please complete the short survey it will take less than 5 minutes.
                         Your feedback will help us better understand your experience and will help shape this year's TLC conference topics so that we focus on what matters most for you.
                     </p>  
+                    <h1>{user.profile.profileName}</h1>
                     {
                       surveyData !== null && <>
                                 {
@@ -62,6 +63,7 @@ function SurveyScreen() {
                                         :
                                         <div className="clinic-part">
                                             <Link 
+                                                target="_blank"
                                                 to="https://mobiletlc.mevent.co.za/" 
                                                 className="btn btn-mevent">
                                                 Clinic Survey
