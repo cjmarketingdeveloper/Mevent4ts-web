@@ -183,7 +183,11 @@ function HomeScreen() {
                       <h2 className="line-one">Welcome <span className="colorred">{user.name}</span>, </h2>
                     </div>                
                   </div>
-                  <IPhoneNotificationBanner />
+                  {
+                  /*
+                    <IPhoneNotificationBanner />
+                  */
+                  }
                   <div className="row mb-3">
                     
                     <div className="w-50 p-2">

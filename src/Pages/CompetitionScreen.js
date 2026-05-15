@@ -90,7 +90,17 @@ function CompetitionScreen() {
                                                         )
                                                         :
                                                         <div className="no-winner">
-                                                            Still Running
+                                                            
+                                                            {
+                                                                item.format === "Announcement" ?
+                                                                <div className="alert alert-warning">
+                                                                    Running at the stand.
+                                                                </div>
+                                                              :
+                                                                <div className="alert alert-success">
+                                                                    Scan at the stand to stand a chance to win.
+                                                                </div>
+                                                            }
                                                         </div>
                                                     }
                                                 </div>
