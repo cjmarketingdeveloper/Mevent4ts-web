@@ -47,7 +47,7 @@ function HomeScreen() {
   const [indicateHappinessClinic, setIndicateHappinessClinic]           = useState(true);
   
   useEffect(() => {
-      console.log(user.profile.profileName);
+      //console.log(user.profile.profileName);
       collectDietaryData();
   },[]);
         

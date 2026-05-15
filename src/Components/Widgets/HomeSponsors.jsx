@@ -128,7 +128,8 @@ function HomeSponsors({eventCodes, user, CONSTANTS, setSponsorCount, setSponsorS
                             <img src={sponsor.logo} className="image-ft"/>
                           </div>
                           <div className="title-container-x1 wide30 p-2">
-                            <h5>{sponsor.title}</h5>
+                          
+                             <h5 className="sc-title">{sponsor.title}</h5>
                           </div>
                         </div>
                       </div>
