@@ -84,8 +84,8 @@ function CompetitionScreen() {
                                                     {
                                                         item.winner?.name ? (
                                                             <>
-                                                            <span className="light-gray">Winner:</span>
-                                                            <span className="strong-win">{item.winner?.name} {item.winner?.surname} </span>
+                                                                <span className="light-gray">Winner:</span>
+                                                                <span className="strong-win">{item.winner?.name} {item.winner?.surname} </span>
                                                             </>
                                                         )
                                                         :
