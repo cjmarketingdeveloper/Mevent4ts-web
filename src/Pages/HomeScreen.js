@@ -43,7 +43,7 @@ function HomeScreen() {
   const [showModalHappinessClinic, setShowModalHappinessClinic]         = useState(false);
   const [showModalDownloads, setShowModalDownloads]                     = useState(false);
 
-  const [indicateHappinessFactor, setIndicateHappinessFactor]           = useState(false);
+  const [indicateHappinessFactor, setIndicateHappinessFactor]           = useState(true);
   const [indicateHappinessClinic, setIndicateHappinessClinic]           = useState(true);
   
   useEffect(() => {
