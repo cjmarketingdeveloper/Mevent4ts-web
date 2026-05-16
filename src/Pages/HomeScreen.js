@@ -353,7 +353,8 @@ function HomeScreen() {
               user.profile.profileName === "Franchisee" && 
               <>
                   {
-                   indicateHappinessFactor && (                   
+                    //indicateHappinessFactor && (
+                   true && (                   
                       <div className="row-component">
                         <div className="section-pad-item mt-3 mb-3">
                               <div className="card card-bl-grad relative hap-content">
