@@ -87,10 +87,7 @@ function SurveyTwoWidget({user, CONSTANTS}) {
                          optionalContactPhone : user.phonenumber,
                          optionalContactEmail: user.email,
                      };
-         
-                     console.log(payload);
-                     console.log("++++++++++++++++++");
-     
+              
                      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwSGMArs38paG_OHut8AEY9mnqlMMLqSxNsz78cCC02Y9kI32HD0DAn-PViRp3SWXZOSQ/exec';
                      
                      const response = await fetch(SCRIPT_URL, {

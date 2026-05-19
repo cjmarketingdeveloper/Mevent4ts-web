@@ -27,17 +27,18 @@ function SurveyThreeWidget({user, CONSTANTS}) {
         q6: "",
         q7: "",
         q8: "",
-        q9: "",
-        contactName: "",
-        contactSurname: "",
-        companyName: "",
-        role: "",
-        contactNumber: "",
-        contactEmail: "",
+        contactName: user.name,
+        contactSurname: user.surname,
+        contactNumber: user.phonenumber,
+        contactEmail: user.email,
     });
 
     const [step, setStep] = useState(1);
     const [submitMessage, setSubmitMessage] = useState("");
+
+    useEffect(() => {
+        console.log(formData)
+    },[formData])
 
     const steps = [
         { id: 1, label: 'I', icon: <FaClinicMedical /> },
@@ -59,13 +60,12 @@ function SurveyThreeWidget({user, CONSTANTS}) {
         const validationMap = {
             1: ['q1'],
             2: ['q2'],
-            3: ['q3'],
+            3: ['q3', 'q3B'],
             4: ['q4'],
             5: ['q5'],
             6: ['q6'],
             7: ['q7'],
             8: ['q8'],
-            9: ['q9'],
         };
 
         const requiredFields = validationMap[step] || [];
@@ -76,32 +76,47 @@ function SurveyThreeWidget({user, CONSTANTS}) {
         });
     };
 
-    const handleSubmitForm = async () => {
+    const RatingScale = ({ name }) => (
+            <div className="rating-row">
+                {[1, 2, 3, 4, 5].map((num) => (
+                    <label key={num} className="rating-pill">
+                        <input 
+                            type="radio" 
+                            name={name} 
+                            value={num} 
+                            checked={formData[name] == num}
+                            onChange={(e) => setFormData({...formData, [name]: e.target.value})} 
+                        />
+                        <span>{num}</span>
+                    </label>
+                ))}
+        </div>
+    );
 
+    const handleSubmitForm = async () => {
         try {
 
             setLoading(true);
             const payload = {
+                kind: user.profile.profileName === "Franchisee" ? "Franchisees" : "Others",
                 q1: formData.q1,
                 q2: formData.q2,
                 q3: formData.q3,
+                q3B: formData.q3B,
                 q4: formData.q4,
                 q5: formData.q5,
                 q6: formData.q6,
                 q7: formData.q7,
                 q8: formData.q8,
-                q9: formData.q9,
                 contactName: formData.contactName,
                 contactSurname: formData.contactSurname,
-                companyName: formData.companyName,
-                role: formData.role,
                 contactNumber: formData.contactNumber,
                 contactEmail: formData.contactEmail,
             };
 
             console.log(payload);
 
-            const SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwoWalNzXAROZhMr-L3S3W-kBh5yYdANvd-Gk6G0GyeLk_5HtsqmpNR9AlGT_pkl0lI4g/exec';
 
             const response = await fetch(SCRIPT_URL, {
                 method: 'POST',
@@ -112,21 +127,16 @@ function SurveyThreeWidget({user, CONSTANTS}) {
                 body: JSON.stringify(payload),
             });
 
-            if (response.status === 0) {
+            console.log(response);
 
-                setSubmitMessage(
-                    "Thank you for taking the time to share your perspective. Your input will help us improve future conferences and collaborations."
-                );
+            if (response.status === 0) {
+                setSubmitMessage("Thank you for taking the time to share your perspective. Your input will help us improve future conferences and collaborations.");
 
             } else {
-
-                setSubmitMessage(
-                    "Submission was not successful, please try again later."
-                );
+                setSubmitMessage("Submission was not successful, please try again later.");
             }
 
             setLoading(false);
-
         } catch (err) {
 
             console.log(err);
@@ -164,7 +174,7 @@ function SurveyThreeWidget({user, CONSTANTS}) {
                         <section>
                             <h3>Section 1</h3>
                             <p>
-                                1) In a single word, how would you describe how you're feeling about CJ Distribution and The Local Choice Pharmacy after attending the conference?
+                                1) Which best describes your current relationship with The Local Choice franchise?
                             </p>
                             <textarea
                                 className="form-control mt-2 fr-large"
@@ -186,22 +196,40 @@ function SurveyThreeWidget({user, CONSTANTS}) {
                         <section>
 
                             <h3>Section 2</h3>
-                            <p>
-                                2) What most influenced that feeling during the conference?
-                            </p>
-
-                            <textarea
-                                className="form-control mt-2 fr-large"
-                                rows="3"
-                                placeholder="Share your thoughts here..."
-                                value={formData.q2}
-                                onChange={(e) =>
-                                    setFormData({
-                                        ...formData,
-                                        q2: e.target.value
-                                    })
-                                }
-                            />
+                            {
+                                user.profile.profileName === "Franchisee" ? 
+                                <>
+                                    <p>
+                                        2) After attending the conference, how confident do you feel about your pharmacy’s success within The Local Choice over the next 12 months?
+                                    </p>    
+                                    <textarea
+                                        className="form-control mt-2 fr-large"
+                                        rows="3"
+                                        placeholder="Share your thoughts here..."
+                                        value={formData.q2}
+                                        onChange={(e) =>
+                                            setFormData({
+                                                ...formData,
+                                                q2: e.target.value
+                                            })
+                                        }
+                                    />
+                                </> 
+                                : 
+                                <>
+                                    <p>
+                                        2) After attending the conference, how confident do you feel about your pharmacy’s success over the next 12 months, if you would join The Local Choice?
+                                    </p>    
+                                    <div className="custom-radio-group">
+                                        <button className={`btn btn-opt mt-1 me-1 ${formData.q2 === 'Very concerned' ? 'active' : ''}`} onClick={() => setFormData({...formData, q2: 'Very concerned'})}>Very concerned</button>
+                                        <button className={`btn btn-opt mt-1 me-1 ${formData.q2 === 'Somewhat concerned' ? 'active' : ''}`} onClick={() => setFormData({...formData, q2: 'Somewhat concerned'})}>Somewhat concerned</button>
+                                        <button className={`btn btn-opt mt-1 me-1 ${formData.q2 === 'Neither concerned or confident' ? 'active' : ''}`} onClick={() => setFormData({...formData, q2: 'Neither concerned or confident'})}>Neither concerned or confident</button>
+                                        <button className={`btn btn-opt mt-1 me-1 ${formData.q2 === 'Somewhat confident' ? 'active' : ''}`} onClick={() => setFormData({...formData, q2: 'Somewhat confident'})}>Somewhat confident</button>
+                                        <button className={`btn btn-opt mt-1 me-1 ${formData.q2 === 'Very confident' ? 'active' : ''}`} onClick={() => setFormData({...formData, q2: 'Very confident'})}>Very confident</button>
+                                    </div>
+                                </>
+                            }
+                            
                         </section>
                     )}
 
@@ -209,35 +237,34 @@ function SurveyThreeWidget({user, CONSTANTS}) {
                     {step === 3 && (
                         <section>
                             <h3>Section 3</h3>
-                            <p>
-                                3) Did the conference meet your expectations?
+                            <p> 3.1) In a word or short phrase, how would you describe how you're feeling about The Local Choice after attending the conference?</p>
+                                <textarea
+                                    className="form-control mt-2 fr-large"
+                                    rows="3"
+                                    placeholder="Share your thoughts here..."
+                                    value={formData.q3}
+                                    onChange={(e) =>
+                                        setFormData({
+                                            ...formData,
+                                            q3: e.target.value
+                                        })
+                                    }
+                                />
+                            <p className="mt-3">
+                                3.2) What most influenced that feeling during the conference?
                             </p>
-
-                            <div className="custom-radio-group">
-
-                                {[
-                                    'Did not meet expectations at all',
-                                    'Somewhat did not meet expectations',
-                                    'Met expectations',
-                                    'Somewhat exceeded expectations',
-                                    'Exceeded expectations'
-                                ].map((item) => (
-                                    <button
-                                        key={item}
-                                        className={`btn btn-opt mt-1 me-1 ${formData.q3 === item ? 'active' : ''}`}
-                                        onClick={() =>
-                                            setFormData({
-                                                ...formData,
-                                                q3: item
-                                            })
-                                        }
-                                    >
-                                        {item}
-                                    </button>
-                                ))}
-
-                            </div>
-
+                            <textarea
+                                className="form-control mt-2 fr-large"
+                                rows="3"
+                                placeholder="Share your thoughts here..."
+                                value={formData.q3B}
+                                onChange={(e) =>
+                                    setFormData({
+                                        ...formData,
+                                        q3B: e.target.value
+                                    })
+                                }
+                            />
                         </section>
                     )}
 
@@ -246,24 +273,34 @@ function SurveyThreeWidget({user, CONSTANTS}) {
                         <section>
 
                             <h3>Section 4</h3>
-
-                            <p>
-                                4) What was the most valuable topic or discussion from the conference for you?
-                            </p>
-
-                            <textarea
-                                className="form-control mt-2 fr-large"
-                                rows="3"
-                                placeholder="Share your thoughts here..."
-                                value={formData.q4}
-                                onChange={(e) =>
-                                    setFormData({
-                                        ...formData,
-                                        q4: e.target.value
-                                    })
-                                }
-                            />
-
+                            {
+                                user.profile.profileName === "Franchisee" ? 
+                                <>
+                                    <p>
+                                        4) What was the most valuable topic or discussion from the conference for you?
+                                    </p>
+                                    <div className="custom-radio-group">
+                                        <button className={`btn btn-opt mt-1 me-1 ${formData.q4 === 'Very dissatisfied' ? 'active' : ''}`} onClick={() => setFormData({...formData, q4: 'Very dissatisfied'})}>Very dissatisfied</button>
+                                        <button className={`btn btn-opt mt-1 me-1 ${formData.q4 === 'Dissatisfied' ? 'active' : ''}`} onClick={() => setFormData({...formData, q4: 'Dissatisfied'})}>Dissatisfied</button>
+                                        <button className={`btn btn-opt mt-1 me-1 ${formData.q4 === 'Neither dissatisfied or satisfied' ? 'active' : ''}`} onClick={() => setFormData({...formData, q4: 'Neither dissatisfied or satisfied'})}>Neither dissatisfied or satisfied</button>
+                                        <button className={`btn btn-opt mt-1 me-1 ${formData.q4 === 'Satisfied' ? 'active' : ''}`} onClick={() => setFormData({...formData, q4: 'Satisfied'})}>Satisfied</button>
+                                        <button className={`btn btn-opt mt-1 me-1 ${formData.q4 === 'Very satisfied' ? 'active' : ''}`} onClick={() => setFormData({...formData, q4: 'Very satisfied'})}>Very satisfied</button>
+                                    </div>
+                                </>
+                                : 
+                                <>
+                                    <p>
+                                        4) Based on your interactions so far, how appealing compelling do you find the value offered by The Local Choice?
+                                    </p>
+                                    <div className="custom-radio-group">
+                                        <button className={`btn btn-opt mt-1 me-1 ${formData.q4 === 'Not compelling appealing at all' ? 'active' : ''}`} onClick={() => setFormData({...formData, q4: 'Not compelling appealing at all'})}>Not compelling appealing at all</button>
+                                        <button className={`btn btn-opt mt-1 me-1 ${formData.q4 === 'Not appealing' ? 'active' : ''}`} onClick={() => setFormData({...formData, q4: 'Not appealing'})}>Not appealing</button>
+                                        <button className={`btn btn-opt mt-1 me-1 ${formData.q4 === 'Neither appealing or unappealing' ? 'active' : ''}`} onClick={() => setFormData({...formData, q4: 'Neither appealing or unappealing'})}>Neither appealing or unappealing</button>
+                                        <button className={`btn btn-opt mt-1 me-1 ${formData.q4 === 'Appealing' ? 'active' : ''}`} onClick={() => setFormData({...formData, q4: 'Appealing'})}>Appealing</button>
+                                        <button className={`btn btn-opt mt-1 me-1 ${formData.q4 === 'Very appealing' ? 'active' : ''}`} onClick={() => setFormData({...formData, q4: 'Very appealing'})}>Very appealing</button>
+                                    </div>
+                                </>
+                            }
                         </section>
                     )}
 
@@ -274,32 +311,14 @@ function SurveyThreeWidget({user, CONSTANTS}) {
                             <h3>Section 5</h3>
 
                             <p>
-                                5) After attending the conference, how would you rate your overall satisfaction with the CJ Distribution and The Local Choice as a business partner?
+                                5) How has attending the conference changed your perception of The Local Choice?
                             </p>
-
                             <div className="custom-radio-group">
-
-                                {[
-                                    'Very dissatisfied',
-                                    'Dissatisfied',
-                                    'Neither dissatisfied nor satisfied',
-                                    'Satisfied',
-                                    'Very satisfied'
-                                ].map((item) => (
-                                    <button
-                                        key={item}
-                                        className={`btn btn-opt mt-1 me-1 ${formData.q5 === item ? 'active' : ''}`}
-                                        onClick={() =>
-                                            setFormData({
-                                                ...formData,
-                                                q5: item
-                                            })
-                                        }
-                                    >
-                                        {item}
-                                    </button>
-                                ))}
-
+                                <button className={`btn btn-opt mt-1 me-1 ${formData.q5 === 'Significantly more negative' ? 'active' : ''}`} onClick={() => setFormData({...formData, q5: 'Significantly more negative'})}>Significantly more negative</button>
+                                <button className={`btn btn-opt mt-1 me-1 ${formData.q5 === 'Slightly more negative' ? 'active' : ''}`} onClick={() => setFormData({...formData, q5: 'Slightly more negative'})}>Slightly more negative</button>
+                                <button className={`btn btn-opt mt-1 me-1 ${formData.q5 === 'No change' ? 'active' : ''}`} onClick={() => setFormData({...formData, q5: 'No change'})}>No change</button>
+                                <button className={`btn btn-opt mt-1 me-1 ${formData.q5 === 'Slightly more positive' ? 'active' : ''}`} onClick={() => setFormData({...formData, q5: 'Slightly more positive'})}>Slightly more positive</button>
+                                <button className={`btn btn-opt mt-1 me-1 ${formData.q5 === 'Significantly more positive' ? 'active' : ''}`} onClick={() => setFormData({...formData, q5: 'Significantly more positive'})}>Significantly more positive</button>
                             </div>
 
                         </section>
@@ -308,36 +327,24 @@ function SurveyThreeWidget({user, CONSTANTS}) {
                     {/* STEP 6 */}
                     {step === 6 && (
                         <section>
-
                             <h3>Section 6</h3>
-
                             <p>
-                                6) Based on your conference experience and what you heard, how confident are you in CJ Distributions’ ability to improve supply chain efficiency going forward?
+                                6) What was the most valuable topic or discussion from the conference for you?
                             </p>
+                            <textarea
+                                className="form-control mt-2 fr-large"
+                                rows="3"
+                                placeholder="Share your thoughts here..."
+                                value={formData.q6}
+                                onChange={(e) =>
+                                    setFormData({
+                                        ...formData,
+                                        q6: e.target.value
+                                    })
+                                }
+                            />
 
-                            <div className="custom-radio-group">
-
-                                {[
-                                    'Not confident at all',
-                                    'Not confident',
-                                    'Somewhat efficient',
-                                    'Confident',
-                                    'Very confident'
-                                ].map((item) => (
-                                    <button
-                                        key={item}
-                                        className={`btn btn-opt mt-1 me-1 ${formData.q6 === item ? 'active' : ''}`}
-                                        onClick={() =>
-                                            setFormData({
-                                                ...formData,
-                                                q6: item
-                                            })
-                                        }
-                                    >
-                                        {item}
-                                    </button>
-                                ))}
-                            </div>
+                           
                         </section>
                     )}
 
@@ -346,36 +353,14 @@ function SurveyThreeWidget({user, CONSTANTS}) {
                         <section>
 
                             <h3>Section 7</h3>
-
                             <p>
-                                7) Based on your conference experience and what you heard, how confident are you in CJ Distributions and Marketing’s ability to effectively execute marketing for your products at store level?
+                                7) How likely are you to recommend The Local Choice franchise to another independent pharmacy owner?
                             </p>
-
-                            <div className="custom-radio-group">
-
-                                {[
-                                    'Not confident at all',
-                                    'Not confident',
-                                    'Somewhat efficient',
-                                    'Confident',
-                                    'Very confident'
-                                ].map((item) => (
-                                    <button
-                                        key={item}
-                                        className={`btn btn-opt mt-1 me-1 ${formData.q7 === item ? 'active' : ''}`}
-                                        onClick={() =>
-                                            setFormData({
-                                                ...formData,
-                                                q7: item
-                                            })
-                                        }
-                                    >
-                                        {item}
-                                    </button>
-                                ))}
-
-                            </div>
-
+                            <RatingScale name="q7" /> 
+                              <div className="ct-range-part">
+                                    <div className="lk-info">[1 Not likely</div>
+                                    <div className="lk-info"> 5 likely]</div>
+                                </div>   
                         </section>
                     )}
 
@@ -384,184 +369,63 @@ function SurveyThreeWidget({user, CONSTANTS}) {
                         <section>
 
                             <h3>Section 8</h3>
-
+                            <p>
+                                We are forming a network of pharmacy owners to be part of future research and to be thought partners in collaborative discussions on future ideas, when needed. Participation is voluntary, and your information will be used solely for this specified purpose.
+                            </p>
                             <p>
                                 8) How would you rate the potential for improved collaboration between your company and CJ Distribution after the conference?
                             </p>
 
                             <div className="custom-radio-group">
+                                <button className={`btn btn-opt mt-1 me-1 ${formData.q8 === 'Yes' ? 'active' : ''}`} onClick={() => setFormData({...formData, q8: 'Yes'})}>Yes</button>
+                                <button className={`btn btn-opt mt-1 me-1 ${formData.q8 === 'No' ? 'active' : ''}`} onClick={() => setFormData({...formData, q8: 'No'})}>No</button>
+                            </div>   
 
-                                {[
-                                    'Significantly decreased potential',
-                                    'Decreased potential',
-                                    'No change in potential',
-                                    'Somewhat improved potential',
-                                    'Significantly improved potential'
-                                ].map((item) => (
-                                    <button
-                                        key={item}
-                                        className={`btn btn-opt mt-1 me-1 ${formData.q8 === item ? 'active' : ''}`}
-                                        onClick={() =>
-                                            setFormData({
-                                                ...formData,
-                                                q8: item
-                                            })
-                                        }
-                                    >
-                                        {item}
-                                    </button>
-                                ))}
-
-                            </div>
-
+                            {
+                                formData.q8 === 'Yes' && <>
+                                        <p className="mt-3">Please share your details below</p>
+                                                <label>Name</label>
+                                                <input
+                                                    type="text" 
+                                                    className="form-control mt-2 " 
+                                                    placeholder="Share your thoughts here..."
+                                                    value={formData.contactName}
+                                                    onChange={(e) => setFormData({...formData, contactName: e.target.value})}
+                                                />
+                                                
+                                                <label className="mt-3">Surname</label>
+                                                <input
+                                                    type="text" 
+                                                    className="form-control mt-2 " 
+                                                    placeholder="Share your thoughts here..."
+                                                    value={formData.contactSurname}
+                                                    onChange={(e) => setFormData({...formData, contactSurname: e.target.value})}
+                                                />
+                                            
+                                                <label className="mt-3">Phone Number</label>
+                                                <input
+                                                    type="text" 
+                                                    className="form-control mt-2 " 
+                                                    placeholder="Share your thoughts here..."
+                                                    value={formData.contactNumber}
+                                                    onChange={(e) => setFormData({...formData, contactNumber: e.target.value})}
+                                                />
+                                                
+                                                <label className="mt-3">Email</label>
+                                                <input
+                                                    type="text" 
+                                                    className="form-control mt-2 " 
+                                                    placeholder="Share your thoughts here..."
+                                                    value={formData.contactEmail}
+                                                    onChange={(e) => setFormData({...formData, contactEmail: e.target.value})}
+                                                />
+                                 </>
+                            }
                         </section>
                     )}
 
                     {/* STEP 9 */}
                     {step === 9 && (
-                        <section>
-
-                            <h3>Section 9</h3>
-
-                            <p>
-                                9) Would you be open to being contacted for future research or collaboration opportunities?
-                            </p>
-
-                            <p className="small text-muted">
-                                Participation is voluntary, and your information will be used solely for this specified purpose.
-                            </p>
-
-                            <div className="custom-radio-group mb-3">
-
-                                <button
-                                    className={`btn btn-opt mt-1 me-1 ${formData.q9 === 'Yes' ? 'active' : ''}`}
-                                    onClick={() =>
-                                        setFormData({
-                                            ...formData,
-                                            q9: 'Yes'
-                                        })
-                                    }
-                                >
-                                    Yes
-                                </button>
-
-                                <button
-                                    className={`btn btn-opt mt-1 me-1 ${formData.q9 === 'No' ? 'active' : ''}`}
-                                    onClick={() =>
-                                        setFormData({
-                                            ...formData,
-                                            q9: 'No'
-                                        })
-                                    }
-                                >
-                                    No
-                                </button>
-
-                            </div>
-
-                            {
-                                formData.q9 === 'Yes' && (
-                                    <div className="mt-4">
-                                        <div className="row">
-                                            <div className="col-md-6 mb-3">
-                                                <label>Name</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    value={formData.contactName}
-                                                    onChange={(e) =>
-                                                        setFormData({
-                                                            ...formData,
-                                                            contactName: e.target.value
-                                                        })
-                                                    }
-                                                />
-                                            </div>
-
-                                            <div className="col-md-6 mb-3">
-                                                <label>Surname</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    value={formData.contactSurname}
-                                                    onChange={(e) =>
-                                                        setFormData({
-                                                            ...formData,
-                                                            contactSurname: e.target.value
-                                                        })
-                                                    }
-                                                />
-                                            </div>
-
-                                            <div className="col-md-6 mb-3">
-                                                <label>Company Name</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    value={formData.companyName}
-                                                    onChange={(e) =>
-                                                        setFormData({
-                                                            ...formData,
-                                                            companyName: e.target.value
-                                                        })
-                                                    }
-                                                />
-                                            </div>
-
-                                            <div className="col-md-6 mb-3">
-                                                <label>Role</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    value={formData.role}
-                                                    onChange={(e) =>
-                                                        setFormData({
-                                                            ...formData,
-                                                            role: e.target.value
-                                                        })
-                                                    }
-                                                />
-                                            </div>
-
-                                            <div className="col-md-6 mb-3">
-                                                <label>Contact Number</label>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    value={formData.contactNumber}
-                                                    onChange={(e) =>
-                                                        setFormData({
-                                                            ...formData,
-                                                            contactNumber: e.target.value
-                                                        })
-                                                    }
-                                                />
-                                            </div>
-
-                                            <div className="col-md-6 mb-3">
-                                                <label>Email Address</label>
-                                                <input
-                                                    type="email"
-                                                    className="form-control"
-                                                    value={formData.contactEmail}
-                                                    onChange={(e) =>
-                                                        setFormData({
-                                                            ...formData,
-                                                            contactEmail: e.target.value
-                                                        })
-                                                    }
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
-                            }
-
-                        </section>
-                    )}
-
-                    {/* STEP 10 */}
-                    {step === 10 && (
                         <section>
 
                             {
@@ -593,7 +457,7 @@ function SurveyThreeWidget({user, CONSTANTS}) {
                             </button>
 
                             {
-                                step < 10 ? (
+                                step < 9 ? (
 
                                     <button
                                         className={`btn-next ${!isStepValid() ? 'btn-disabled' : ''}`}
@@ -618,6 +482,7 @@ function SurveyThreeWidget({user, CONSTANTS}) {
                     )
                 }
             </div>
+            <br/><br/>
         </div>
     );
 }
