@@ -277,7 +277,7 @@ function SurveyThreeWidget({user, CONSTANTS}) {
                                 user.profile.profileName === "Franchisee" ? 
                                 <>
                                     <p>
-                                        4) What was the most valuable topic or discussion from the conference for you?
+                                        4) To what extent do you feel the value and support from The Local Choice are being delivered?
                                     </p>
                                     <div className="custom-radio-group">
                                         <button className={`btn btn-opt mt-1 me-1 ${formData.q4 === 'Very dissatisfied' ? 'active' : ''}`} onClick={() => setFormData({...formData, q4: 'Very dissatisfied'})}>Very dissatisfied</button>
@@ -373,7 +373,7 @@ function SurveyThreeWidget({user, CONSTANTS}) {
                                 We are forming a network of pharmacy owners to be part of future research and to be thought partners in collaborative discussions on future ideas, when needed. Participation is voluntary, and your information will be used solely for this specified purpose.
                             </p>
                             <p>
-                                8) How would you rate the potential for improved collaboration between your company and CJ Distribution after the conference?
+                                8) Would you be open to being contacted for future research or collaboration opportunities?
                             </p>
 
                             <div className="custom-radio-group">

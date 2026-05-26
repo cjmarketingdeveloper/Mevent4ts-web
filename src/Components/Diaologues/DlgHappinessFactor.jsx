@@ -133,7 +133,8 @@ function DlgHappinessFactor({user, showModalHappiness, setShowModalHappiness, se
                     <section>
                         <h3>Section 1: Franchise Background</h3>
                         <p>1) How long have you been part of The Local Choice?</p>
-                        <select className="form-select" onChange={(e) => setFormData({...formData, tenure: e.target.value})}>
+                        <select className="form-select" 
+                           onChange={(e) => setFormData({...formData, tenure: e.target.value})}>
                             <option value="">Select...</option>
                             <option>Less than 1 year</option>
                             <option>1 – 3 years</option>
